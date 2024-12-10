@@ -11,10 +11,11 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        "arena": "#EAE2B7",
-        "primario": "#003049",
-        "secundario": "#FCBF49",
-        "accion": "#D62828"
+        "champagne": "#D2B68A",
+        "velvet": "#222D52",
+        "pearl": "#FDFFFF",
+        "marble": "E8E4E0",
+        "silk": "#EEE5D9"
       },
     },
   },
