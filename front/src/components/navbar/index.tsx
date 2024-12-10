@@ -17,13 +17,13 @@ export const Navbar: React.FC = () => {
     }
 
     return (
-        <nav className="bg-primario">
+        <nav className="bg-velvet">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
 
                 {/* Boton Hamburguesa */}
                 <div className="md:hidden flex items-center">
                     <button
-                    className="p-2 rounded-md text-arena hover:text-arena focus:outline-none focus:ring-2 focus:ring-inset focus:ring-arena"
+                    className="p-2 rounded-md text-silk focus:outline-none focus:ring-2 focus:ring-inset focus:ring-silk"
                     onClick={toggleMenu}
                     >
                     {isClick ? (
@@ -42,11 +42,11 @@ export const Navbar: React.FC = () => {
                 {/* Seccion izquierda - Links menu */}
                 <div className="hidden md:flex space-x-4">
                     <Link href="/">
-                      <div className="text-arena hover:bg-arena hover:text-accion rounded-lg p-2">Inicio</div>
+                      <div className="text-silk hover:bg-champagne hover:text-velvet rounded-lg p-2">Inicio</div>
                     </Link>
 
                     <Link href="/">
-                      <div className="text-arena hover:bg-arena hover:text-accion rounded-lg p-2">Sobre nosotros</div>
+                      <div className="text-silk hover:bg-champagne hover:text-velvet rounded-lg p-2">Sobre nosotros</div>
                     </Link>
                 </div>
                 
@@ -60,22 +60,22 @@ export const Navbar: React.FC = () => {
                  {/* Seccion Derecha - perfil, reserva, favoritos / Login o registro botones */}
                  {/* <div className="flex items-center space-x-4 mt-4">
                     <Link href="/">
-                        <button className="bg-secundario text-primario w-full py-2 px-4 rounded mb-4 hover:bg-accion hover:text-arena" >Inicia sesión</button>
+                        <button className="bg-silk text-velvet w-full py-2 px-4 rounded mb-4 hover:bg-champagne hover:text-silk" >Inicia sesión</button>
                     </Link>
                     <Link href="/">
-                        <button className="bg-secundario text-primario w-full py-2 px-4 rounded mb-4 hover:bg-accion hover:text-arena" >Registrate</button>
+                        <button className="bg-silk text-velvet w-full py-2 px-4 rounded mb-4 hover:bg-champagne hover:text-silk" >Registrate</button>
                     </Link>
                 </div> */}
                 
                 <div className="hidden md:flex items-center space-x-4">
                     <Link href="">
-                        <i className="fi fi-rr-key text-arena rounded-lg p-2 hover:bg-arena hover:text-accion"> Reservas</i>
+                        <i className="fi fi-rr-key text-silk rounded-lg p-2 hover:bg-champagne hover:text-velvet"> Reservas</i>
                     </Link>
                     <Link href="/">
-                        <i className="fi fi-rr-heart text-arena rounded-lg p-2 hover:bg-arena hover:text-accion"> Favoritos</i>
+                        <i className="fi fi-rr-heart text-silk rounded-lg p-2 hover:bg-champagne hover:text-velvet"> Favoritos</i>
                     </Link>
                     <Link href="/">
-                        <i className="fi fi-rr-user text-arena rounded-lg p-2 hover:bg-arena hover:text-accion"> Perfil</i>
+                        <i className="fi fi-rr-user text-silk rounded-lg p-2 hover:bg-champagne hover:text-velvet"> Perfil</i>
                     </Link>
                 </div>
             </div>
@@ -84,20 +84,20 @@ export const Navbar: React.FC = () => {
             {isClick && (
                 <div className="md:hidden px-2 pt-2 pb-3 space-y-1 sm:px-3">
                     <Link href="/">
-                        <i className="fi fi-rr-user text-arena rounded-lg p-2 hover:bg-arena hover:text-accion"> Perfil</i>
+                        <i className="fi fi-rr-user text-silk rounded-lg p-2 hover:bg-champagne hover:text-velvet"> Perfil</i>
                     </Link>
                     <Link href="">
-                        <i className="fi fi-rr-key text-arena rounded-lg p-2 hover:bg-arena hover:text-accion"> Reservas</i>
+                        <i className="fi fi-rr-key text-silk rounded-lg p-2 hover:bg-champagne hover:text-velvet"> Reservas</i>
                     </Link>
                     <Link href="/">
-                        <i className="fi fi-rr-heart text-arena rounded-lg p-2 hover:bg-arena hover:text-accion"> Favoritos</i>
+                        <i className="fi fi-rr-heart text-silk rounded-lg p-2 hover:bg-champagne hover:text-velvet"> Favoritos</i>
                     </Link>
                     
                     <Link href="/">
-                        <div className="text-arena hover:bg-arena hover:text-accion rounded-lg p-2">Inicio</div>
+                        <div className="text-silk hover:bg-champagne hover:text-velvet rounded-lg p-2">Inicio</div>
                     </Link>
                     <Link href="/">
-                        <div className="text-arena hover:bg-arena hover:text-accion rounded-lg p-2">Sobre nosotros</div>
+                        <div className="text-silk hover:bg-champagne hover:text-velvet rounded-lg p-2">Sobre nosotros</div>
                     </Link>
 
                 </div>
