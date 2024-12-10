@@ -1,9 +1,10 @@
+/* eslint-disable @next/next/no-img-element */
 "use client"; 
 import React, { useState } from "react";
 
 type LoginData = {
   email: string;
-  password: string; // Reemplaza dni por password
+  password: string; 
 };
 
 const Login: React.FC = () => {
@@ -12,6 +13,7 @@ const Login: React.FC = () => {
     password: "",
   });
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -23,9 +25,8 @@ const Login: React.FC = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // Simulación de usuarios registrados
     const registeredUsers = [
-      { email: "test@example.com", password: "password123" }, // Ejemplo
+      { email: "test@example.com", password: "password123" },
     ];
 
     const user = registeredUsers.find(
@@ -43,77 +44,51 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row items-center justify-center min-h-screen bg-[#fffefe] text-[#0a0a0a] pt-20 lg:pt-40 pb-20">
-      <div className="flex-1 flex flex-col lg:flex-row items-center justify-center max-w-2xl px-5 sm:px-10 mb-10 lg:mb-0">
-        <div className="text-center lg:text-left">
-          <h2 className="text-3xl sm:text-4xl lg:text-6xl font-bold mb-4">
-            Che! Volviste
-          </h2>
-          <p className="leading-relaxed text-base sm:text-lg lg:text-xl mb-6">
-            Bienvenido de nuevo, por favor inicia sesión para continuar.
-          </p>
-        </div>
+    <div className="flex lg:flex-row items-center justify-center min-h-screen bg-gray-100">
+      {/* Imagen a la izquierda */}
+      <div className="flex-1 flex items-center justify-center bg-gray-200 h-full">
+        <img
+          src="https://mundosdepinceladas.net/wp-content/uploads/pintura-impresionante-paisaje-sereno-1.webp"
+          alt="Imagen decorativa"
+          className="w-full h-full object-cover"
+        />
       </div>
 
-      <div className="w-full max-w-lg p-6 sm:p-8 bg-white bg-opacity-90 border border-[#0a0a0a] rounded-md shadow-lg space-y-6 lg:ml-20">
-        <h2 className="text-xl sm:text-2xl font-bold text-center tracking-wider">
-          Inicia sesión
-        </h2>
-
-        {isLoggedIn ? (
-          <p>¡Inicio de sesión exitoso! Bienvenido/a.</p>
-        ) : (
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="relative">
-              <label className="block text-lg text-[#0a0a0a]">Email:</label>
+      {/* Tarjeta de inicio de sesión */}
+      <div className="flex-1 flex items-center justify-center">
+        <div className="bg-white w-full max-w-md p-8 rounded-lg shadow-lg">
+          <h2 className="text-2xl font-bold text-center mb-6 text-black">Inicia sesión</h2>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="flex flex-col space-y-2">
+              <label className="text-sm font-medium text-black">Correo electrónico</label>
               <input
                 type="email"
                 name="email"
                 value={loginData.email}
                 onChange={handleChange}
                 required
-                className="w-full bg-transparent border-b border-[#0a0a0a] text-lg text-[#0a0a0a] placeholder-gray-500 focus:outline-none p-2"
+                className="border border-gray-300 rounded-lg p-2 text-sm text-black focus:ring-2 focus:ring-blue-500 focus:outline-none"
               />
             </div>
-
-            <div className="relative">
-              <label className="block text-lg text-[#0a0a0a]">Contraseña:</label>
+            <div className="flex flex-col space-y-2">
+              <label className="text-sm font-medium text-black">Contraseña</label>
               <input
                 type="password"
                 name="password"
                 value={loginData.password}
                 onChange={handleChange}
                 required
-                className="w-full bg-transparent border-b border-[#0a0a0a] text-lg text-[#0a0a0a] placeholder-gray-500 focus:outline-none p-2"
+                className="border border-gray-300 rounded-lg p-2 text-sm text-black focus:ring-2 focus:ring-blue-500 focus:outline-none"
               />
             </div>
-
             <button
               type="submit"
-              className="flex items-center justify-center w-full border border-[#0a0a0a] text-[#0a0a0a] text-sm py-2 bg-[#a6d2ff] rounded-md hover:bg-[#76bafe] transition duration-300"
+              className="w-full bg-black text-white py-2 rounded-lg hover:bg-gray-800 focus:ring-2 focus:ring-blue-500 focus:outline-none"
             >
-              Inicia Sesión
+              Ingresar
             </button>
           </form>
-        )}
-
-        {error && <p className="text-red-500 text-center">{error}</p>}
-
-        <div className="text-center mt-4">
-          <p className="text-sm">
-            ¿No tienes cuenta?{" "}
-            <a href="/register" className="text-blue-600 hover:underline">
-              Regístrate aquí
-            </a>
-          </p>
-        </div>
-        <div className="text-center mt-4">
-          <p className="text-sm">
-            ¿Olvidaste tu contraseña?{" "}
-            <a href="/forgotPassword" className="text-blue-600 hover:underline">
-              Recupérala aquí
-            </a>
-          </p>
+          {error && <p className="text-red-500 text-center mt-4">{error}</p>}
         </div>
       </div>
     </div>
