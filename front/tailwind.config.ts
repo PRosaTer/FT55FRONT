@@ -14,7 +14,7 @@ export default {
         "champagne": "#D2B68A",
         "velvet": "#222D52",
         "pearl": "#FDFFFF",
-        "marble": "E8E4E0",
+        "marble": "#E8E4E0",
         "silk": "#EEE5D9"
       },
     },
