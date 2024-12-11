@@ -1,4 +1,6 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
+import Link from "next/link";
 import React, { useState } from "react";
 
 type FormData = {
@@ -21,7 +23,9 @@ const RegisterForm: React.FC = () => {
   });
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => {
     const { name, value, type } = e.target;
 
@@ -37,11 +41,13 @@ const RegisterForm: React.FC = () => {
   };
 
   return (
-    <div className="flex lg:flex-row items-center justify-center min-h-screen bg-gray-100">
-      {/* Tarjeta de registro */}
-      <div className="flex-1 flex items-center justify-center">
+    <div className="flex min-h-screen">
+      {/* Formulario de registro */}
+      <div className="flex-1 flex items-center justify-center bg-gray-100">
         <div className="bg-white w-full max-w-md p-8 rounded-lg shadow-lg">
-          <h2 className="text-2xl font-bold text-center mb-6 text-black">Regístrate</h2>
+          <h2 className="text-2xl font-bold text-center mb-6 text-black">
+            Regístrate
+          </h2>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="flex flex-col space-y-2">
               <label className="text-sm font-medium text-black">Nombre</label>
@@ -70,7 +76,9 @@ const RegisterForm: React.FC = () => {
             </div>
 
             <div className="flex flex-col space-y-2">
-              <label className="text-sm font-medium text-black">Correo electrónico</label>
+              <label className="text-sm font-medium text-black">
+                Correo electrónico
+              </label>
               <input
                 type="email"
                 name="email"
@@ -83,7 +91,9 @@ const RegisterForm: React.FC = () => {
             </div>
 
             <div className="flex flex-col space-y-2">
-              <label className="text-sm font-medium text-black">Contraseña</label>
+              <label className="text-sm font-medium text-black">
+                Contraseña
+              </label>
               <input
                 type="password"
                 name="password"
@@ -96,7 +106,24 @@ const RegisterForm: React.FC = () => {
             </div>
 
             <div className="flex flex-col space-y-2">
-              <label className="text-sm font-medium text-black">Dirección</label>
+              <label className="text-sm font-medium text-black">
+                Confirmar Contraseña
+              </label>
+              <input
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+                className="border border-gray-300 rounded-lg p-2 text-sm text-black focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                placeholder="confirmar Contraseña"
+              />
+            </div>
+
+            <div className="flex flex-col space-y-2">
+              <label className="text-sm font-medium text-black">
+                Dirección
+              </label>
               <input
                 type="text"
                 name="address"
@@ -109,7 +136,9 @@ const RegisterForm: React.FC = () => {
             </div>
 
             <div className="flex flex-col space-y-2">
-              <label className="text-sm font-medium text-black">Fecha de nacimiento</label>
+              <label className="text-sm font-medium text-black">
+                Fecha de nacimiento
+              </label>
               <input
                 type="date"
                 name="DOB"
@@ -126,18 +155,28 @@ const RegisterForm: React.FC = () => {
             >
               Regístrate
             </button>
+            <div className="text-center mt-4">
+              <p className="text-sm text-black">
+                ¿Ya tienes cuenta?{" "}
+                <Link href="/login">
+                  <span className="text-blue-600 hover:underline">
+                    Inicia sesión aquí
+                  </span>
+                </Link>
+              </p>
+            </div>
           </form>
         </div>
       </div>
 
-      {/* Imagen a la derecha */}
-      <div className="flex-1 flex items-center justify-center bg-gray-200 h-full">
-        <img
-          src="https://mundosdepinceladas.net/wp-content/uploads/pintura-impresionante-paisaje-sereno-1.webp"
-          alt="Imagen decorativa"
-          className="w-full h-full object-cover"
-        />
-      </div>
+      {/* Imagen de fondo */}
+      <div
+        className="flex-1 bg-cover bg-center"
+        style={{
+          backgroundImage:
+            "url('https://i.postimg.cc/0NVR0Tvc/pexels-almir-reis-1982745319-29144360-2.jpg')",
+        }}
+      ></div>
     </div>
   );
 };
