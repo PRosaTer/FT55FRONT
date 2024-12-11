@@ -1,10 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
-"use client"; 
+"use client";
+import { FcGoogle } from "react-icons/fc";
+import Link from "next/link";
 import React, { useState } from "react";
 
 type LoginData = {
   email: string;
-  password: string; 
+  password: string;
 };
 
 const Login: React.FC = () => {
@@ -48,7 +50,7 @@ const Login: React.FC = () => {
       {/* Imagen a la izquierda */}
       <div className="flex-1 flex items-center justify-center bg-gray-200 h-full">
         <img
-          src="https://mundosdepinceladas.net/wp-content/uploads/pintura-impresionante-paisaje-sereno-1.webp"
+          src="https://i.postimg.cc/qBC7wtdC/pexels-rutger-van-rees-2147548108-29650203.jpg"
           alt="Imagen decorativa"
           className="w-full h-full object-cover"
         />
@@ -57,10 +59,14 @@ const Login: React.FC = () => {
       {/* Tarjeta de inicio de sesión */}
       <div className="flex-1 flex items-center justify-center">
         <div className="bg-white w-full max-w-md p-8 rounded-lg shadow-lg">
-          <h2 className="text-2xl font-bold text-center mb-6 text-black">Inicia sesión</h2>
+          <h2 className="text-2xl font-bold text-center mb-6 text-black">
+            Inicia sesión
+          </h2>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="flex flex-col space-y-2">
-              <label className="text-sm font-medium text-black">Correo electrónico</label>
+              <label className="text-sm font-medium text-black">
+                Correo electrónico
+              </label>
               <input
                 type="email"
                 name="email"
@@ -71,7 +77,9 @@ const Login: React.FC = () => {
               />
             </div>
             <div className="flex flex-col space-y-2">
-              <label className="text-sm font-medium text-black">Contraseña</label>
+              <label className="text-sm font-medium text-black">
+                Contraseña
+              </label>
               <input
                 type="password"
                 name="password"
@@ -87,6 +95,36 @@ const Login: React.FC = () => {
             >
               Ingresar
             </button>
+            <button
+              type="submit"
+              className="w-full bg-black text-white py-2 rounded-lg flex items-center justify-center hover:bg-gray-800 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            >
+              <span className="flex items-center">
+                <FcGoogle />
+                Ingresar con Google
+              </span>
+            </button>
+
+            <div className="text-center mt-4">
+              <p className="text-sm text-black">
+                ¿No tienes cuenta?{" "}
+                <Link href="/register">
+                  <span className="text-blue-600 hover:underline">
+                    Regístrate aquí
+                  </span>
+                </Link>
+              </p>
+            </div>
+            <div className="text-center mt-4">
+              <p className="text-sm text-black">
+                ¿Olvidaste tu contraseña?{" "}
+                <Link href="/forgotPassword">
+                  <span className="text-blue-600 hover:underline">
+                    Recuperala aquí
+                  </span>
+                </Link>
+              </p>
+            </div>
           </form>
           {error && <p className="text-red-500 text-center mt-4">{error}</p>}
         </div>
