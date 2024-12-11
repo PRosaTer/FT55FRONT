@@ -45,7 +45,7 @@ export const Navbar: React.FC = () => {
                       <div className="text-silk hover:bg-champagne hover:text-velvet rounded-lg p-2">Inicio</div>
                     </Link>
 
-                    <Link href="/">
+                    <Link href="/about">
                       <div className="text-silk hover:bg-champagne hover:text-velvet rounded-lg p-2">Sobre nosotros</div>
                     </Link>
                 </div>
@@ -59,22 +59,22 @@ export const Navbar: React.FC = () => {
 
                  {/* Seccion Derecha - perfil, reserva, favoritos / Login o registro botones */}
                  {/* <div className="flex items-center space-x-4 mt-4">
-                    <Link href="/">
+                    <Link href="/login">
                         <button className="bg-silk text-velvet w-full py-2 px-4 rounded mb-4 hover:bg-champagne hover:text-silk" >Inicia sesión</button>
                     </Link>
-                    <Link href="/">
+                    <Link href="/register">
                         <button className="bg-silk text-velvet w-full py-2 px-4 rounded mb-4 hover:bg-champagne hover:text-silk" >Registrate</button>
                     </Link>
                 </div> */}
                 
                 <div className="hidden md:flex items-center space-x-4">
-                    <Link href="">
+                    <Link href="/reservations">
                         <i className="fi fi-rr-key text-silk rounded-lg p-2 hover:bg-champagne hover:text-velvet"> Reservas</i>
                     </Link>
-                    <Link href="/">
+                    <Link href="/favs">
                         <i className="fi fi-rr-heart text-silk rounded-lg p-2 hover:bg-champagne hover:text-velvet"> Favoritos</i>
                     </Link>
-                    <Link href="/">
+                    <Link href="/profile">
                         <i className="fi fi-rr-user text-silk rounded-lg p-2 hover:bg-champagne hover:text-velvet"> Perfil</i>
                     </Link>
                 </div>
@@ -83,20 +83,20 @@ export const Navbar: React.FC = () => {
             {/* Menu hamburguesa */}
             {isClick && (
                 <div className="md:hidden px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                    <Link href="/">
+                    <Link href="/userProfile">
                         <i className="fi fi-rr-user text-silk rounded-lg p-2 hover:bg-champagne hover:text-velvet"> Perfil</i>
                     </Link>
-                    <Link href="">
+                    <Link href="/reservations">
                         <i className="fi fi-rr-key text-silk rounded-lg p-2 hover:bg-champagne hover:text-velvet"> Reservas</i>
                     </Link>
-                    <Link href="/">
+                    <Link href="/favs">
                         <i className="fi fi-rr-heart text-silk rounded-lg p-2 hover:bg-champagne hover:text-velvet"> Favoritos</i>
                     </Link>
                     
                     <Link href="/">
                         <div className="text-silk hover:bg-champagne hover:text-velvet rounded-lg p-2">Inicio</div>
                     </Link>
-                    <Link href="/">
+                    <Link href="/about">
                         <div className="text-silk hover:bg-champagne hover:text-velvet rounded-lg p-2">Sobre nosotros</div>
                     </Link>
 
