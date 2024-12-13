@@ -6,9 +6,9 @@ const RegisterForm = () => {
     name: "",
     lastName: "",
     email: "",
-    phone: 0,
+    phone: "",
     nationality: "",
-    dni: 0,
+    dni: "",
     DOB: "",
     civilStatus: "SINGLE",
     employmentStatus: "EMPLOYED",
@@ -31,12 +31,21 @@ const RegisterForm = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const { password, confirmPassword } = formData;
+    const { password, confirmPassword, DOB, phone, dni } = formData;
     if (password !== confirmPassword) {
       alert("Las contraseñas no coinciden");
       return;
     }
     console.log(formData);
+
+    const formDataWithNumbers = {
+      ...formData,
+      phone: parseInt(formData.phone, 10),
+      dni: parseInt(formData.dni, 10),
+      DOB: DOB, 
+    };
+
+    console.log(formDataWithNumbers);
 
     try {
       const response = await fetch("http://localhost:3002/users", {
@@ -44,10 +53,12 @@ const RegisterForm = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(formDataWithNumbers),
       });
 
       if (!response.ok) {
+        const errorData = await response.json();
+        console.error("Detalles del error:", errorData);
         throw new Error("Error al registrar al usuario");
       }
 
@@ -125,7 +136,7 @@ const RegisterForm = () => {
           Teléfono
         </label>
         <input
-          type="number"
+          type="text"
           name="phone"
           id="phone"
           value={formData.phone}
@@ -161,7 +172,7 @@ const RegisterForm = () => {
           DNI
         </label>
         <input
-          type="number"
+          type="text"
           name="dni"
           id="dni"
           value={formData.dni}
