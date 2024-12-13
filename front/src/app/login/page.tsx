@@ -1,9 +1,11 @@
-"use client"
+/* eslint-disable @next/next/no-img-element */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+"use client";
 import { FcGoogle } from "react-icons/fc";
 import Link from "next/link";
 import React, { useState } from "react";
 import Swal from "sweetalert2";
-import { useRouter } from "next/navigation"; 
+import { useRouter } from "next/navigation";
 
 type LoginData = {
   email: string;
@@ -16,7 +18,7 @@ const Login: React.FC = () => {
     password: "",
   });
 
-  const router = useRouter(); 
+  const router = useRouter();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -40,8 +42,8 @@ const Login: React.FC = () => {
       if (response.status === 201) {
         const data = await response.json();
 
-        localStorage.setItem('user', JSON.stringify(data.user));
-        localStorage.setItem('token', data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
+        localStorage.setItem("token", data.token);
 
         Swal.fire({
           icon: "success",
@@ -49,8 +51,8 @@ const Login: React.FC = () => {
           text: `Bienvenido, ${data.user.email}!`,
           confirmButtonColor: "#3085d6",
         });
-        router.push('/profile'); 
-        return; 
+        router.push("/profile");
+        return;
       }
 
       if (!response.ok) {
@@ -60,7 +62,6 @@ const Login: React.FC = () => {
       const data = await response.json();
 
       const { token, user } = data;
-
     } catch (error) {
       Swal.fire({
         icon: "error",
