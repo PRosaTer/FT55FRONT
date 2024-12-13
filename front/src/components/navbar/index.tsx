@@ -95,7 +95,14 @@ export const Navbar: React.FC = () => {
         </div>
 
         <div className="flex justify-center flex-1 lg:mr-32">
-          <Link href="/">Logo</Link>
+          <Link href="/">
+            <Image
+              src="/logofinal.png"
+              alt="logo"
+              width={200}
+              height={70}
+            ></Image>
+          </Link>
         </div>
 
         <div className="hidden md:flex items-center space-x-4">
@@ -103,13 +110,11 @@ export const Navbar: React.FC = () => {
             <>
               <Link href="/favs">
                 <i className="fi fi-rr-heart text-silk rounded-lg p-2 hover:bg-champagne hover:text-velvet">
-                  {" "}
                   Favoritos
                 </i>
               </Link>
               <Link href="/profile">
                 <i className="fi fi-rr-user text-silk rounded-lg p-2 hover:bg-champagne hover:text-velvet">
-                  {" "}
                   Perfil
                 </i>
               </Link>
@@ -168,14 +173,12 @@ export const Navbar: React.FC = () => {
             <>
               <Link href="/userProfile">
                 <i className="fi fi-rr-user text-silk rounded-lg p-2 hover:bg-champagne hover:text-velvet">
-                  {" "}
                   Perfil
                 </i>
               </Link>
 
               <Link href="/favs">
                 <i className="fi fi-rr-heart text-silk rounded-lg p-2 hover:bg-champagne hover:text-velvet">
-                  {" "}
                   Favoritos
                 </i>
               </Link>
@@ -189,45 +192,6 @@ export const Navbar: React.FC = () => {
           )}
         </div>
       )}
-      {/* {isClick && (
-        <div className="md:hidden px-2 pt-2 pb-3 space-y-1 sm:px-3">
-          <Link href="/userProfile">
-            <i className="fi fi-rr-user text-silk rounded-lg p-2 hover:bg-champagne hover:text-velvet">
-              {" "}
-              Perfil
-            </i>
-          </Link>
-          <Link href="/reservations">
-            <i className="fi fi-rr-key text-silk rounded-lg p-2 hover:bg-champagne hover:text-velvet">
-              {" "}
-              Reservas
-            </i>
-          </Link>
-          <Link href="/favs">
-            <i className="fi fi-rr-heart text-silk rounded-lg p-2 hover:bg-champagne hover:text-velvet">
-              {" "}
-              Favoritos
-            </i>
-          </Link>
-
-          <Link href="/">
-            <div className="text-silk hover:bg-champagne hover:text-velvet rounded-lg p-2">
-              Inicio
-            </div>
-          </Link>
-          <Link href="/about">
-            <div className="text-silk hover:bg-champagne hover:text-velvet rounded-lg p-2">
-              Sobre nosotros
-            </div>
-          </Link>
-          <button
-            onClick={handleLogOut}
-            className="bg-silk text-velvet w-full py-2 px-4 rounded mb-4 hover:bg-champagne hover:text-silk"
-          >
-            Log Out
-          </button>
-        </div>
-      )} */}
     </nav>
   );
 };
