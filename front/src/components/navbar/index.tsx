@@ -102,14 +102,11 @@ export const Navbar: React.FC = () => {
           {userSession && userSession.token ? (
             <>
               <Link href="/favs">
-                <i className="fi fi-rr-heart text-silk rounded-lg p-2 hover:bg-champagne hover:text-velvet">
-                  {" "}
-                  Favoritos
+                <i className="fi fi-rr-heart text-silk rounded-lg p-2 hover:bg-champagne hover:text-velvet">Favoritos
                 </i>
               </Link>
               <Link href="/profile">
                 <i className="fi fi-rr-user text-silk rounded-lg p-2 hover:bg-champagne hover:text-velvet">
-                  {" "}
                   Perfil
                 </i>
               </Link>
