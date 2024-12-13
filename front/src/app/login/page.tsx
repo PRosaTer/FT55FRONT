@@ -4,8 +4,8 @@
 import { FcGoogle } from "react-icons/fc";
 import Link from "next/link";
 import React, { useState } from "react";
-import Swal from "sweetalert2"; 
-import {useRouter} from "next/router";
+import Swal from "sweetalert2";
+import { useRouter } from "next/router";
 
 type LoginData = {
   email: string;
@@ -42,8 +42,8 @@ const Login: React.FC = () => {
       if (response.status === 200) {
         const data = await response.json();
 
-        localStorage.setItem('user', JSON.stringify(data.user));
-        localStorage.setItem('token', data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
+        localStorage.setItem("token", data.token);
 
         Swal.fire({
           icon: "success",
@@ -51,8 +51,8 @@ const Login: React.FC = () => {
           text: `Bienvenido, ${data.user.email}!`,
           confirmButtonColor: "#3085d6",
         });
-        router.push('/profile');
-        return; 
+        router.push("/profile");
+        return;
       }
 
       if (!response.ok) {
