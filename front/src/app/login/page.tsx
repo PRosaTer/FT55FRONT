@@ -1,11 +1,11 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @next/next/no-img-element */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 import { FcGoogle } from "react-icons/fc";
 import Link from "next/link";
 import React, { useState } from "react";
-import Swal from "sweetalert2"; 
-import {useRouter} from "next/router";
+import Swal from "sweetalert2";
+import { useRouter } from "next/navigation";
 
 type LoginData = {
   email: string;
@@ -39,20 +39,20 @@ const Login: React.FC = () => {
         body: JSON.stringify(loginData),
       });
 
-      if (response.status === 200) {
+      if (response.status === 201) {
         const data = await response.json();
 
-        localStorage.setItem('user', JSON.stringify(data.user));
-        localStorage.setItem('token', data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
+        localStorage.setItem("token", data.token);
 
         Swal.fire({
           icon: "success",
-          title: "Cuenta creada con éxito",
+          title: "Inicio de sesión con éxito",
           text: `Bienvenido, ${data.user.email}!`,
           confirmButtonColor: "#3085d6",
         });
-        router.push('/profile');
-        return; 
+        router.push("/profile");
+        return;
       }
 
       if (!response.ok) {
@@ -62,13 +62,6 @@ const Login: React.FC = () => {
       const data = await response.json();
 
       const { token, user } = data;
-
-      Swal.fire({
-        icon: "success",
-        title: "Inicio de sesión exitoso",
-        text: `Bienvenido, ${data.user.email}!`,
-        confirmButtonColor: "#3085d6",
-      });
     } catch (error) {
       Swal.fire({
         icon: "error",
