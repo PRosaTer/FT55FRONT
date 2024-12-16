@@ -1,13 +1,5 @@
 "use client";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Award, Gamepad2, Globe, Users } from "lucide-react";
 import Image from "next/image";
 
 export default function About() {
@@ -50,53 +42,6 @@ export default function About() {
           </div>
         </section>
 
-        {/* <section className="mb-12 grid gap-6 pt-9 md:grid-cols-2 lg:grid-cols-4">
-          <Card>
-            <CardHeader>
-              <Gamepad2 className="mb-2 h-10 w-10 text-primary" />
-              <CardTitle>Games</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <CardDescription>
-                Enjoy your games with affordable deals on over 10,000 available
-                games.
-              </CardDescription>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader>
-              <Users className="mb-2 h-10 w-10 text-primary" />
-              <CardTitle>Active Community</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <CardDescription>
-                Join millions of players in our global community.
-              </CardDescription>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader>
-              <Globe className="mb-2 h-10 w-10 text-primary" />
-              <CardTitle>Global Delivery</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <CardDescription>
-                Instant delivery of game codes anywhere in the world.
-              </CardDescription>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader>
-              <Award className="mb-2 h-10 w-10 text-primary" />
-              <CardTitle>Quality Guarantee</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <CardDescription>
-                All our products are 100% original and guaranteed.
-              </CardDescription>
-            </CardContent>
-          </Card>
-        </section> */}
         <section className="mt-20 flex flex-col items-center justify-between gap-8 md:flex-row">
           <div className="flex max-w-xl flex-col justify-center">
             <h2 className="mb-4 text-3xl font-bold">Por que elegirnos?</h2>

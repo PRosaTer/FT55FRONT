@@ -23,7 +23,7 @@ export const Navbar: React.FC = () => {
   //console.log(userSession);
   useEffect(() => {
     if (typeof window !== "undefined" && window.localStorage) {
-      const userData = localStorage.getItem("userSession");
+      const userData = localStorage.getItem("user");
       //console.log(userData);
       setUserSession(JSON.parse(userData!));
     }
@@ -31,7 +31,7 @@ export const Navbar: React.FC = () => {
   //console.log(userSession);
 
   const handleLogOut = () => {
-    localStorage.removeItem("userSession");
+    localStorage.removeItem("user");
     Cookies.remove("test");
     setUserSession(undefined);
     router.push("/");
