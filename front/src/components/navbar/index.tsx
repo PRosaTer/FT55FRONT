@@ -2,18 +2,24 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useAuthStore } from '@/store/authStore';
+import { usePathname, useRouter } from "next/navigation";
+import { useAuthStore } from "@/store/authStore";
 
 export const Navbar: React.FC = () => {
   const { user, resetForm } = useAuthStore();
   const [userData, setUserData] = useState(user);
   const [isClick, setIsClick] = useState(false);
+  const pathname = usePathname();
   const router = useRouter();
 
   useEffect(() => {
     setUserData(user);
   }, [user]);
+
+  useEffect(() => {
+    const dataUser = localStorage.getItem("user");
+    setUserData(JSON.parse(dataUser!));
+  }, [pathname]);
 
   const toggleMenu = (): void => {
     setIsClick(!isClick);
@@ -22,7 +28,7 @@ export const Navbar: React.FC = () => {
   const handleLogOut = () => {
     useAuthStore.getState().logoutUser();
     setUserData(null);
-    router.push('/');
+    router.push("/");
   };
 
   return (
@@ -83,12 +89,7 @@ export const Navbar: React.FC = () => {
 
         <div className="flex justify-center flex-1 lg:mr-32">
           <Link href="/">
-            <Image
-              src="/logofinal.png"
-              alt="logo"
-              width={200}
-              height={70}
-            />
+            <Image src="/logofinal.png" alt="logo" width={200} height={70} />
           </Link>
         </div>
 
