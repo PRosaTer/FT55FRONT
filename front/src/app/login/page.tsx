@@ -7,6 +7,8 @@ import Link from "next/link";
 import React, { useState } from "react";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/context/AuthContext";
+
 
 const Login: React.FC = () => {
   const [loginData, setLoginData] = useState({
@@ -14,8 +16,9 @@ const Login: React.FC = () => {
     password: "",
   });
 
-  const [showPassword, setShowPassword] = useState(false); // Estado para mostrar/ocultar contraseña
+  const [showPassword, setShowPassword] = useState(false); 
 
+  const { setUser } = useAuth();
   const router = useRouter();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,6 +45,8 @@ const Login: React.FC = () => {
 
         localStorage.setItem("user", JSON.stringify(data.user));
         localStorage.setItem("token", data.token);
+       
+        setUser(data.user);
 
         Swal.fire({
           icon: "success",
@@ -104,7 +109,7 @@ const Login: React.FC = () => {
                 Contraseña
               </label>
               <input
-                type={showPassword ? "text" : "password"} // Alterna el tipo de input
+                type={showPassword ? "text" : "password"} 
                 name="password"
                 value={loginData.password}
                 onChange={handleChange}
@@ -113,7 +118,7 @@ const Login: React.FC = () => {
               />
               <button
                 type="button"
-                onClick={() => setShowPassword(!showPassword)} // Cambia el estado
+                onClick={() => setShowPassword(!showPassword)} 
                 className="absolute right-3 top-10 text-gray-500 hover:text-gray-700 focus:outline-none"
               >
                 {showPassword ? <FaEyeSlash size={20} /> : <FaEye size={20} />}

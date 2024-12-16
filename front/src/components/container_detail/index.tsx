@@ -56,6 +56,8 @@ console.log("eestoy en el contenedor");
       {/* Mapa */}
       <Map/>
 
+      <hr className="border-t border-gray-300 my-4"/>
+
       <ReviewsContainer/>
 
     </div>
