@@ -7,6 +7,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/context/AuthContext";
 
 const Login: React.FC = () => {
   const [loginData, setLoginData] = useState({
@@ -16,6 +17,7 @@ const Login: React.FC = () => {
 
   const [showPassword, setShowPassword] = useState(false); // Estado para mostrar/ocultar contraseña
 
+  const { setUser } = useAuth();
   const router = useRouter();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,6 +44,8 @@ const Login: React.FC = () => {
 
         localStorage.setItem("user", JSON.stringify(data.user));
         localStorage.setItem("token", data.token);
+       
+        setUser(data.user);
 
         Swal.fire({
           icon: "success",
