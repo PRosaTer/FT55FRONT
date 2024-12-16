@@ -71,6 +71,7 @@ export const useAuthStore = create<IAuthState>((set) => {
     logoutUser: () => {
       set({ token: null, user: null, error: "", successMessage: "" });
       localStorage.removeItem("token");
+      localStorage.removeItem("user");
     },
   };
 });
