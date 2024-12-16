@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { productsToPreLoad } from "@/helpers/data";
 import { Heart } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function FeatureProperties() {
   return (
@@ -14,6 +15,7 @@ export default function FeatureProperties() {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {productsToPreLoad.map((property) => (
+           <Link href={`/house/${property.id}`} key={property.id} passHref>
             <Card key={property.id}>
               <div className="relative">
                 <Image
@@ -54,6 +56,7 @@ export default function FeatureProperties() {
                 </Badge>
               </CardContent>
             </Card>
+          </Link>
           ))}
         </div>
       </div>
