@@ -20,7 +20,7 @@ export const Navbar: React.FC = () => {
   };
 
   const handleLogOut = () => {
-    resetForm();
+    useAuthStore.getState().logoutUser();
     setUserData(null);
     router.push('/');
   };
