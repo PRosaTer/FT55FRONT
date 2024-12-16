@@ -2,18 +2,24 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useAuthStore } from "@/store/authStore";
 
 export const Navbar: React.FC = () => {
   const { user, resetForm } = useAuthStore();
   const [userData, setUserData] = useState(user);
   const [isClick, setIsClick] = useState(false);
+  const pathname = usePathname();
   const router = useRouter();
 
   useEffect(() => {
     setUserData(user);
   }, [user]);
+
+  useEffect(() => {
+    const dataUser = localStorage.getItem("user");
+    setUserData(JSON.parse(dataUser!));
+  }, [pathname]);
 
   const toggleMenu = (): void => {
     setIsClick(!isClick);
