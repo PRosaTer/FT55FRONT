@@ -35,7 +35,7 @@ export default function FeatureDepartments() {
                       <CardContent className="p-0">
                         <div className="relative">
                           <Image
-                            src={property.image}
+                            src={property.photos[0]}
                             alt={property.title}
                             className="h-60 w-full rounded-t-lg object-cover"
                             width={300}
@@ -54,7 +54,7 @@ export default function FeatureDepartments() {
                             {property.title}
                           </h3>
                           <p className="mt-2 mb-2 text-lg font-bold">
-                            {property.location}
+                            {property.city} - {property.state}
                           </p>
                           <p className="text-gray-600 mb-2">
                             {property.description}
@@ -64,13 +64,13 @@ export default function FeatureDepartments() {
                               Habitaciones
                             </span>
                             <p className="text-sm font-bold mb-2">
-                              {property.rooms}
+                              {property.bedrooms}
                             </p>
                           </div>
                           <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
                             <span className="text-sm font-bold">Huéspedes</span>
                             <p className="text-sm font-bold mb-2">
-                              {property.guests}
+                              {property.capacity}
                             </p>
                           </div>
                           <span className="text-xl text-[#239b56] font-bold">
