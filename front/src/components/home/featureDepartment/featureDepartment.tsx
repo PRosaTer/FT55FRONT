@@ -49,7 +49,7 @@ export default function FeatureDepartments() {
                             <Heart />
                           </Button>
                         </div>
-                        <div className="flex h-[250px] flex-col justify-between rounded-b-lg bg-white p-4">
+                        <div className="flex h-[350px] flex-col justify-between rounded-b-lg bg-white p-4">
                           <h3 className="line-clamp-1 text-lg font-bold">
                             {property.title}
                           </h3>
