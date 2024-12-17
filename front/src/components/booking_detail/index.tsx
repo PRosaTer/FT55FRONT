@@ -216,7 +216,8 @@ const BookingDetail: React.FC = () => {
                 <h2>${finalpriceWD.toFixed(2)}</h2>
               </div>
 
-              <button className="bg-champagne text-pearl py-2 px-4 mb-4 rounded-lg hover:bg-velvet hover:scale-110">
+              <button className="bg-champagne text-pearl py-2 px-4 mb-4 rounded-lg hover:bg-velvet hover:scale-110"
+              onClick={handleReserv}>
                 Reserva
               </button>
             </div>
