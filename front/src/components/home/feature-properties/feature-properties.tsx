@@ -15,11 +15,10 @@ export default function FeatureProperties() {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {productsToPreLoad.map((property) => (
-           <Link href={`/house/${property.id}`} key={property.id} passHref>
             <Card key={property.id}>
               <div className="relative">
                 <Image
-                  src={property.image}
+                  src={property.photos[0]}
                   alt={property.title}
                   width={300}
                   height={200}
@@ -34,29 +33,30 @@ export default function FeatureProperties() {
                 </Button>
               </div>
 
+              <Link href={`/house/${property.id}`} key={property.id} passHref>
               <CardContent className="p-4">
                 <h3 className="text-xl font-semibold mb-2 hover:text-sky-500">
                   {property.title}
                 </h3>
                 <p className="text-gray-800 font-semibold mb-2 hover:text-sky-500">
-                  {property.location}
+                  {property.city} - {property.state}
                 </p>
                 <p className="text-gray-600 mb-2">{property.description}</p>
                 <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
                   <span>Habitaciones</span>
-                  <p className="text-gray-600 mb-2">{property.rooms}</p>
+                  <p className="text-gray-600 mb-2">{property.bedrooms}</p>
                 </div>
                 <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
                   <span>Huéspedes</span>
-                  <p className="text-gray-600 mb-2">{property.guests}</p>
+                  <p className="text-gray-600 mb-2">{property.capacity}</p>
                 </div>
 
                 <Badge className="text-xl" variant="secondary">
                   ${property.price}
                 </Badge>
               </CardContent>
+              </Link>
             </Card>
-          </Link>
           ))}
         </div>
       </div>
