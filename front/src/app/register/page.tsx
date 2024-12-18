@@ -43,7 +43,7 @@ const RegisterForm = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const { password, confirmPassword, DOB, phone, dni } = formData;
+    const { password, confirmPassword, DOB } = formData;
 
     if (formData.name.length < 2 || formData.lastName.length < 2) {
       alert("El nombre y el apellido deben tener al menos 2 caracteres.");
@@ -66,16 +66,6 @@ const RegisterForm = () => {
       alert("Las contraseñas no coinciden");
       return;
     }
-    if (!/^[0-9]+$/.test(phone)) {
-      alert("El número de teléfono debe tener el formato ");
-      return;
-    }
-
-    if (!/^[0-9]+$/.test(dni)) {
-      alert("El número de DNI debe tener el formato xxxxxxxxxx");
-      return;
-    }
-
     console.log(formData);
 
     const formDataWithNumbers = {
@@ -265,10 +255,7 @@ const RegisterForm = () => {
       </div>
 
       <div className="mb-4">
-        <button
-          type="submit"
-          className="w-full py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-        >
+        <button className="w-full py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-indigo-500">
           Registrar
         </button>
       </div>
