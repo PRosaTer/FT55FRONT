@@ -1,4 +1,4 @@
-export interface IProduct {
+export interface IProperty {
   id: number;
   owner: string;
   active: boolean;
@@ -18,6 +18,6 @@ export interface IProduct {
   rating: number;
 }
 
-export interface IProductListProps {
-  products: IProduct[];
+export interface IPropertyList {
+  properties: IProperty[];
 }

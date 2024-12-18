@@ -1,7 +1,7 @@
-import { IProduct } from "@/interfaces/IProduct";
+import { IProperty } from "@/interfaces/IProperty";
 
 
-export const productsToPreLoad: IProduct[] = [
+export const productsToPreLoad: IProperty[] = [
   {
     id: 1,
     owner: "Juan Pérez",

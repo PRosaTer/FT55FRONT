@@ -10,11 +10,11 @@ import DescriptionDetail from '@/components/description_detail';
 import BookingDetail from '../booking_detail';
 import Map from '../map';
 import ReviewsContainer from '../reviews_container';
-import { IProduct } from '@/interfaces/IProduct';
+import { IProperty } from '@/interfaces/IProperty';
 
 
 
-export const ContainerDetail: React.FC<IProduct> = (product) => {
+export const ContainerDetail: React.FC<IProperty> = (property) => {
 
   return (
     <div className="p-4">
@@ -23,12 +23,12 @@ export const ContainerDetail: React.FC<IProduct> = (product) => {
       <BackButton />
 
       {/* Detalles de la Propiedad */}
-      <CardDetail {...product}/>
+      <CardDetail {...property}/>
 
       <div className='flex flex-col lg:flex-row lg:gap-8 lg:mx-12 mb-8'>
       {/* Descripción */}
       <div className='lg:w-1/2'>
-        <DescriptionDetail {...product}/>
+        <DescriptionDetail {...property}/>
       </div>
       
       {/* Calendario y cantidad de viajeros */}

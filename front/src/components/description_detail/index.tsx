@@ -1,14 +1,14 @@
 // react
-import { IProduct } from '@/interfaces/IProduct';
+import { IProperty } from '@/interfaces/IProperty';
 import React from 'react';
 
 
-export const DescriptionDetail: React.FC<IProduct> = (product) => {
+export const DescriptionDetail: React.FC<IProperty> = (property) => {
 return (
    <div className="p-8 rounded-lg">
         <h3 className="text-xl font-semibold mb-2">Acerca de este alojamiento</h3>
         <p className="text-gray-600 mb-4">
-        {product.description}
+        {property.description}
         </p>
         <h3 className="text-xl font-bold mb-2">¿Qué ofrece este lugar?</h3>
         <ul className="list-disc list-inside mb-4">
