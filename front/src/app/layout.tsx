@@ -4,6 +4,7 @@ import "./globals.css";
 import { AuthProvider } from "@/context/AuthContext";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -28,19 +29,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-    <body
-      className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-    >
-      <AuthProvider>
-      <header>
-        <Navbar/>
-      </header>
-      <main>
-      {children}
-      </main>
-      <Footer/>
-      </AuthProvider>
-    </body>
-  </html>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <GoogleOAuthProvider
+          clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!}
+        >
+          <AuthProvider>
+            <header>
+              <Navbar />
+            </header>
+            <main>{children}</main>
+            <Footer />
+          </AuthProvider>
+        </GoogleOAuthProvider>
+      </body>
+    </html>
   );
 }
