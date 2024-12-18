@@ -12,12 +12,12 @@ const RegisterForm = () => {
     nationality: "",
     dni: "",
     DOB: "",
-    civilStatus: "SINGLE",
-    employmentStatus: "EMPLOYED",
-    userName: "",
+    civilStatus: "",
+    employmentStatus: "",
     password: "",
     confirmPassword: "",
-    role: "USER",
+    role: "user",
+    photo: "",
   });
   const [showpassword, setShowpassword] = useState(false);
   const router = useRouter();
@@ -70,9 +70,7 @@ const RegisterForm = () => {
 
     const formDataWithNumbers = {
       ...formData,
-      phone: parseInt(formData.phone, 10),
-      dni: parseInt(formData.dni, 10),
-      DOB: DOB,
+      DOB: DOB.toString(),
     };
 
     console.log(formDataWithNumbers);
