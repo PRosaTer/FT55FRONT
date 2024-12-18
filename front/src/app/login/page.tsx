@@ -75,6 +75,7 @@ const Login: React.FC = () => {
   // Inicio de sesión con Google
   const handleGoogleLoginSuccess = async (response: CredentialResponse) => {
     const token = response.credential;
+    console.log(response);
 
     if (!token) {
       console.error("Token de Google no recibido.");
