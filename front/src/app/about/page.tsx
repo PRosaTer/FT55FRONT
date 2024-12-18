@@ -74,7 +74,7 @@ export default function About() {
             <div className="absolute inset-0 overflow-hidden rounded-bl-[40%] rounded-br-3xl rounded-tl-3xl rounded-tr-[40%] bg-black">
               <Image
                 src="/about1.jpeg"
-                alt="Game Vault Team"
+                alt="rentafacil"
                 layout="fill"
                 objectFit="cover"
                 className="rounded-md"
