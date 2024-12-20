@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Swal from "sweetalert2";
+
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -31,10 +32,12 @@ const RegisterForm = () => {
       [name]: value,
     }));
   };
+
   const validatePassword = (password: string) => {
-    const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*[a-zA-Z]).{8,}$/;
+    const passwordRegex = /^(?=.[A-Z])(?=.[!@#$%^&])(?=.[a-zA-Z]).{8,}$/;
     return passwordRegex.test(password);
   };
+
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
@@ -104,161 +107,169 @@ const RegisterForm = () => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="max-w-md mx-auto p-6 bg-gray-100 rounded-lg shadow-lg"
+    <div
+      className="min-h-screen flex items-center justify-center bg-cover bg-center"
+      style={{
+        backgroundImage:
+          "url('https://i.postimg.cc/3RnqJCmr/pexels-chris-schippers-139261-421927.jpg')",
+      }}
     >
-      <div className="mb-4">
-        <label
-          htmlFor="name"
-          className="block text-sm font-semibold text-gray-700"
-        >
-          Nombre
-        </label>
-        <input
-          type="text"
-          name="name"
-          id="name"
-          value={formData.name}
-          onChange={handleChange}
-          className="w-full px-3 py-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          required
-        />
-      </div>
-
-      <div className="mb-4">
-        <label
-          htmlFor="lastName"
-          className="block text-sm font-semibold text-gray-700"
-        >
-          Apellido
-        </label>
-        <input
-          type="text"
-          name="lastName"
-          id="lastName"
-          value={formData.lastName}
-          onChange={handleChange}
-          className="w-full px-3 py-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          required
-        />
-      </div>
-
-      <div className="mb-4">
-        <label
-          htmlFor="email"
-          className="block text-sm font-semibold text-gray-700"
-        >
-          Correo Electrónico
-        </label>
-        <input
-          type="email"
-          name="email"
-          id="email"
-          value={formData.email}
-          onChange={handleChange}
-          className="w-full px-3 py-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          required
-        />
-      </div>
-
-      <div className="mb-4">
-        <label
-          htmlFor="nationality"
-          className="block text-sm font-semibold text-gray-700"
-        >
-          Nacionalidad
-        </label>
-        <input
-          type="text"
-          name="nationality"
-          id="nationality"
-          value={formData.nationality}
-          onChange={handleChange}
-          className="w-full px-3 py-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          required
-        />
-      </div>
-
-      <div className="mb-4">
-        <label
-          htmlFor="DOB"
-          className="block text-sm font-semibold text-gray-700"
-        >
-          Fecha de Nacimiento
-        </label>
-        <input
-          type="date"
-          name="DOB"
-          id="DOB"
-          value={formData.DOB}
-          onChange={handleChange}
-          className="w-full px-3 py-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          required
-        />
-      </div>
-
-      <div className="mb-4">
-        <label
-          htmlFor="password"
-          className="block text-sm font-semibold text-gray-700"
-        >
-          Contraseña
-        </label>
-        <div className="relative">
+      <form
+        onSubmit={handleSubmit}
+        className="max-w-xl mx-auto p-10 bg-white rounded-lg shadow-lg"
+      >
+        <div className="mb-4">
+          <label
+            htmlFor="name"
+            className="block text-sm font-semibold text-gray-700"
+          >
+            Nombre
+          </label>
           <input
-            type={showpassword ? "text" : "password"}
-            name="password"
-            id="password"
-            value={formData.password}
+            type="text"
+            name="name"
+            id="name"
+            value={formData.name}
             onChange={handleChange}
             className="w-full px-3 py-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
             required
           />
-          <button
-            type="button"
-            onClick={() => setShowpassword(!showpassword)}
-            className="absolute right-2 top-2 text-gray-500 hover:text-gray-700 focus:outline-none"
-          >
-            {showpassword ? <FaEyeSlash /> : <FaEye />}
-          </button>
         </div>
-      </div>
 
-      <div className="mb-4">
-        <label
-          htmlFor="confirmPassword"
-          className="block text-sm font-semibold text-gray-700"
-        >
-          Confirmar Contraseña
-        </label>
-        <div className="relative">
+        <div className="mb-4">
+          <label
+            htmlFor="lastName"
+            className="block text-sm font-semibold text-gray-700"
+          >
+            Apellido
+          </label>
           <input
-            type={showpassword ? "text" : "password"}
-            name="confirmPassword"
-            id="confirmPassword"
-            value={formData.confirmPassword}
+            type="text"
+            name="lastName"
+            id="lastName"
+            value={formData.lastName}
+            onChange={handleChange}
+            className="w-full px-10 py-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            required
+          />
+        </div>
+
+        <div className="mb-4">
+          <label
+            htmlFor="email"
+            className="block text-sm font-semibold text-gray-700"
+          >
+            Correo Electrónico
+          </label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            value={formData.email}
             onChange={handleChange}
             className="w-full px-3 py-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
             required
           />
-          <button
-            type="button"
-            onClick={() => setShowpassword(!showpassword)}
-            className="absolute right-2 top-2 text-gray-500 hover:text-gray-700 focus:outline-none"
+        </div>
+
+        <div className="mb-4">
+          <label
+            htmlFor="nationality"
+            className="block text-sm font-semibold text-gray-700"
           >
-            {showpassword ? <FaEyeSlash /> : <FaEye />}
+            Nacionalidad
+          </label>
+          <input
+            type="text"
+            name="nationality"
+            id="nationality"
+            value={formData.nationality}
+            onChange={handleChange}
+            className="w-full px-3 py-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            required
+          />
+        </div>
+
+        <div className="mb-4">
+          <label
+            htmlFor="DOB"
+            className="block text-sm font-semibold text-gray-700"
+          >
+            Fecha de Nacimiento
+          </label>
+          <input
+            type="date"
+            name="DOB"
+            id="DOB"
+            value={formData.DOB}
+            onChange={handleChange}
+            className="w-full px-3 py-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            required
+          />
+        </div>
+
+        <div className="mb-4">
+          <label
+            htmlFor="password"
+            className="block text-sm font-semibold text-gray-700"
+          >
+            Contraseña
+          </label>
+          <div className="relative">
+            <input
+              type={showpassword ? "text" : "password"}
+              name="password"
+              id="password"
+              value={formData.password}
+              onChange={handleChange}
+              className="w-full px-3 py-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              required
+            />
+            <button
+              type="button"
+              onClick={() => setShowpassword(!showpassword)}
+              className="absolute right-2 top-2 text-gray-500 hover:text-gray-700 focus:outline-none"
+            >
+              {showpassword ? <FaEyeSlash /> : <FaEye />}
+            </button>
+          </div>
+        </div>
+
+        <div className="mb-4">
+          <label
+            htmlFor="confirmPassword"
+            className="block text-sm font-semibold text-gray-700"
+          >
+            Confirmar Contraseña
+          </label>
+          <div className="relative">
+            <input
+              type={showpassword ? "text" : "password"}
+              name="confirmPassword"
+              id="confirmPassword"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              className="w-full px-3 py-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              required
+            />
+            <button
+              type="button"
+              onClick={() => setShowpassword(!showpassword)}
+              className="absolute right-2 top-2 text-gray-500 hover:text-gray-700 focus:outline-none"
+            >
+              {showpassword ? <FaEyeSlash /> : <FaEye />}
+            </button>
+          </div>
+        </div>
+
+        <div className="mb-4">
+          <button className="w-full py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            Registrar
           </button>
         </div>
-      </div>
-
-      <div className="mb-4">
-        <button className="w-full py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-          Registrar
-        </button>
-      </div>
-    </form>
+      </form>
+    </div>
   );
 };
 
-export default RegisterForm;
+export default RegisterForm;

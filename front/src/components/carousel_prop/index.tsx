@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import React, { useState } from 'react';
-import Image from 'next/image';
+import React, { useState } from "react";
+import Image from "next/image";
 
 interface CarouselProps {
   photos?: string[]; 
@@ -10,7 +10,6 @@ interface CarouselProps {
 
 export const ImageCarousel: React.FC<CarouselProps> = ({ photos }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-
 
   const goToPrevious = () => {
     setCurrentIndex((prevIndex) => (photos && prevIndex === 0 ? photos.length - 1 : prevIndex - 1));
@@ -27,9 +26,8 @@ export const ImageCarousel: React.FC<CarouselProps> = ({ photos }) => {
       <Image
         src={photos[currentIndex]}
         alt={`Imagen ${currentIndex + 1}`}
-        layout="fill"
-        objectFit="cover"
-        className="transition-transform duration-500 ease-in-out"
+        fill
+        className="transition-transform duration-500 ease-in-out object-cover"
       />
       )}
 
@@ -56,7 +54,7 @@ export const ImageCarousel: React.FC<CarouselProps> = ({ photos }) => {
             key={index}
             onClick={() => setCurrentIndex(index)}
             className={`w-3 h-3 rounded-full ${
-              currentIndex === index ? 'bg-blue-500' : 'bg-gray-300'
+              currentIndex === index ? "bg-blue-500" : "bg-gray-300"
             }`}
           ></button>
         ))}

@@ -1,15 +1,15 @@
 // "use client"
 
 // react
-import React from 'react';
+import React from "react";
 
 // components
-import BackButton from '@/components/back_button';
-import CardDetail from '@/components/card_detail';
-import DescriptionDetail from '@/components/description_detail';
-import BookingDetail from '../booking_detail';
-import Map from '../map';
-import ReviewsContainer from '../reviews_container';
+import BackButton from "@/components/back_button";
+import CardDetail from "@/components/card_detail";
+import DescriptionDetail from "@/components/description_detail";
+import BookingDetail from "../booking_detail";
+import { GoogleMaps } from "../map";
+import ReviewsContainer from "../reviews_container";
 import { IProperty } from '@/interfaces/IProperty';
 import { user } from '@/helpers/data';
 
@@ -19,10 +19,8 @@ interface IPropsDetail {
 }
 
 export const ContainerDetail: React.FC<IPropsDetail> = ({property, owner}) => {
-
   return (
     <div className="p-4">
-
       {/* Volver a la Home */}
       <BackButton />
 
@@ -39,18 +37,16 @@ export const ContainerDetail: React.FC<IPropsDetail> = ({property, owner}) => {
       <div className='lg:w-1/2'>
         <BookingDetail/>
       </div>
-
       </div>
-      
+
       {/* Mapa */}
-      <Map/>
+      <GoogleMaps />
 
-      <hr className="border-t border-gray-300 my-4"/>
+      <hr className="border-t border-gray-300 my-4" />
 
-      <ReviewsContainer/>
-
+      <ReviewsContainer />
     </div>
   );
-}
+};
 
 export default ContainerDetail;

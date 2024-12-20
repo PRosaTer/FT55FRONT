@@ -35,6 +35,7 @@ return (
          <ImageCarousel {...property}/>
         </div>
 
+
         {/* Contenido */}
         <div className="md:w-1/2 w-full p-4 bg-pearl">
           <h2 className="text-xl font-semibold mb-2">{property.name}</h2>

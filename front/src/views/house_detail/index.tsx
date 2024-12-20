@@ -6,7 +6,7 @@ import ContainerDetail from '@/components/container_detail';
 import { getPropertyById, getPropertyOwner } from '@/api/PropertyAPI';
 
 
-export const Detail: React.FC<{params:{id:string}}> = async({params}) => {
+export const HouseDetail: React.FC<{params:{id:string}}> = async({params}) => {
   const property = await getPropertyById(params.id)
 
   if (!property) {
@@ -29,4 +29,4 @@ export const Detail: React.FC<{params:{id:string}}> = async({params}) => {
 
 }
 
-export default Detail
+export default HouseDetail
