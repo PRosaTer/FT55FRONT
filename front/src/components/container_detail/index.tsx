@@ -10,27 +10,33 @@ import DescriptionDetail from "@/components/description_detail";
 import BookingDetail from "../booking_detail";
 import { GoogleMaps } from "../map";
 import ReviewsContainer from "../reviews_container";
-import { IProduct } from "@/interfaces/IProduct";
+import { IProperty } from '@/interfaces/IProperty';
+import { user } from '@/helpers/data';
 
-export const ContainerDetail: React.FC<IProduct> = (product) => {
+interface IPropsDetail {
+  property : IProperty;
+  owner?: user
+}
+
+export const ContainerDetail: React.FC<IPropsDetail> = ({property, owner}) => {
   return (
     <div className="p-4">
       {/* Volver a la Home */}
       <BackButton />
 
       {/* Detalles de la Propiedad */}
-      <CardDetail {...product} />
+      <CardDetail property={property} owner={owner}/>
 
-      <div className="flex flex-col lg:flex-row lg:gap-8 lg:mx-12 mb-8">
-        {/* Descripción */}
-        <div className="lg:w-1/2">
-          <DescriptionDetail {...product} />
-        </div>
-
-        {/* Calendario y cantidad de viajeros */}
-        <div className="lg:w-1/2">
-          <BookingDetail />
-        </div>
+      <div className='flex flex-col lg:flex-row lg:gap-8 lg:mx-12 mb-8'>
+      {/* Descripción */}
+      <div className='lg:w-1/2'>
+        <DescriptionDetail {...property}/>
+      </div>
+      
+      {/* Calendario y cantidad de viajeros */}
+      <div className='lg:w-1/2'>
+        <BookingDetail/>
+      </div>
       </div>
 
       {/* Mapa */}
