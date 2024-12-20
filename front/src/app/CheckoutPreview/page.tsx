@@ -8,38 +8,7 @@ import React from "react";
 const CheckoutPreview = () => {
   const router = useRouter(); // Hook para manejar la navegación
   const [loading, setLoading] = useState(false); // Para manejar el estado de carga
-  const [loading, setLoading] = useState(false); // Para manejar el estado de carga
 
-  const handlePayment = async () => {
-    setLoading(true); // Activa el estado de carga
-    try {
-      // Enviar datos al backend para crear la preferencia de pago
-      const response = await fetch("/api/payment", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          title: "Casa con hermosa vista",
-          price: 593.41, // Total calculado
-          quantity: 1,
-        }),
-      });
-
-      const data = await response.json();
-      if (data.init_point) {
-        // Redirigir al usuario al enlace de pago de Mercado Pago
-        window.location.href = data.init_point;
-      } else {
-        console.error("Error al generar el enlace de pago");
-        alert("Hubo un error al procesar tu pago. Intenta nuevamente.");
-      }
-    } catch (error) {
-      console.error("Error al procesar el pago:", error);
-      alert("Ocurrió un error. Por favor, inténtalo más tarde.");
-    } finally {
-      setLoading(false); // Desactiva el estado de carga
-    }
   const handlePayment = async () => {
     setLoading(true); // Activa el estado de carga
     try {
