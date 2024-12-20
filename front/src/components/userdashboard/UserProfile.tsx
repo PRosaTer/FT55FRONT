@@ -141,13 +141,7 @@ const UserProfile: React.FC = () => {
                 <span className="font-semibold">Correo electrónico:</span> {user.email}
               </p>
               <p>
-                <span className="font-semibold">Teléfono:</span> {user.phone}
-              </p>
-              <p>
                 <span className="font-semibold">Nacionalidad:</span> {user.nationality}
-              </p>
-              <p>
-                <span className="font-semibold">DNI:</span> {user.dni}
               </p>
               <p>
                 <span className="font-semibold">Fecha de Nacimiento:</span>{" "}
