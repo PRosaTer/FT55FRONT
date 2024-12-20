@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import React from "react";
+import { useState } from "react";
 
 const CheckoutPreview = () => {
   const router = useRouter(); // Hook para manejar la navegación
