@@ -1,4 +1,4 @@
-export default interface FormData {
+export default interface IFormData {
   title: string;
   description: string;
   price: number;
@@ -19,5 +19,6 @@ export default interface FormData {
   airConditioning: boolean,
   piscina: boolean,
   parqueadero: boolean,
-  kitchen: boolean,
+  cocina: boolean,
+  isActive: boolean,
 }
