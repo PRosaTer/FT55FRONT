@@ -1,10 +1,12 @@
 export default interface IUser {
     reservations(reservations: any): unknown;
-    firstname: string;
-    lastname: string;
-    birthdate: string;
+    name: string;
+    lastName: string;
+    DOB: string;
     phone: string;
     email: string;
+    nationality: string;
+    dni:string;
     id: string;
     profileImgUrl: string;
     registeredAt: string;
