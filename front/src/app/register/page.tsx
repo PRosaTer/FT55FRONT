@@ -1,4 +1,5 @@
 "use client";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Swal from "sweetalert2";
@@ -33,7 +34,7 @@ const RegisterForm = () => {
   };
 
   const validatePassword = (password: string) => {
-    const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*[a-zA-Z]).{8,}$/;
+    const passwordRegex = /^(?=.[A-Z])(?=.[!@#$%^&])(?=.[a-zA-Z]).{8,}$/;
     return passwordRegex.test(password);
   };
 
@@ -75,6 +76,8 @@ const RegisterForm = () => {
       DOB: DOB.toString(),
     };
 
+    console.log(formDataWithNumbers);
+
     try {
       const response = await fetch("http://localhost:3002/users", {
         method: "POST",
@@ -99,11 +102,6 @@ const RegisterForm = () => {
         }
       );
     } catch (error) {
-      Swal.fire({
-        icon: "error",
-        title: "Error en el registro",
-        text: "Hubo un problema al registrar al usuario.",
-      });
       console.error("Error al registrar el usuario:", error);
     }
   };
@@ -274,4 +272,4 @@ const RegisterForm = () => {
   );
 };
 
-export default RegisterForm;
+export default RegisterForm;
