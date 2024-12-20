@@ -1,4 +1,5 @@
 "use client";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Swal from "sweetalert2";
@@ -19,6 +20,8 @@ const RegisterForm = () => {
     role: "user",
     photo: "",
   });
+  const [showpassword, setShowpassword] = useState(false);
+  const router = useRouter();
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -31,7 +34,7 @@ const RegisterForm = () => {
   };
 
   const validatePassword = (password: string) => {
-    const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*[a-zA-Z]).{8,}$/;
+    const passwordRegex = /^(?=.[A-Z])(?=.[!@#$%^&])(?=.[a-zA-Z]).{8,}$/;
     return passwordRegex.test(password);
   };
 
@@ -92,6 +95,12 @@ const RegisterForm = () => {
 
       const data = await response.json();
       console.log("Usuario registrado exitosamente:", data);
+
+      Swal.fire("Éxito", "Usuario registrado exitosamente", "success").then(
+        () => {
+          router.push("/login");
+        }
+      );
     } catch (error) {
       console.error("Error al registrar el usuario:", error);
     }
@@ -163,24 +172,6 @@ const RegisterForm = () => {
           />
         </div>
 
-      <div className="mb-4">
-        <label
-          htmlFor="phone"
-          className="block text-sm font-semibold text-gray-700"
-        >
-          Teléfono
-        </label>
-        <input
-          type="text"
-          name="phone"
-          id="phone"
-          value={formData.phone}
-          onChange={handleChange}
-          className="w-full px-3 py-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          required
-        />
-      </div>
-
         <div className="mb-4">
           <label
             htmlFor="nationality"
@@ -216,63 +207,6 @@ const RegisterForm = () => {
             required
           />
         </div>
-
-      <div className="mb-4">
-        <label
-          htmlFor="civilStatus"
-          className="block text-sm font-semibold text-gray-700"
-        >
-          Estado Civil
-        </label>
-        <select
-          name="civilStatus"
-          id="civilStatus"
-          value={formData.civilStatus}
-          onChange={handleChange}
-          className="w-full px-3 py-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-        >
-          <option value="SINGLE">Soltero</option>
-          <option value="MARRIED">Casado</option>
-        </select>
-      </div>
-
-      <div className="mb-4">
-        <label
-          htmlFor="employmentStatus"
-          className="block text-sm font-semibold text-gray-700"
-        >
-          Estado de Empleo
-        </label>
-        <select
-          name="employmentStatus"
-          id="employmentStatus"
-          value={formData.employmentStatus}
-          onChange={handleChange}
-          className="w-full px-3 py-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-        >
-          <option value="EMPLOYED">Empleado</option>
-          <option value="UNEMPLOYED">Desempleado</option>
-          <option value="STUDENT">estudiante</option>
-        </select>
-      </div>
-
-      <div className="mb-4">
-        <label
-          htmlFor="userName"
-          className="block text-sm font-semibold text-gray-700"
-        >
-          Nombre de Usuario
-        </label>
-        <input
-          type="text"
-          name="userName"
-          id="userName"
-          value={formData.userName}
-          onChange={handleChange}
-          className="w-full px-3 py-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          required
-        />
-      </div>
 
         <div className="mb-4">
           <label
@@ -338,4 +272,4 @@ const RegisterForm = () => {
   );
 };
 
-export default RegisterForm;
+export default RegisterForm;

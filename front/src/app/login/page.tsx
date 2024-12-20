@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @next/next/no-img-element */
 "use client";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Link from "next/link";
@@ -10,7 +9,7 @@ import { useAuth } from "@/context/AuthContext";
 import { GoogleLogin, CredentialResponse } from "@react-oauth/google";
 
 const Login: React.FC = () => {
-  const [loginData, setLoginData] = useState<LoginData>({
+  const [loginData, setLoginData] = useState({
     email: "",
     password: "",
   });
@@ -37,7 +36,7 @@ const Login: React.FC = () => {
         body: JSON.stringify(loginData),
       });
 
-      if (response.status === 200) {
+      if (response.status === 201) {
         const data = await response.json();
 
         localStorage.setItem("user", JSON.stringify(data.user));
@@ -47,7 +46,7 @@ const Login: React.FC = () => {
 
         Swal.fire({
           icon: "success",
-          title: "Cuenta creada con éxito",
+          title: "Inicio de sesión con éxito",
           text: `Bienvenido, ${data.user.email}!`,
           confirmButtonColor: "#3085d6",
         });
@@ -58,13 +57,6 @@ const Login: React.FC = () => {
       if (!response.ok) {
         throw new Error("Credenciales incorrectas");
       }
-
-      Swal.fire({
-        icon: "success",
-        title: "Inicio de sesión exitoso",
-        text: `Bienvenido, ${data.user.email}!`,
-        confirmButtonColor: "#3085d6",
-      });
     } catch (error) {
       Swal.fire({
         icon: "error",
