@@ -11,10 +11,14 @@ import BookingDetail from '../booking_detail';
 import Map from '../map';
 import ReviewsContainer from '../reviews_container';
 import { IProperty } from '@/interfaces/IProperty';
+import { user } from '@/helpers/data';
 
+interface IPropsDetail {
+  property : IProperty;
+  owner?: user
+}
 
-
-export const ContainerDetail: React.FC<IProperty> = (property) => {
+export const ContainerDetail: React.FC<IPropsDetail> = ({property, owner}) => {
 
   return (
     <div className="p-4">
@@ -23,7 +27,7 @@ export const ContainerDetail: React.FC<IProperty> = (property) => {
       <BackButton />
 
       {/* Detalles de la Propiedad */}
-      <CardDetail {...property}/>
+      <CardDetail property={property} owner={owner}/>
 
       <div className='flex flex-col lg:flex-row lg:gap-8 lg:mx-12 mb-8'>
       {/* Descripción */}

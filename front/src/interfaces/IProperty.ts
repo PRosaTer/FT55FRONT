@@ -1,8 +1,13 @@
+import { user } from "@/helpers/data";
+import { IAmenities } from "./IAmenities";
+import IUser from "./user";
+import { IAccount } from "./IAccount";
+
 export interface IProperty {
   id: number;
-  owner: string;
-  active: boolean;
-  title: string;
+  account_: IAccount;
+  isActive: boolean;
+  name: string;
   description: string;
 
   state: string;
@@ -12,10 +17,12 @@ export interface IProperty {
   bathrooms: number;
   isAvailable: boolean;
   capacity: number;
-  photos: string[];
-  checkin: string;
-  checkout:string;
+  photos?: string[];
+  image_?: { id: string; url: string }[];
   rating: number;
+  hasMinor: boolean;
+  pets: boolean
+  amenities: IAmenities
 }
 
 export interface IPropertyList {

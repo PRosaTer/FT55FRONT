@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useEffect, useState } from "react"
-import FeatureDepartments from "@/components/featureDepartments";
+import FeatureDepartments from "@/components/featureDepartment";
 import { getPropertyDB } from "@/api/PropertyAPI";
 import { IProperty } from "@/interfaces/IProperty";
 
@@ -12,14 +12,20 @@ export const HomeContainer: React.FC = () => {
     useEffect(() => {
         const fetchProperties = async () => {
             const propertiesData = await getPropertyDB();
-            setProperties(propertiesData);
+
+            const transformedProperties = propertiesData.map((property) => ({
+                ...property,
+                photos: property.image_?.map((img) => img.url) || [], 
+              }));
+
+              setProperties(transformedProperties);
         };
 
         fetchProperties();
     }, []);
 
     return (
-        <div className="py-16 bg-pearl">
+        <div className="py-16">
             <div className="container mx-auto px-4">
                 <FeatureDepartments properties={properties}/>
             </div>

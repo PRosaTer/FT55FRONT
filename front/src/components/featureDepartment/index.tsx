@@ -19,7 +19,7 @@ export const FeatureDepartments: React.FC<IFeatureDepartmentsProps> = ({properti
 
   const plugin = useRef(Autoplay({ delay: 6000, stopOnInteraction: true }));
   return (
-    <section className="py-16 bg-gray-100">
+    <section className="py-16 ">
       <div className="container mx-auto px-4">
         {/* <h2 className="mb-6 text-2xl text-center font-semibold md:text-3xl">
           Departamentos
@@ -27,7 +27,7 @@ export const FeatureDepartments: React.FC<IFeatureDepartmentsProps> = ({properti
         <Carousel className="w-full" plugins={[plugin.current]}>
           <CarouselContent className="-ml-2 md:-ml-4">
             {properties && properties.map((property: IProperty) => (
-              <CardHome {...property}/>
+              <CardHome {...property} key={property.id}/>
             ))}
           </CarouselContent>
         </Carousel>
