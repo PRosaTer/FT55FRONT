@@ -9,7 +9,7 @@ export default interface IUser {
     profileImgUrl: string;
     registeredAt: string;
     active: boolean;
-    nationality: string;
-    dni: string;
-    DOB: string;
+    nationality?: string;
+    dni?: string;
+    DOB?: string;
   }

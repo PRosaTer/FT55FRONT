@@ -15,8 +15,8 @@ const MyProperties: React.FC = () => {
       id: 1,
       owner: {
         id: "123",
-        firstname: "Juan",
-        lastname: "Pérez",
+        name: "Juan",
+        lastName: "Pérez",
         birthdate: "1990-01-01",
         phone: "+34 123 456 789",
         email: "juan.perez@example.com",
@@ -58,8 +58,8 @@ const MyProperties: React.FC = () => {
       id: 2,
       owner: {
         id: "123",
-        firstname: "Juan",
-        lastname: "Pérez",
+        name: "Juan",
+        lastName: "Pérez",
         birthdate: "1990-01-01",
         phone: "+34 123 456 789",
         email: "juan.perez@example.com",
