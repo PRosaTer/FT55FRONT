@@ -20,6 +20,8 @@ const MyReviews: React.FC<{ propertyId: string }> = ({ propertyId }) => {
         registeredAt: "2023-01-01",
         active: true,
         reservations: () => null,
+        civilStatus: '',
+        photo: ''
       },
       property: {
         id: 1,
@@ -34,6 +36,8 @@ const MyReviews: React.FC<{ propertyId: string }> = ({ propertyId }) => {
           registeredAt: "2023-01-01",
           active: true,
           reservations: () => null,
+          civilStatus: '',
+          photo: ''
         },
         active: true,
         title: "Casa en la playa",
@@ -79,6 +83,8 @@ const MyReviews: React.FC<{ propertyId: string }> = ({ propertyId }) => {
         registeredAt: "2023-01-01",
         active: true,
         reservations: () => null,
+        civilStatus: '',
+        photo: ''
       },
       property: {
         id: 2,
@@ -93,6 +99,8 @@ const MyReviews: React.FC<{ propertyId: string }> = ({ propertyId }) => {
           registeredAt: "2023-01-01",
           active: true,
           reservations: () => null,
+          civilStatus: '',
+          photo: ''
         },
         active: true,
         title: "Apartamento en la ciudad",

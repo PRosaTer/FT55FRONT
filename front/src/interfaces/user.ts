@@ -12,4 +12,6 @@ export default interface IUser {
     nationality?: string;
     dni?: string;
     DOB?: string;
+    civilStatus: string;
+    photo: string;
   }
