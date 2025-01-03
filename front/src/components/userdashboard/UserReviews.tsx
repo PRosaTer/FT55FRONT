@@ -13,7 +13,7 @@ const MyReviews: React.FC<{ propertyId: string }> = ({ propertyId }) => {
         id: "123",
         name: "Juan",
         lastName: "Pérez",
-        birthdate: "1990-01-01",
+        DOB: "1990-01-01",
         phone: "+34 123 456 789",
         email: "juan.perez@example.com",
         profileImgUrl: "https://via.placeholder.com/150?text=Usuario",
@@ -21,7 +21,9 @@ const MyReviews: React.FC<{ propertyId: string }> = ({ propertyId }) => {
         active: true,
         reservations: () => null,
         civilStatus: '',
-        photo: ''
+        photo: '',
+        employmentStatus: '',
+        isActive: ''
       },
       property: {
         id: 1,
@@ -29,7 +31,7 @@ const MyReviews: React.FC<{ propertyId: string }> = ({ propertyId }) => {
           id: "123",
           name: "Juan",
           lastName: "Pérez",
-          birthdate: "1990-01-01",
+          DOB: "1990-01-01",
           phone: "+34 123 456 789",
           email: "juan.perez@example.com",
           profileImgUrl: "https://via.placeholder.com/150?text=Propietario",
@@ -37,7 +39,9 @@ const MyReviews: React.FC<{ propertyId: string }> = ({ propertyId }) => {
           active: true,
           reservations: () => null,
           civilStatus: '',
-          photo: ''
+          photo: '',
+          employmentStatus: '',
+          isActive: ''
         },
         active: true,
         title: "Casa en la playa",
@@ -76,7 +80,7 @@ const MyReviews: React.FC<{ propertyId: string }> = ({ propertyId }) => {
         id: "123",
         name: "Juan",
         lastName: "Pérez",
-        birthdate: "1990-01-01",
+        DOB: "1990-01-01",
         phone: "+34 123 456 789",
         email: "juan.perez@example.com",
         profileImgUrl: "https://via.placeholder.com/150?text=Usuario",
@@ -84,7 +88,9 @@ const MyReviews: React.FC<{ propertyId: string }> = ({ propertyId }) => {
         active: true,
         reservations: () => null,
         civilStatus: '',
-        photo: ''
+        photo: '',
+        employmentStatus: '',
+        isActive: ''
       },
       property: {
         id: 2,
@@ -92,7 +98,7 @@ const MyReviews: React.FC<{ propertyId: string }> = ({ propertyId }) => {
           id: "123",
           name: "Juan",
           lastName: "Pérez",
-          birthdate: "1990-01-01",
+          DOB: "1990-01-01",
           phone: "+34 123 456 789",
           email: "juan.perez@example.com",
           profileImgUrl: "https://via.placeholder.com/150?text=Propietario",
@@ -100,7 +106,9 @@ const MyReviews: React.FC<{ propertyId: string }> = ({ propertyId }) => {
           active: true,
           reservations: () => null,
           civilStatus: '',
-          photo: ''
+          photo: '',
+          employmentStatus: '',
+          isActive: ''
         },
         active: true,
         title: "Apartamento en la ciudad",
@@ -148,6 +156,7 @@ const MyReviews: React.FC<{ propertyId: string }> = ({ propertyId }) => {
   return (
     <div className="bg-white p-6 rounded-md shadow-md mb-8">
       <h2 className="text-2xl font-bold mb-4">Mis Reseñas</h2>
+      <p className="text-sm text-gray-500 mb-4">Acá podras ver todas las reseñas que hiciste de los alojamientos que te hospedaste</p>
       <ul className="space-y-4">
         {reviews.length > 0 ? (
           reviews.map((review) => (

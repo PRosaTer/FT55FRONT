@@ -1,17 +1,20 @@
 export default interface IUser {
-    reservations(reservations: any): unknown;
+    reservations?(reservations: any): unknown;
     name: string;
     lastName: string;
-    birthdate: string;
-    phone: string;
+    // birthdate: string;
+    phone: number | string;
     email: string;
     id: string;
-    profileImgUrl: string;
-    registeredAt: string;
-    active: boolean;
+    profileImgUrl?: string;
+    registeredAt?: string;
+    active?: boolean;
     nationality?: string;
-    dni?: string;
-    DOB?: string;
+    dni?: number;
+    DOB?:string,
     civilStatus: string;
-    photo: string;
+    photo?: string;
+    employmentStatus: string;
+    role?: string;
+    isActive: string;
   }

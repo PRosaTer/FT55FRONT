@@ -28,7 +28,7 @@ const PropertyForm: React.FC = () => {
     piscina: false,
     parqueadero: false,
     cocina: false,
-    isActive: true,
+    isActive: false,
   });
 
   const resetForm = () => {
@@ -54,7 +54,7 @@ const PropertyForm: React.FC = () => {
       piscina: false,
       parqueadero: false,
       cocina: false,
-      isActive: true,
+      isActive: false,
     });
   };
   
