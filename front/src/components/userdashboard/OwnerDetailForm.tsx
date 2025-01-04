@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
 import IUser from "@/interfaces/user";
 import Swal from "sweetalert2";
-import {
-  civilStatusOptions,
-  employmentStatusOptions,
-} from "@/helpers/userStatus";
+import {CivilStatusOptions,EmploymentStatusOptions,} from "@/helpers/userStatus";
 
 interface OwnerDetailsFormProps {
   onComplete: (ownerDetails: IUser) => void;
@@ -24,47 +21,37 @@ const OwnerDetailsForm: React.FC<OwnerDetailsFormProps> = ({
   const [email, setEmail] = useState(initialData.email || "");
   const [nationality, setNationality] = useState(initialData.nationality || "");
   const [civilStatus, setCivilStatus] = useState(initialData.civilStatus || "");
-  const [employmentStatus, setEmploymentStatus] = useState(
-    initialData.employmentStatus || ""
-  );
+  const [employmentStatus, setEmploymentStatus] = useState(initialData.employmentStatus || "");
+  const [id, setId] = useState(initialData.id || "");
   const [DOB, setDOB] = useState(initialData.DOB || "");
-  const [phone, setPhone] = useState<number | string>(initialData.phone || "");
-  const [dni, setDni] = useState<number | string>(initialData.dni || "");
-  const [photo, setPhoto] = useState(
-    initialData.photo || "https://default.photo.url"
-  );
+  const [phone, setPhone] = useState<number | undefined>(initialData.phone ? Number(initialData.phone) : undefined);
+  const [dni, setDni] = useState<number | undefined>(initialData.dni ? Number(initialData.dni) : undefined);
+  const [photo, setPhoto] = useState(initialData.photo || "https://cdn-icons-png.flaticon.com/512/61/61205.png");
+
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user") || "{}");
     if (user) {
       setName(user.name || "");
       setLastName(user.lastName || "");
-      setPhone(user.phone || "");
+      setPhone(user.phone ? Number(user.phone) : undefined);
+      setDni(user.dni ? Number(user.dni) : undefined);
       setEmail(user.email || "");
       setNationality(user.nationality || "");
-      setDni(user.dni || "");
       setCivilStatus(user.civilStatus || "");
       setEmploymentStatus(user.employmentStatus || "");
       setDOB(user.DOB ? new Date(user.DOB).toISOString().split("T")[0] : "");
       setPhoto("");
+      setId(user.id || "");
     }
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (
-      !name ||
-      !lastName ||
-      !email ||
-      !nationality ||
-      !DOB ||
-      !dni ||
-      !phone ||
-      !civilStatus ||
-      !employmentStatus ||
-      !photo
-    ) {
+    if (!name || !lastName || !email || !nationality || !DOB || !dni || !phone || !civilStatus || !employmentStatus || !photo) 
+    {
       Swal.fire({
         icon: "error",
         title: "Campos incompletos",
@@ -80,42 +67,14 @@ const OwnerDetailsForm: React.FC<OwnerDetailsFormProps> = ({
       return;
     }
 
-    const parsedPhone = typeof phone === "string" ? parseInt(phone, 10) : phone;
-    const parsedDni = typeof dni === "string" ? parseInt(dni, 10) : dni;
-
-    if (isNaN(parsedPhone) || isNaN(parsedDni)) {
-      Swal.fire({
-        icon: "error",
-        title: "Error en los datos",
-        text: "El DNI y el Teléfono deben ser números válidos.",
-      });
-      return;
-    }
-
     const ownerDetails: IUser = {
-      id: user.id,
-      name,
-      lastName,
-      DOB,
-      phone: parsedPhone,
-      email,
-      nationality,
-      dni: parsedDni,
-      civilStatus,
-      employmentStatus,
-      photo,
-      role: "user",
-      isActive: "true"
-    };
-    console.log("Datos a enviar:", ownerDetails);
-
+      name, lastName, email, phone, nationality, dni, DOB, civilStatus, employmentStatus, isActive: user.isActive, photo, role: user.role};
     await handleUpdate(ownerDetails);
-  };
+     };
 
   const handleUpdate = async (userDetails: IUser) => {
     const user = JSON.parse(localStorage.getItem("user") || "{}");
     if (!user || !user.id) {
-      console.error("No se encontró el usuario o el ID está ausente.");
       Swal.fire({
         icon: "error",
         title: "Error",
@@ -135,7 +94,6 @@ const OwnerDetailsForm: React.FC<OwnerDetailsFormProps> = ({
 
       if (response.ok) {
         const data = await response.json();
-        console.log("Datos actualizados exitosamente:", data);
         Swal.fire({
           icon: "success",
           title: "¡Actualización exitosa!",
@@ -143,7 +101,6 @@ const OwnerDetailsForm: React.FC<OwnerDetailsFormProps> = ({
         });
         onComplete(userDetails);
       } else {
-        console.error("Error al actualizar los datos:", response.statusText);
         Swal.fire({
           icon: "error",
           title: "Error al actualizar",
@@ -151,12 +108,68 @@ const OwnerDetailsForm: React.FC<OwnerDetailsFormProps> = ({
         });
       }
     } catch (error) {
-      console.error("Error de red:", error);
       Swal.fire({
         icon: "error",
         title: "Error de red",
         text: "No se pudo conectar al servidor. Intenta más tarde.",
       });
+    }
+  };
+
+  const handleUserImageUpload = async (files: FileList) => {
+    if (!id) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "No se encontró el usuario. Por favor, inicia sesión.",
+      });
+      return [];
+    }
+
+    const formData = new FormData();
+    formData.append("id", id);
+    formData.append("file", files[0]);
+
+    try {
+      const response = await fetch("http://localhost:3002/image/user-photo", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        const errorMessage = await response.text();
+        Swal.fire({
+          icon: "error",
+          title: "Error al subir la foto",
+          text: errorMessage || "No se pudo subir la imagen.",
+        });
+        return [];
+      }
+
+      const data = await response.json();
+      return [data.photoUrl];
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Error de red",
+        text: "No se pudo conectar al servidor. Intenta más tarde.",
+      });
+      return [];
+    }
+  };
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+
+    if (files && files.length > 0) {
+      setIsLoading(true);
+
+      try {
+        const uploadedImageUrls = await handleUserImageUpload(files);
+        setPhoto(uploadedImageUrls[0]);
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
@@ -261,7 +274,7 @@ const OwnerDetailsForm: React.FC<OwnerDetailsFormProps> = ({
           className="border border-gray-300 rounded-md p-2 w-full"
         >
           <option value="">Seleccione una opción</option>
-          {civilStatusOptions.map((status) => (
+          {Object.values(CivilStatusOptions).map((status) => (
             <option key={status} value={status}>
               {status}
             </option>
@@ -276,7 +289,7 @@ const OwnerDetailsForm: React.FC<OwnerDetailsFormProps> = ({
           className="border border-gray-300 rounded-md p-2 w-full"
         >
           <option value="">Seleccione una opción</option>
-          {employmentStatusOptions.map((status) => (
+          {Object.values(EmploymentStatusOptions).map((status) => (
             <option key={status} value={status}>
               {status}
             </option>
@@ -286,13 +299,25 @@ const OwnerDetailsForm: React.FC<OwnerDetailsFormProps> = ({
       <div>
         <label className="block font-semibold">Imagen de Perfil:</label>
         <input
-        type="text"
-        value={photo}
-        onChange={(e) => setPhoto(e.target.value)}
-        className="border border-gray-300 rounded-md p-2 w-full"
-        placeholder="Introduce la URL de tu foto de perfil"
+          type="file"
+          accept="image/*"
+          onChange={handleFileChange}
+          className="border border-gray-300 rounded-md p-2 w-full"
         />
-        <p className="text-gray-500 text-sm mt-1">Te pedimos una foto para validar tu identidad.</p>
+        <p className="text-gray-500 text-sm mt-1">
+          Te pedimos una foto para validar tu identidad.
+        </p>
+        {isLoading && <p>Subiendo imagen...</p>}
+        {photo &&
+          photo !== "https://cdn-icons-png.flaticon.com/512/61/61205.png" && (
+            <div className="mt-2">
+              <img
+                src={photo}
+                alt="Perfil"
+                className="w-24 h-24 object-cover rounded-full"
+              />
+            </div>
+          )}
       </div>
       <button
         type="submit"
