@@ -18,7 +18,6 @@ export default {
         pearl: "#FDFFFF",
         marble: "#E8E4E0",
         silk: "#EEE5D9",
-
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
