@@ -1,18 +1,10 @@
 // react
-import React from 'react';
+import React from "react";
 
-// import { productsToPreLoad } from '@/helpers/data';
-import { EmptyFavorites } from '@/components/empty_favorites';
+import ContentFavorite from "@/components/content_favorite";
 
 export const Favorite: React.FC = () => {
-
-  
-return (
-  <>
-  <EmptyFavorites/>
-
-  </>
-)
-}
+  return <ContentFavorite />;
+};
 
 export default Favorite;

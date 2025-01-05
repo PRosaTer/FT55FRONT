@@ -5,8 +5,7 @@ import React, { useState } from 'react';
 // next
 import Image from 'next/image';
 
-import casa from '../../assets/casaprueba.jpeg'
-import persona from '../../assets/persona.jpeg'
+
 import { IProperty } from '@/interfaces/IProperty';
 import ImageCarousel from '../carousel_prop';
 import { user } from '@/helpers/data';
@@ -21,7 +20,23 @@ export const CardDetail: React.FC<IPropsDetail> = ({property, owner}) => {
 
     const toggleFavorite = () => {
       setIsFavorite(!isFavorite);
+
+      const storedFavorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+
+      if (isFavorite) {
+        const updatedFavorites = storedFavorites.filter(
+          (fav: IProperty) => fav.id !== property.id
+        );
+        localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+      } else {
+        storedFavorites.push(property);
+        localStorage.setItem('favorites', JSON.stringify(storedFavorites));
+      }
     };
+
+    const defaultPhoto = "https://cdn-icons-png.flaticon.com/512/61/61205.png"; // URL de imagen predeterminada
+    const imageSrc = owner?.photo && owner.photo.trim() ? owner.photo : defaultPhoto;
+
 return (
     <div className="flex flex-col md:flex-row border-2 border-marble p-4 rounded-lg shadow-md mb-6 lg:mx-40">
          {/* Imagen con boton corazón */}
@@ -50,13 +65,13 @@ return (
           <div className="flex items-center mt-10">
           {owner?.photo && (
             <Image
-              src={owner.photo}
+              src={imageSrc || "https://cdn-icons-png.flaticon.com/512/61/61205.png"}
               alt="Propietario"
               width={40}
               height={40}
               className="h-10 w-10 rounded-full mr-2"
             />
-          )}
+        
             <span className="text-gray-800">{owner?.name} {owner?.lastName}</span>
           </div>
         </div>

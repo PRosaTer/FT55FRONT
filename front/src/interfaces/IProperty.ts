@@ -1,6 +1,4 @@
-import { user } from "@/helpers/data";
 import { IAmenities } from "./IAmenities";
-import IUser from "./user";
 import { IAccount } from "./IAccount";
 
 export interface IProperty {
@@ -22,7 +20,7 @@ export interface IProperty {
   rating: number;
   hasMinor: boolean;
   pets: boolean
-  amenities: IAmenities
+  amenities_: IAmenities
 }
 
 export interface IPropertyList {
