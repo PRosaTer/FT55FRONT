@@ -31,14 +31,20 @@ const MenuProperties = () => {
               </p>
             </div>
           </button>
-          <button className="block select-none space-y-1 rounded-md p-2 leading-none text-white no-underline outline-none transition-colors hover:bg-slate-500/10 focus:bg-slate/10">
+          <button
+            onClick={() => handleTypeChange("casa")}
+            className="block select-none space-y-1 rounded-md p-2 leading-none text-white no-underline outline-none transition-colors hover:bg-slate-500/10 focus:bg-slate/10"
+          >
             <div className="text-sm font-medium capitalize leading-none">
               <p className="line-clamp-2 text-sm leading-snug text-muted-foreground hover:text-black">
                 Casas
               </p>
             </div>
           </button>
-          <button className="block select-none space-y-1 rounded-md p-2 leading-none text-white no-underline outline-none transition-colors hover:bg-slate-500/10 focus:bg-slate/10">
+          <button
+            onClick={() => handleTypeChange("departamento")}
+            className="block select-none space-y-1 rounded-md p-2 leading-none text-white no-underline outline-none transition-colors hover:bg-slate-500/10 focus:bg-slate/10"
+          >
             <div className="text-sm font-medium capitalize leading-none">
               <p className="line-clamp-2 text-sm leading-snug text-muted-foreground hover:text-black">
                 Departamentos
