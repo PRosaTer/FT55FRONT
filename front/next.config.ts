@@ -6,7 +6,8 @@ const nextConfig: NextConfig = {
       "quierocasa.cl",
       "cf.bstatic.com",
       "encrypted-tbn0.gstatic.com",
-      "",
+      "example.com",
+      "res.cloudinary.com",
     ],
   },
   /* config options here */
