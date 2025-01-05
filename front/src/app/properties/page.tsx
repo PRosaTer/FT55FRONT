@@ -4,7 +4,7 @@ import PropertyContainer from "@/views/propertyContainer";
 import { useSearchParams } from "next/navigation";
 import React from "react";
 import { z } from "zod";
-import { useInfiniteQuery } from "@tanstack/react-query";
+//import { useInfiniteQuery } from "@tanstack/react-query";
 import MenuProperties from "@/components/menuProperties";
 
 const params = z.object({
