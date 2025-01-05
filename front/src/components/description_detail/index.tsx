@@ -1,6 +1,7 @@
 // react
 import { IProperty } from '@/interfaces/IProperty';
 import React from 'react';
+import AmenitiesList from '../amenities_list';
 
 
 export const DescriptionDetail: React.FC<IProperty> = (property) => {
@@ -11,13 +12,7 @@ return (
         {property.description}
         </p>
         <h3 className="text-xl font-bold mb-2">¿Qué ofrece este lugar?</h3>
-        <ul className="list-disc list-inside mb-4">
-          <li>WiFi</li>
-          <li>Estacionamiento en el lugar</li>
-          <li>Cocina</li>
-          <li>Permite mascotas</li>
-          <li>Permite menores</li>
-        </ul>
+        <AmenitiesList amenities={property.amenities_} hasMinor={property.hasMinor} pets={property.pets}/>
        
       </div>
 )

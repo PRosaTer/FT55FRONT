@@ -1,8 +1,8 @@
 export interface IAmenities {
-    wifi:boolean;
-    tv:boolean;
-    airAcconditioning:boolean;
-    pool:boolean;
-    parking:boolean;
-    kitchen:boolean
+    wifi: boolean,
+    tv: boolean,
+    airConditioning: boolean,
+    piscina: boolean,
+    parqueadero: boolean,
+    cocina: boolean
 }

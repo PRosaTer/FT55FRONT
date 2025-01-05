@@ -1,9 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
-import { IProperty } from '../interfaces/IProperty';
-import { IAccountUser } from '@/interfaces/IAccount';
-
-
+import { IProperty } from '@/interfaces/IProperty';
+import { IAccountUser } from '@/interfaces/IAccount'
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL
 
@@ -55,7 +51,7 @@ export const getPropertyById = async (id: string): Promise<IProperty> => {
 
 export const getPropertyOwner = async (id: string): Promise<IAccountUser> => {
     try {
-        const res = await fetch(`${API_URL}/account/${id}`, {
+        const res = await fetch(`${API_URL}/account/user/${id}`, {
             next: { revalidate: 1200 }
         });
         console.log(res);
