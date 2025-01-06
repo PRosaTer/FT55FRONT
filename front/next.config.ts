@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
       "cf.bstatic.com",
       "encrypted-tbn0.gstatic.com",
       "example.com",
+      "cdn-icons-png.flaticon.com",
       "res.cloudinary.com",
     ],
   },

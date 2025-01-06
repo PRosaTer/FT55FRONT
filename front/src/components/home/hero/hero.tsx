@@ -15,13 +15,14 @@ import { productsToPreLoad } from "@/helpers/data";
 import { IProduct } from "@/interfaces/IProduct";
 import { Heart } from "lucide-react";
 import Link from "next/link";
+import { IProperty } from "@/interfaces/IProperty";
 
 export default function HeroHome() {
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
   const [guests, setGuests] = useState("1");
   const [location, setLocation] = useState("Colombia");
-  const [searchResults, setSearchResults] = useState<IProduct[]>([]);
+  const [searchResults, setSearchResults] = useState<IProperty[]>([]);
 
   const handleSearch = () => {
     const results = productsToPreLoad.filter((product) => {
@@ -29,13 +30,13 @@ export default function HeroHome() {
         product.state.toLowerCase().includes(location.toLowerCase()) ||
         product.city.toLowerCase().includes(location.toLowerCase());
 
-      const isDateMatch =
-        (!checkIn || product.checkin >= checkIn) &&
-        (!checkOut || product.checkout <= checkOut);
+      // const isDateMatch =
+      //   (!checkIn || product.checkin >= checkIn) &&
+      //   (!checkOut || product.checkout <= checkOut);
 
-      const isCapacityMatch = product.capacity >= parseInt(guests);
+      // const isCapacityMatch = product.capacity >= parseInt(guests);
 
-      return isLocationMatch && isDateMatch && isCapacityMatch;
+      // return isLocationMatch && isDateMatch && isCapacityMatch;
     });
     setSearchResults(results);
     console.log("Search results:", results);
@@ -142,7 +143,7 @@ export default function HeroHome() {
           </div>
         </div>
       </section>
-      {searchResults.length > 0 && (
+      {/* {searchResults.length > 0 && (
         <div className="container mx-auto px-4 py-8">
           <h3 className="text-2xl font-bold mb-4">Resultados de la Busqueda</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -151,8 +152,8 @@ export default function HeroHome() {
                 <Link href={`/house/${product.id}`}>
                   <div className="relative">
                     <Image
-                      src={product.photos[0]}
-                      alt={product.title}
+                      src={product.photos?.[0] ?? "/casadef.png"}
+                      alt={product.name}
                       width={300}
                       height={400}
                       className="w-full h-60 object-cover rounded-t-lg"
@@ -167,7 +168,7 @@ export default function HeroHome() {
                   </div>
                   <div className="flex h-[350px] flex-col justify-between rounded-b-lg bg-white p-4">
                     <h3 className="text-xl font-semibold mt-2">
-                      {product.title}
+                      {product.name}
                     </h3>
                     <p className="mt-2 mb-2 text-lg font-bold">
                       {product.city}, {product.state}
@@ -194,7 +195,7 @@ export default function HeroHome() {
             ))}
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 }

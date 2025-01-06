@@ -27,6 +27,7 @@
     "date-fns": "^4.1.0",
     "embla-carousel-autoplay": "^8.5.1",
     "embla-carousel-react": "^8.5.1",
+    "flowbite-react": "^0.10.2",
     "formik": "^2.4.6",
     "js-cookie": "^3.0.5",
     "lucide-react": "^0.468.0",

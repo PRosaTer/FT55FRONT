@@ -1,4 +1,5 @@
 import { IProduct, ProductType } from "@/interfaces/IProduct";
+import { IProperty } from "@/interfaces/IProperty";
 export interface user {
   name: string;
   lastName: string;
@@ -12,10 +13,10 @@ export interface user {
   nationality: string;
   dni: string;
   DOB: string;
-  employmentStatus:string;
+  employmentStatus: string;
 }
 
-export const productsToPreLoad: IProduct[] = [
+export const productsToPreLoad: IProperty[] = [
   {
     id: 1,
     owner: "Juan Pérez",
