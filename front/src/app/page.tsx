@@ -1,17 +1,14 @@
-import FeatureDepartments from "@/components/home/featureDepartment/featureDepartment";
-import FeatureHouses from "@/components/home/featureHouse/featureHouse";
-import HeroHome from "@/components/home/hero/hero";
-import HeroOwner from "@/components/home/heroOwner/heroOwner";
+import HeroHome from "@/components/hero";
+import HeroOwner from "@/components/heroOwner";
+import HomeContainer from "@/components/home/home_container";
 
-export default function Home() {
+export const Home: React.FC = () => {
   return (
     <div>
-      <main>
-        <HeroHome />
-        <FeatureHouses />
-        <FeatureDepartments />
-        <HeroOwner />
-      </main>
+      <HeroHome />
+      <HomeContainer />
+      <HeroOwner />
     </div>
   );
-}
+};
+export default Home;
