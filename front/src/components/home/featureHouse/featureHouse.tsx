@@ -8,7 +8,7 @@ import { Carousel, CarouselContent } from "@/components/ui/carousel";
 import { IProperty } from "@/interfaces/IProperty";
 import CardHome from "../card_home";
 
-interface IFeatureDepartmentsProps {
+export interface IFeatureDepartmentsProps {
   properties: IProperty[];
 }
 

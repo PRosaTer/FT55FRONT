@@ -38,8 +38,8 @@ export default function HeroHome() {
 
       // return isLocationMatch && isDateMatch && isCapacityMatch;
     });
-    setSearchResults(results);
-    console.log("Search results:", results);
+    // setSearchResults(results);
+    // console.log("Search results:", results);
   };
 
   return (

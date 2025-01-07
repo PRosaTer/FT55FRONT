@@ -16,7 +16,7 @@ export interface user {
   employmentStatus: string;
 }
 
-export const productsToPreLoad: IProperty[] = [
+export const productsToPreLoad = [
   {
     id: 1,
     owner: "Juan Pérez",

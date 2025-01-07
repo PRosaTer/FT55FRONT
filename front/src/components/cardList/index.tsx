@@ -1,21 +1,25 @@
-import React from "react";
-import { productsToPreLoad } from "@/helpers/data";
+import React, { useRef } from "react";
 import CardProperties from "../card";
-import Link from "next/link";
-import { getPropertyDB } from "@/api/PropertyAPI";
-const CardList = async () => {
-  const products = await getPropertyDB();
+import { Carousel, CarouselContent } from "../ui/carousel";
+import { IFeatureDepartmentsProps } from "../home/featureHouse/featureHouse";
+import { IProperty } from "@/interfaces/IProperty";
+
+export const CardList: React.FC<IFeatureDepartmentsProps> = ({
+  properties,
+}) => {
   return (
-    <div className="flex flex-wrap items-center px-10 justify-between space-y-[10px]">
-      {products &&
-        products.map((property) => {
-          return (
-            <Link href={`/house/${property.id}`} key={property.id}>
-              <CardProperties {...property} photos={property.photos || []} />
-            </Link>
-          );
-        })}
-    </div>
+    <section className="py-8">
+      <div className="container mx-auto px-4">
+        <Carousel className="w-full">
+          <div className="-ml-2 md:-ml-4 flex flex-wrap items-center space-y-10">
+            {properties &&
+              properties.map((property: IProperty) => (
+                <CardProperties {...property} key={property.id} />
+              ))}
+          </div>
+        </Carousel>
+      </div>
+    </section>
   );
 };
 
