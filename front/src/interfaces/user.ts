@@ -4,16 +4,16 @@ export default interface IUser {
     lastName?: string;
     phone?: number | string;
     email?: string;
-    id?: string;
+    id: string;
     profileImgUrl?: string;
     registeredAt?: string;
     active?: boolean;
     nationality?: string;
-    dni?: number;
-    DOB?:string,
+    dni?: number | string;
+    DOB?: string,
     civilStatus?: string;
     photo?: string;
     employmentStatus?: string;
     role?: string;
     isActive?: boolean;
-  }
+}

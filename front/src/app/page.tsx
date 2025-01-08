@@ -1,9 +1,9 @@
-import HeroHome from "@/components/home/hero/hero";
-import HeroOwner from "@/components/home/heroOwner/heroOwner";
+import HeroHome from "@/components/hero";
+import HeroOwner from "@/components/heroOwner";
 import HomeContainer from "@/components/home/home_container";
 import Support from "@/components/home/support/support";
 
-export default function Home() {
+export const Home: React.FC = () => {
   return (
     <div>
       <main>
@@ -14,4 +14,5 @@ export default function Home() {
       </main>
     </div>
   );
-}
+};
+export default Home;
