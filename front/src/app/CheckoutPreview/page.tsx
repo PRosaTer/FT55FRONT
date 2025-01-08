@@ -15,7 +15,7 @@ const CheckoutPreview = () => {
     setLoading(true); // Activa el estado de carga
     try {
       // Enviar datos al backend para crear la preferencia de pago
-      const response = await fetch("/api/payment", {
+      const response = await fetch("http://localhost:3002/api/payment", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
