@@ -1,6 +1,3 @@
-import IUser from "./user";
-import { IReview } from "./reviews";
-import { IReservationDetail } from "./reservationDetail";
 
 // export interface IPropiedad {
 //   rating: number;
