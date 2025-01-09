@@ -311,7 +311,7 @@ const handleAddressChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
               </div>
         
               <div className="mb-4">
-                <label className="block text-gray-800 text-lg">Precio:</label>
+                <label className="block text-gray-800 text-lg">Precio en dolares por noche:</label>
                 <input
                   type="number"
                   name="price"
