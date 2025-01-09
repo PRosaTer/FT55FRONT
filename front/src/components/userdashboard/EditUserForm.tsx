@@ -9,10 +9,7 @@ interface OwnerDetailsFormProps {
     onComplete: (updatedUser: IUser) => Promise<void>;
   }
 
-const EditUserForm: React.FC<OwnerDetailsFormProps> = ({
-  editableFields,
-  onComplete,
-}) => {
+const EditUserForm: React.FC<OwnerDetailsFormProps> = ({editableFields,onComplete,}) => {
   const [name, setName] = useState<string>("");
   const [lastName, setLastName] = useState<string>("");
   const [email, setEmail] = useState<string>("");

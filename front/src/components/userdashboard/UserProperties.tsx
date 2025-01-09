@@ -19,7 +19,7 @@
 //   const [isFormVisible, setIsFormVisible] = useState(false);
 
 //   const handlePropertyClick = (property: IPropiedad) => {
-//     setSelectedProperty(property); 
+//     setSelectedProperty(property);
 //   };
 
 //   const toggleFormVisibility = () => {
@@ -155,27 +155,24 @@
 // import React, { useEffect, useState } from "react";
 // import { IPropiedad } from "@/interfaces/properties";
 // import PropertyForm from "@/components/propertyForm/page";
-// import PropertyEditForm from "@/components/propertyEditForm/page"; 
-// import { FiEdit } from "react-icons/fi"; 
+// import PropertyEditForm from "@/components/propertyEditForm/page";
+// import { FiEdit } from "react-icons/fi";
 // import IFormData from "@/interfaces/formData";
-
 
 // interface MyPropertiesProps {}
 
 // const MyProperties: React.FC<MyPropertiesProps> = () => {
 //   const [properties, setProperties] = useState<IPropiedad[]>([]);
 //   const [isFormVisible, setIsFormVisible] = useState(false);
-//   const [editingProperty, setEditingProperty] = useState<IPropiedad | null>(null); 
+//   const [editingProperty, setEditingProperty] = useState<IPropiedad | null>(null);
 //   const [selectedProperty, setSelectedProperty] = useState<IPropiedad | null>(null);
-
-
 
 //   useEffect(() => {
 //     const user = localStorage.getItem("user");
 //     if (user) {
 //       const parsedUser = JSON.parse(user);
-//       const userId = parsedUser.account_.id; 
-      
+//       const userId = parsedUser.account_.id;
+
 //       fetch(`http://localhost:3002/property/owner/${userId}`)
 //         .then((response) => {
 //           if (!response.ok) {
@@ -192,11 +189,10 @@
 //         .catch((error) => console.error("Error al obtener propiedades:", error));
 //     }
 //   }, []);
-  
 
 //   const toggleFormVisibility = () => {
 //     setIsFormVisible(!isFormVisible);
-//     setEditingProperty(null); 
+//     setEditingProperty(null);
 //   };
 
 //   const handleEditClick = (property: IPropiedad) => {
@@ -216,7 +212,6 @@
 //     setSelectedProperty(null);
 //   };
 
-  
 //   return (
 //     <div className="bg-white p-6 rounded-md shadow-md mb-8">
 //       <h2 className="text-2xl font-bold mb-4">Mis Propiedades</h2>
@@ -309,7 +304,6 @@
 // };
 // export default MyProperties;
 
-
 import React, { useEffect, useState } from "react";
 import { IPropiedad } from "@/interfaces/properties";
 import PropertyForm from "@/components/propertyForm/page";
@@ -328,33 +322,51 @@ const MyProperties: React.FC<MyPropertiesProps> = () => {
   useEffect(() => {
     const user = localStorage.getItem("user");
     if (user) {
-      const parsedUser = JSON.parse(user);
-      const userId = parsedUser.account_.id;
+      try {
+        const parsedUser = JSON.parse(user);
+        const userId = parsedUser.id;
+        if (!userId) {
+          throw new Error("El usuario en localStorage no tiene un 'id'.");
+        }
+ 
+        fetch(`http://localhost:3002/users/${userId}`)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Error al obtener información del usuario");
+            }
+            return response.json();
+          })
+          .then((userData) => {
+            const accountId = userData.account_?.id;
+            if (!accountId) {
+              throw new Error("El usuario no tiene una cuenta asociada (account_).");
+            }
 
-      fetch(`http://localhost:3002/property/owner/${userId}`)
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Error al obtener propiedades");
-          }
-          return response.json();
-        })
-        .then((data) => {
-          const userProperties = data.filter(
-            (property: IPropiedad) => property.account_.id === userId
-          );
-          setProperties(userProperties);
-        })
-        .catch((error) => console.error("Error al obtener propiedades:", error));
+            return fetch(`http://localhost:3002/property/owner/${accountId}`);
+          })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Error al obtener propiedades");
+            }
+            return response.json();
+          })
+          .then((properties) => {
+            setProperties(properties);
+          })
+          .catch((error) => console.error("Error en el flujo de datos:", error));
+      } catch (error:any) {
+        console.error("Error al procesar el usuario:", error.message);
+      }
     }
   }, []);
-
+  
   const toggleFormVisibility = () => {
     setIsFormVisible(!isFormVisible);
     setEditingProperty(null);
   };
 
   const handleEditClick = (property: IPropiedad) => {
-    setEditingProperty(property); 
+    setEditingProperty(property);
   };
 
   const handlePropertyClick = (property: IPropiedad) => {
@@ -374,7 +386,6 @@ const MyProperties: React.FC<MyPropertiesProps> = () => {
       ) : (
         <>
           {selectedProperty ? (
-
             <div className="p-4 border border-gray-200 rounded-md shadow-md">
               <button
                 onClick={closeDetails}
@@ -398,7 +409,9 @@ const MyProperties: React.FC<MyPropertiesProps> = () => {
               </p>
               <p className="font-medium">
                 Precio por noche:{" "}
-                <span className="text-green-500">${selectedProperty.price}</span>
+                <span className="text-green-500">
+                  ${selectedProperty.price}
+                </span>
               </p>
               <p className="text-sm text-gray-500">
                 Capacidad: {selectedProperty.capacity} personas,{" "}
