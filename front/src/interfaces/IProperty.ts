@@ -7,7 +7,7 @@ export interface IProperty {
   isActive: boolean;
   name: string;
   description: string;
-
+  type: string;
   state: string;
   city: string;
   price: number;
@@ -19,8 +19,8 @@ export interface IProperty {
   image_?: { id: string; url: string }[];
   rating: number;
   hasMinor: boolean;
-  pets: boolean
-  amenities_: IAmenities
+  pets: boolean;
+  amenities_: IAmenities;
 }
 
 export interface IPropertyList {
