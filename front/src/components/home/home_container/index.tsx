@@ -1,10 +1,11 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-
 import { getPropertyDB } from "@/api/PropertyAPI";
 import { IProperty } from "@/interfaces/IProperty";
-import FeatureHouses from "../../../components/featureHouse/index";
+import FeatureHouse from "@/components/featureHouse";
+//import FeatureHouses from "../featureHouse/featureHouse";
+
 export const HomeContainer: React.FC = () => {
   const [properties, setProperties] = useState<IProperty[]>([]);
 
@@ -24,9 +25,9 @@ export const HomeContainer: React.FC = () => {
   }, []);
 
   return (
-    <div className="py-16">
+    <div className="py-4">
       <div className="container mx-auto px-4">
-        <FeatureHouses properties={properties} />
+        <FeatureHouse properties={properties} />
       </div>
     </div>
   );
