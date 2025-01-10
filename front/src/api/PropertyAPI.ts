@@ -1,6 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { IProperty } from "@/interfaces/IProperty";
 import { IAccountUser } from "@/interfaces/IAccount";
-import { SearchParams } from "./propertyFilter";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
