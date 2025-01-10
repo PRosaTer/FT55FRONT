@@ -5,9 +5,12 @@ import React, { useState } from "react";
 // next
 import Image from "next/image";
 
+// interfaces
 import { IProperty } from "@/interfaces/IProperty";
-import ImageCarousel from "../carousel_prop";
 import { user } from "@/helpers/data";
+
+// component
+import ImageCarousel from "../image_carousel";
 
 interface IPropsDetail {
   property: IProperty;
@@ -15,25 +18,25 @@ interface IPropsDetail {
 }
 
 export const CardDetail: React.FC<IPropsDetail> = ({ property, owner }) => {
-  const [isFavorite, setIsFavorite] = useState(false);
+  // const [isFavorite, setIsFavorite] = useState(false);
 
-  const toggleFavorite = () => {
-    setIsFavorite(!isFavorite);
+  // const toggleFavorite = () => {
+  //   setIsFavorite(!isFavorite);
 
-    const storedFavorites = JSON.parse(
-      localStorage.getItem("favorites") || "[]"
-    );
+    // const storedFavorites = JSON.parse(
+    //   localStorage.getItem("favorites") || "[]"
+    // );
 
-    if (isFavorite) {
-      const updatedFavorites = storedFavorites.filter(
-        (fav: IProperty) => fav.id !== property.id
-      );
-      localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
-    } else {
-      storedFavorites.push(property);
-      localStorage.setItem("favorites", JSON.stringify(storedFavorites));
-    }
-  };
+  //   if (isFavorite) {
+  //     const updatedFavorites = storedFavorites.filter(
+  //       (fav: IProperty) => fav.id !== property.id
+  //     );
+  //     localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+  //   } else {
+  //     storedFavorites.push(property);
+  //     localStorage.setItem("favorites", JSON.stringify(storedFavorites));
+  //   }
+  // };
 
   const defaultPhoto = "https://cdn-icons-png.flaticon.com/512/61/61205.png"; // URL de imagen predeterminada
   const imageSrc =
@@ -43,7 +46,7 @@ export const CardDetail: React.FC<IPropsDetail> = ({ property, owner }) => {
     <div className="flex flex-col md:flex-row border-2 border-marble p-4 rounded-lg shadow-md mb-6 lg:mx-40">
       {/* Imagen con boton corazón */}
       <div className="relative md:w-1/2">
-        <button
+        {/* <button
           className="absolute hover:scale-110 top-3 right-3 z-10"
           onClick={toggleFavorite}
         >
@@ -56,7 +59,7 @@ export const CardDetail: React.FC<IPropsDetail> = ({ property, owner }) => {
               className={`fi fi-sr-heart bg-white rounded-lg p-2 shadow-md text-red-500`}
             ></i>
           )}
-        </button>
+        </button> */}
 
         <ImageCarousel {...property} />
       </div>
@@ -67,6 +70,7 @@ export const CardDetail: React.FC<IPropsDetail> = ({ property, owner }) => {
         <h3 className="text-lg font-medium mb-2">
           {property.city} / {property.state}
         </h3>
+        <h4>{property.country}</h4>
         <p className="text-gray-600 mb-2">
           {property.capacity} Huéspedes | {property.bedrooms} Dormitorios |{" "}
           {property.bathrooms} Baños

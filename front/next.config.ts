@@ -9,6 +9,7 @@ const nextConfig: NextConfig = {
       "example.com",
       "cdn-icons-png.flaticon.com",
       "res.cloudinary.com",
+      "hips.hearstapps.com"
     ],
   },
   /* config options here */
