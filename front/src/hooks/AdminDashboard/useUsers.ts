@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import IUser from "../../interfaces/user";
+import Swal from "sweetalert2";
 
 const useUsers = () => {
   const [users, setUsers] = useState<IUser[]>([]);
@@ -48,30 +49,33 @@ const useUsers = () => {
     }
   };
 
-  const handleDesactivate = async (userId: string) => {
+  const handleDesactivateUser = async (id: string) => {
     try {
-      const response = await fetch(`http://localhost:3002/users/${userId}`, {
+      const response = await fetch(`http://localhost:3002/users/${id}`, {
         method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
       });
-
+  
       if (!response.ok) {
         throw new Error("Error al desactivar el usuario");
       }
-
-      setUsers((prevUsers) =>
-        prevUsers.map((user) =>
-          user.id === userId ? { ...user, isActive: false } : user
-        )
-      );
-    } catch (err: any) {
-      setError(err.message);
+      Swal.fire({
+        icon: "success",
+        title: "Usuario desactivado exitosamente",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Hubo un problema al desactivar el usuario",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
   };
+  
 
-  return { users, loading, error, handleActivate, handleDesactivate };
+  return { users, loading, error, handleActivate, handleDesactivateUser };
 };
 
 export default useUsers;

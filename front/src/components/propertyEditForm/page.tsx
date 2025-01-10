@@ -13,11 +13,12 @@ interface PropertyEditFormProps {
 
 const PropertyEditForm: React.FC<PropertyEditFormProps> = ({ property }) => {
   const [formData, setFormData] = useState<IFormData>({
-    title: property.title || "",
+    name: property.name || "",
     description: property.description || "",
     price: property.price || 1,
     state: property.state || "",
     city: property.city || "",
+    country: property.country || "",
     bedrooms: property.bedrooms || 1,
     bathrooms: property.bathrooms || 1,
     capacity: property.capacity || 1,
@@ -42,11 +43,12 @@ const PropertyEditForm: React.FC<PropertyEditFormProps> = ({ property }) => {
 
   const resetForm = () => {
     setFormData({
-      title: "",
+      name: "",
       description: "",
-      price: 10,
+      price: 1,
       state: "",
       city: "",
+      country: "",
       bedrooms: 1,
       bathrooms: 1,
       capacity: 1,
@@ -76,11 +78,11 @@ const PropertyEditForm: React.FC<PropertyEditFormProps> = ({ property }) => {
   const validateForm = () => {
     const newErrors: { [key: string]: string } = {};
 
-    if (!formData.title) {
+    if (!formData.name) {
       newErrors.title = "El título no debe estar vacío";
-    } else if (formData.title.length < 8) {
+    } else if (formData.name.length < 8) {
       newErrors.title = "El título debe tener al menos 8 caracteres";
-    } else if (formData.title.length > 50) {
+    } else if (formData.name.length > 50) {
       newErrors.title = "El título debe tener un máximo de 50 caracteres";
     }
 
@@ -94,13 +96,13 @@ const PropertyEditForm: React.FC<PropertyEditFormProps> = ({ property }) => {
     if (!formData.city) {
       newErrors.city = "La ciudad no debe estar vacía";
     }
-    if (typeof formData.bedrooms !== "number" || formData.bedrooms < 0) {
+    if (typeof formData.bedrooms !== "number" || formData.bedrooms < 1) {
       newErrors.bedrooms = "El número de habitaciones debe ser positivo";
     }
-    if (typeof formData.bathrooms !== "number" || formData.bathrooms < 0) {
+    if (typeof formData.bathrooms !== "number" || formData.bathrooms < 1) {
       newErrors.bathrooms = "El número de baños debe ser positivo";
     }
-    if (typeof formData.capacity !== "number" || formData.capacity < 0) {
+    if (typeof formData.capacity !== "number" || formData.capacity < 1) {
       newErrors.capacity = "La capacidad debe ser positiva";
     }
 
@@ -256,30 +258,38 @@ const PropertyEditForm: React.FC<PropertyEditFormProps> = ({ property }) => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+  
     if (!validateForm()) {
       return;
     }
-
+  
     setIsLoading(true);
-
+  
     try {
+      const payload = {
+        ...formData,
+        id: property.id,
+        address: formData.address || "Dirección no especificada", 
+        images: formData.images.map((image) => (typeof image === "string" ? image : image)), 
+      };
+  
+      console.log("Payload enviado:", JSON.stringify(payload));
+  
       const response = await fetch("http://localhost:3002/property/update", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(payload),
       });
-      console.log(JSON.stringify(formData));
-
+  
       if (!response.ok) {
         throw new Error("Error al actualizar la propiedad");
       }
-
+  
       const data = await response.json();
       console.log("Propiedad actualizada:", data);
-
+  
       Swal.fire("Éxito", "Propiedad actualizada con éxito", "success").then(() => {
         resetForm();
       });
@@ -290,6 +300,7 @@ const PropertyEditForm: React.FC<PropertyEditFormProps> = ({ property }) => {
       setIsLoading(false);
     }
   };
+  
 
   const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
 
@@ -337,7 +348,7 @@ const PropertyEditForm: React.FC<PropertyEditFormProps> = ({ property }) => {
         <input
           type="text"
           name="name"
-          value={formData.title}
+          value={formData.name}
           onChange={handleChange}
           required
           className="mt-2 w-full p-3 bg-white text-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-black"

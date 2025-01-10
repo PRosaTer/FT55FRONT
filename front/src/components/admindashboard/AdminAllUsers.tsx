@@ -3,7 +3,7 @@ import useUsers from "../../hooks/AdminDashboard/useUsers";
 import IUser from "../../interfaces/user";
 
 const AllUsers: React.FC = () => {
-  const { users, loading, error, handleActivate, handleDesactivate } = useUsers();
+  const { users, loading, error, handleActivate, handleDesactivateUser } = useUsers();
   const [selectedUser, setSelectedUser] = useState<IUser | null>(null);
   const [brokenImages, setBrokenImages] = useState<Record<string, boolean>>({});
 
@@ -71,11 +71,15 @@ const AllUsers: React.FC = () => {
                     ? "bg-red-500 hover:bg-red-600"
                     : "bg-green-500 hover:bg-green-600"
                 }`}
-                onClick={() =>
-                  selectedUser.isActive
-                    ? handleDesactivate(selectedUser.id)
-                    : handleActivate(selectedUser.id)
-                }
+                onClick={async () => {
+                  if (selectedUser.isActive) {
+                    await handleDesactivateUser(selectedUser.id);
+                    setSelectedUser({ ...selectedUser, isActive: false });
+                  } else {
+                    await handleActivate(selectedUser.id);
+                    setSelectedUser({ ...selectedUser, isActive: true });
+                  }
+                }}
               >
                 {selectedUser.isActive ? "Desactivar" : "Activar"}
               </button>
@@ -120,6 +124,11 @@ const AllUsers: React.FC = () => {
         </div>
       )}
     </div>
+    );
+  };
+
+export default AllUsers;
+
 //     <div className="bg-white p-6 rounded-md shadow-md mb-8">
 //   <h2 className="text-2xl font-bold mb-4 text-center md:text-left">
 //     Lista de Usuarios
@@ -306,7 +315,4 @@ const AllUsers: React.FC = () => {
   //     </div>
   //   )}
   // </div>
-  );
-};
 
-export default AllUsers;

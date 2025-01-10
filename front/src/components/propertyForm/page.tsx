@@ -7,11 +7,12 @@ import { TypeOfProperty } from "@/helpers/typeOfProperty";
 
 const PropertyForm: React.FC = () => {
   const [formData, setFormData] = useState<IFormData>({
-    title: "",
+    name: "",
     description: "",
     price: 1,
     state: "",
     city: "",
+    country: "",
     bedrooms: 1,
     bathrooms: 1,
     capacity: 1,
@@ -34,11 +35,12 @@ const PropertyForm: React.FC = () => {
 
   const resetForm = () => {
     setFormData({
-      title: "",
+      name: "",
       description: "",
       price: 1,
       state: "",
       city: "",
+      country: "",
       bedrooms: 1,
       bathrooms: 1,
       capacity: 1,
@@ -68,12 +70,12 @@ const PropertyForm: React.FC = () => {
   const validateForm = () => {
     const newErrors: { [key: string]: string } = {};
 
-    if (!formData.title) {
-      newErrors.title = "El título no debe estar vacío";
-    } else if (formData.title.length < 8) {
-      newErrors.title = "El título debe tener al menos 8 caracteres";
-    } else if (formData.title.length > 50) {
-      newErrors.title = "El título debe tener un máximo de 50 caracteres";
+    if (!formData.name) {
+      newErrors.name = "El título no debe estar vacío";
+    } else if (formData.name.length < 8) {
+      newErrors.name = "El título debe tener al menos 8 caracteres";
+    } else if (formData.name.length > 50) {
+      newErrors.name = "El título debe tener un máximo de 50 caracteres";
     }
 
     if (typeof formData.price !== "number" || formData.price <= 0) {
@@ -83,16 +85,19 @@ const PropertyForm: React.FC = () => {
     if (!formData.state) {
       newErrors.state = "La provincia no debe estar vacía";
     }
+    if (!formData.country) {
+      newErrors.country = "El país no debe estar vacío";
+    }
     if (!formData.city) {
       newErrors.city = "La ciudad no debe estar vacía";
     }
-    if (typeof formData.bedrooms !== "number" || formData.bedrooms < 0) {
+    if (typeof formData.bedrooms !== "number" || formData.bedrooms < 1) {
       newErrors.bedrooms = "El número de habitaciones debe ser positivo";
     }
-    if (typeof formData.bathrooms !== "number" || formData.bathrooms < 0) {
+    if (typeof formData.bathrooms !== "number" || formData.bathrooms < 1) {
       newErrors.bathrooms = "El número de baños debe ser positivo";
     }
-    if (typeof formData.capacity !== "number" || formData.capacity < 0) {
+    if (typeof formData.capacity !== "number" || formData.capacity < 1) {
       newErrors.capacity = "La capacidad debe ser positiva";
     }
 
@@ -115,6 +120,13 @@ const PropertyForm: React.FC = () => {
     if (typeof formData.cocina !== "boolean") {
       newErrors.cocina = "El campo cocina debe ser un valor booleano";
     }
+    if (!formData.description) {
+      newErrors.description = "La descripción no debe estar vacía";
+    }
+    
+    if (!formData.address) {
+      newErrors.address = "La dirección no debe estar vacía";
+    }
     if (!Object.values(TypeOfProperty).includes(formData.type)) {
       newErrors.type = "Selecciona un tipo de propiedad válido";
     }
@@ -134,6 +146,11 @@ const PropertyForm: React.FC = () => {
           const response = await fetch(`http://localhost:3002/users/${userId}`);
           if (!response.ok) {
             throw new Error("Error en la solicitud");
+          }
+          if (!userId) {
+            setError("No se encontró un usuario válido en el localStorage.");
+            setIsLoading(false);
+            return;
           }
           const user = await response.json();
           setUser(user);
@@ -285,18 +302,18 @@ const PropertyForm: React.FC = () => {
   return (
         <form onSubmit={handleSubmit} className="max-w-4xl mx-auto p-6 bg-white rounded-md shadow-md">
           <h2 className="text-2xl font-bold text-gray-800 mb-4">Crear Propiedad</h2>
-    
+
           <div className="mb-4">
-                <label className="block text-gray-800 text-lg">Título de la Propiedad:</label>
-               <input
+                <label className="block text-gray-800 text-lg">Título de la propiedad:</label>
+                <input
                   type="text"
-                  name="title"
-                  value={formData.title}
+                  name="name"
+                  value={formData.name}
                   onChange={handleChange}
                   required
                   className="mt-2 w-full p-3 bg-white text-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
                 />
-                {errors.title && <p className="text-red-500 text-sm">{errors.title}</p>}
+                {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
               </div>
         
               <div className="mb-4">
@@ -324,9 +341,21 @@ const PropertyForm: React.FC = () => {
                 />
                 {errors.price && <p className="text-red-500 text-sm">{errors.price}</p>}
               </div>
-        
               <div className="mb-4">
                 <label className="block text-gray-800 text-lg">Pais:</label>
+                <input
+                  type="text"
+                  name="country"
+                  value={formData.country}
+                  onChange={handleChange}
+                  required
+                  className="mt-2 w-full p-3 bg-white text-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
+                />
+                {errors.country && <p className="text-red-500 text-sm">{errors.country}</p>}
+              </div>
+        
+              <div className="mb-4">
+                <label className="block text-gray-800 text-lg">Provincia:</label>
                 <input
                   type="text"
                   name="state"
@@ -537,20 +566,21 @@ const PropertyForm: React.FC = () => {
         />
         {errors.image && <p className="text-red-500 text-sm">{errors.image}</p>}
         {formData.images.length > 0 && (
-          <div className="mt-2">
-            <p className="text-gray-600">Imágenes seleccionadas:</p>
-            <ul>
-              {formData.images.map((image, index) => (
-                <li key={index}>
-                  <img
-                    src={image}
-                    alt={`Preview ${index}`}
-                    className="w-16 h-16 object-cover"
-                  />
-                </li>
-              ))}
-            </ul>
-          </div>
+         <div className="mt-2">
+         <p className="text-gray-600">Imágenes seleccionadas:</p>
+         <ul className="flex space-x-2">
+           {formData.images.map((image, index) => (
+             <li key={index}>
+               <img
+                 src={image}
+                 alt={`Preview ${index}`}
+                 className="w-16 h-16 object-cover"
+               />
+             </li>
+           ))}
+         </ul>
+       </div>
+       
         )}
       </div>
       <button

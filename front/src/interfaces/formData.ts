@@ -1,9 +1,11 @@
 export default interface IFormData {
-  title: string;
+  id?: string,
+  name: string;
   description: string;
   price: number;
   state?: string;
   city: string;
+  country: string;
   address?: string;
   bedrooms: number;
   bathrooms: number;
