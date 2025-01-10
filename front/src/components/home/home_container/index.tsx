@@ -2,8 +2,6 @@
 
 // react
 import React, { useEffect, useState } from "react";
-
-// Api
 import { getPropertyDB } from "@/api/PropertyAPI";
 
 // interfaces

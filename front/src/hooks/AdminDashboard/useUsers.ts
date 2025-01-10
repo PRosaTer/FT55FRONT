@@ -14,7 +14,6 @@ const useUsers = () => {
           throw new Error("Error al cargar los usuarios");
         }
         const data = await response.json();
-
         setUsers(data);
       } catch (err: any) {
         setError(err.message);
