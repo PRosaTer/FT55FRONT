@@ -3,7 +3,7 @@ import Swal from "sweetalert2";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-interface IFilters {
+export interface IFilters {
   minors?: boolean;
   pets?: boolean;
   checkOut?: string;
@@ -21,13 +21,13 @@ export const FilterProperties = async (
     const queryString = new URLSearchParams(
       Object.fromEntries(
         Object.entries(filters).filter(
-          ([_, value]) => value !== undefined && value !== null
+          ([_, value]) => value !== undefined && value !== null && value !== ""
         )
       )
     ).toString();
-
+    console.log("resultado de queryString:", queryString);
     // Realizar la solicitud GET con los parámetros
-    const res = await fetch(`${API_URL}/properties/filter?${queryString}`, {
+    const res = await fetch(`${API_URL}/property/filter?${queryString}`, {
       method: "GET",
     });
 

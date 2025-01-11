@@ -9,11 +9,11 @@ const nextConfig: NextConfig = {
       "example.com",
       "cdn-icons-png.flaticon.com",
       "res.cloudinary.com",
-      "hips.hearstapps.com"
+      "hips.hearstapps.com",
+      "www.construyehogar.com",
     ],
   },
   /* config options here */
 };
 
 export default nextConfig;
-

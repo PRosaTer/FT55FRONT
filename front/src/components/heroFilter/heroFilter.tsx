@@ -18,7 +18,7 @@ export default function HeroFilter() {
     // checkIn: " ",
     // checkOut: " ",
     capacity: "",
-    state: "",
+    country: "",
     type: "",
   });
 
@@ -29,8 +29,14 @@ export default function HeroFilter() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const queryString = new URLSearchParams(searchParams).toString();
-    router.push(`/properties?${queryString}`);
+    const queryString = new URLSearchParams(
+      Object.fromEntries(
+        Object.entries(searchParams).filter(
+          ([_, value]) => value !== undefined && value.trim() !== ""
+        )
+      )
+    ).toString();
+    router.push(`/property/filter?${queryString}`);
   };
   return (
     <div>
@@ -69,9 +75,9 @@ export default function HeroFilter() {
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
-                  <SelectItem value="1">Casas</SelectItem>
-                  <SelectItem value="2">Departamentos</SelectItem>
-                  <SelectItem value="3">Habitaciones</SelectItem>
+                  <SelectItem value="casa">Casas</SelectItem>
+                  <SelectItem value="apartamento">Apartamentos</SelectItem>
+                  <SelectItem value="habitacion">Habitaciones</SelectItem>
                 </SelectGroup>
               </SelectContent>
             </Select>
@@ -94,8 +100,8 @@ export default function HeroFilter() {
               placeholder="Dónde?"
               type="text"
               className="w-full"
-              name="state"
-              value={searchParams.state}
+              name="country"
+              value={searchParams.country}
               onChange={handleInputChange}
             />
           </label>

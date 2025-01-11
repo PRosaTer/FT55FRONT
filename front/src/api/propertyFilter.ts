@@ -74,7 +74,7 @@ export interface SearchParams {
   checkIn?: string;
   checkOut?: string;
   capacity?: string;
-  state?: string;
+  country?: string;
   type?: string;
 }
 
@@ -88,10 +88,12 @@ export async function filterProperties(
   const filteredProperties = allProperties.filter((property) => {
     let isMatch = true;
 
-    if (searchParams.state && property.state) {
+    if (searchParams.country && property.country) {
       isMatch =
         isMatch &&
-        property.state.toLowerCase().includes(searchParams.state.toLowerCase());
+        property.state
+          .toLowerCase()
+          .includes(searchParams.country.toLowerCase());
     }
 
     if (searchParams.capacity && property.capacity) {
