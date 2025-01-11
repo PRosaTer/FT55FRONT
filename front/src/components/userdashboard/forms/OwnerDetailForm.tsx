@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import IUser from "@/interfaces/user";
 import Swal from "sweetalert2";
 import {CivilStatusOptions,EmploymentStatusOptions,} from "@/helpers/userStatus";
-import { saveUser as saveUserUtil } from "@/helpers/userUtils";
 
 interface OwnerDetailsFormProps {
   onComplete: (ownerDetails: IUser) => void;
@@ -110,7 +109,7 @@ const OwnerDetailsForm: React.FC<OwnerDetailsFormProps> = ({
           title: "¡Actualización exitosa!",
           text: "Los datos se han actualizado correctamente.",
         }).then(() => {
-          onComplete(updatedUser); // Llama a onComplete solo después de que se muestre el swal
+          onComplete(updatedUser); 
         });
         
       } else {
@@ -157,7 +156,7 @@ const OwnerDetailsForm: React.FC<OwnerDetailsFormProps> = ({
           title: "¡Actualización exitosa!",
           text: "Los datos se han actualizado correctamente.",
         }).then(() => {
-          onComplete(userDetails); // Llama a onComplete solo después de que se muestre el swal
+          onComplete(userDetails); 
         });
       } else {
         Swal.fire({

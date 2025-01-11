@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import IUser from "@/interfaces/user";
-import EditUserForm from "./EditUserForm";
+import EditUserForm from "./forms/EditUserForm";
 import Swal from "sweetalert2";
 
 const UserProfile: React.FC = () => {

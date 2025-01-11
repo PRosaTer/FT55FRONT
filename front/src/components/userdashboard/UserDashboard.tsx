@@ -3,7 +3,7 @@ import UserProfile from './UserProfile';
 import MyProperties from './UserProperties';
 import MyReservations from './UserReservations';
 import MyReviews from './UserReviews';
-import OwnerDetailsForm from './OwnerDetailForm';
+import OwnerDetailsForm from './forms/OwnerDetailForm';
 import IUser from '@/interfaces/user';
 import Swal from 'sweetalert2';
 
