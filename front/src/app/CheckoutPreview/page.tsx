@@ -16,7 +16,7 @@ import { ILocalReservation } from "@/interfaces/IReservation";
 
 // API peticiones
 import { getPropertyById } from "@/api/PropertyAPI";
-import { createReservation, getEmailOwner } from "@/api/ResevationAPI";
+import { createReservation, getEmailOwner } from "@/api/ResevationApi";
 import { getUserAccount } from "@/api/UsersAPI";
 
 // Sweet
@@ -106,8 +106,10 @@ const CheckoutPreview = () => {
       const response = await createReservation(reserva);
   
       if (response && response.link) {
-        // Redirigir al usuario al enlace proporcionado por el backend
-        window.location.href = response.link;
+      // guardar el id en local
+      localStorage.setItem("compraId", JSON.stringify(response.id));
+      // Redirigir al usuario al enlace proporcionado por el backend
+     router.push(response.link)
       } else {
         console.error("No se recibió un enlace válido en la respuesta:", response);
         Swal.fire({

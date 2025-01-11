@@ -1,12 +1,9 @@
 //"use client";
 import { SearchParams } from "@/api/propertyFilter";
 import Loading from "@/components/loading/loading";
-import { getProperties } from "@/services/propertiesService";
 import PropertyContainer from "@/views/propertyContainer";
-import { useSearchParams } from "next/navigation";
 import React, { Suspense } from "react";
 //import Loading from '@/components/Loading';
-import { z } from "zod";
 //import { useInfiniteQuery } from "@tanstack/react-query";
 //import MenuProperties from "@/components/menuProperties";
 
