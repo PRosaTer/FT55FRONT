@@ -11,6 +11,8 @@ const nextConfig: NextConfig = {
       "res.cloudinary.com",
       "hips.hearstapps.com",
       "www.construyehogar.com",
+      "www.casasparaconstruir.com",
+      "images.homify.com",
     ],
   },
   /* config options here */

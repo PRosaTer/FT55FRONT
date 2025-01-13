@@ -7,14 +7,10 @@ import { useAuthStore } from "@/store/authStore";
 
 import {
   NavigationMenu,
-  NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
 } from "../ui/navigation-menu";
-//import { MobilePropertiesMenu } from "./mobileProperties";
-import MenuProperties from "../menuProperties";
 
 export const Navbar: React.FC = () => {
   const { user, resetForm } = useAuthStore();
@@ -109,17 +105,11 @@ export const Navbar: React.FC = () => {
         <NavigationMenu className="flex items-center space-x-4">
           <NavigationMenuList className="hidden md:flex items-center space-x-4">
             <NavigationMenuItem className="hidden lg:block px-4 py-2">
-              <Link href="/properties">
+              <Link href="/property/filter">
                 <NavigationMenuLink className="text-silk hover:border-b-2 hover:border-champagne p-2">
                   Propiedades
                 </NavigationMenuLink>
               </Link>
-              {/* <NavigationMenuTrigger className="text-silk hover:border-b-2 hover:border-champagne p-2 hover:text-white text-base">
-                Ver propiedades
-              </NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <MenuProperties />
-              </NavigationMenuContent> */}
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>

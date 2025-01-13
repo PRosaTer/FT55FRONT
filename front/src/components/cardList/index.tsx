@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import CardProperties from "../card";
 import { Carousel, CarouselContent } from "../ui/carousel";
 import { IFeatureDepartmentsProps } from "../home/featureHouse";

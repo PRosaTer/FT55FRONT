@@ -108,7 +108,7 @@ export async function filterProperties(
           .includes(searchParams.type.toLocaleLowerCase());
     }
 
-    // Aquí se agrega la lógica de filtrado para checkIn y checkOut
+    // Aquí se agregaria la lógica de filtrado para checkIn y checkOut
     // Por ejemplo, si se tiene un array de fechas disponibles en cada propiedad:
     // if (
     //   searchParams.checkIn &&
