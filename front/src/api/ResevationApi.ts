@@ -1,5 +1,5 @@
 import Swal from "sweetalert2";
-import { IReservation } from "@/interfaces/IReservation";
+import { IContractReservation, IReservation } from "@/interfaces/IReservation";
 
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL
@@ -57,3 +57,38 @@ export const getEmailOwner = async(propertyId:string): Promise<string> => {
     }
 
 }
+
+export const getReservationDaysById = async ( propertyId: string ): Promise<Date[]> => {
+    try {
+      const res = await fetch(`${API_URL}/contract/propety/${propertyId}`, {
+        next: { revalidate: 1200 },
+      });
+  
+      if (!res.ok) {
+        throw new Error(`Error fetching reservations: ${res.status}`);
+      }
+  
+      const reservations: IContractReservation[] = await res.json();
+  
+      const blockedDates: Date[] = [];
+      reservations.forEach((reservation) => {
+        if (reservation.status !== "cancelled") {
+          const start = new Date(reservation.startDate);
+          const end = new Date(reservation.endDate);
+  
+          for (
+            let date = new Date(start);
+            date <= end;
+            date.setDate(date.getDate() + 1)
+          ) {
+            blockedDates.push(new Date(date)); 
+          }
+        }
+      });
+  
+      return blockedDates;
+    } catch (error: any) {
+      console.error("Error in getReservationDaysById:", error.message || error);
+      return [];
+    }
+  };
