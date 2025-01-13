@@ -22,6 +22,6 @@ export default interface IFormData {
   piscina: boolean,
   parqueadero: boolean,
   cocina: boolean,
-  isActive: boolean,
+  isActive: string,
   type: string,
 }

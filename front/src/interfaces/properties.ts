@@ -15,7 +15,7 @@ export interface IPropiedad {
   pets: boolean;
   latitude: number;
   longitude: number;
-  isActive: boolean;
+  isActive: string;
   type: string;
   accountId?: string; 
   images: string[]; 

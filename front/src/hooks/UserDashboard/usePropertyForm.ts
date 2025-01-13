@@ -5,6 +5,7 @@ import { TypeOfProperty } from "@/helpers/typeOfProperty";
 import IFormData from "../../interfaces/formData";
 import IUser from "@/interfaces/user";
 import { IPropiedad } from "@/interfaces/properties";
+import { PropertyStatus } from "@/helpers/statusProperty";
 
 interface UsePropertyFormProps {
   property: IPropiedad;
@@ -36,7 +37,7 @@ const usePropertyForm = ({ property }: UsePropertyFormProps) => {
       piscina: property.amenities_?.piscina || false,
       parqueadero: property.amenities_?.parqueadero || false,
       cocina: property.amenities_?.cocina || false,
-      isActive: property.isActive || false,
+      isActive: property.isActive || PropertyStatus.PENDING,
       type: property.type || "casa",
     });
   
@@ -223,7 +224,7 @@ const usePropertyForm = ({ property }: UsePropertyFormProps) => {
         piscina: false,
         parqueadero: false,
         cocina: false,
-        isActive: false,
+        isActive: PropertyStatus.PENDING,
         type: "casa",
       });
     };

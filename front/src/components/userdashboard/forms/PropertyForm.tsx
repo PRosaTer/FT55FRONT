@@ -3,8 +3,8 @@ import usePropertyForm from "@/hooks/UserDashboard/usePropertyForm";
 import { IPropiedad } from "@/interfaces/properties";
 
 interface PropertyFormProps {
-    property: IPropiedad; // Esta propiedad ya la tienes
-    onCancel: () => void; // Añadir onCancel
+    property: IPropiedad; 
+    onCancel: () => void;
   }
   
   const PropertyForm: React.FC<PropertyFormProps> = ({ property, onCancel }) => {

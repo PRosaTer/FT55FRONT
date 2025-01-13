@@ -79,7 +79,8 @@ const UserProfile: React.FC = () => {
             {user?.lastName && <p className="text-sm sm:text-base"><span className="font-semibold">Apellido:</span> {user.lastName}</p>}
             {user?.email && <p className="text-sm sm:text-base"><span className="font-semibold">Correo electrónico:</span> {user.email}</p>}
             {user?.nationality && <p className="text-sm sm:text-base"><span className="font-semibold">Nacionalidad:</span> {user.nationality}</p>}
-            {user?.DOB && <p className="text-sm sm:text-base"><span className="font-semibold">Fecha de Nacimiento:</span> {new Date(user.DOB).toLocaleDateString("es-ES")}</p>}
+            {/* {user?.DOB && <p className="text-sm sm:text-base"><span className="font-semibold">Fecha de Nacimiento:</span> {new Date(user.DOB).toLocaleDateString("es-ES")}</p>} */}
+            {user?.DOB && (<p className="text-sm sm:text-base"><span className="font-semibold">Fecha de Nacimiento:</span> {user.DOB}</p>)}
             {user?.dni && <p className="text-sm sm:text-base"><span className="font-semibold">DNI:</span> {user.dni}</p>}
             {user?.civilStatus && <p className="text-sm sm:text-base"><span className="font-semibold">Estado Civil:</span> {user.civilStatus}</p>}
             {user?.employmentStatus && <p className="text-sm sm:text-base"><span className="font-semibold">Estado laboral:</span> {user.employmentStatus}</p>}
