@@ -1,6 +1,4 @@
 "use client";
-// react
-import React, { useState } from "react";
 
 // next
 import Image from "next/image";
@@ -23,9 +21,9 @@ export const CardDetail: React.FC<IPropsDetail> = ({ property, owner }) => {
   // const toggleFavorite = () => {
   //   setIsFavorite(!isFavorite);
 
-    // const storedFavorites = JSON.parse(
-    //   localStorage.getItem("favorites") || "[]"
-    // );
+  // const storedFavorites = JSON.parse(
+  //   localStorage.getItem("favorites") || "[]"
+  // );
 
   //   if (isFavorite) {
   //     const updatedFavorites = storedFavorites.filter(
