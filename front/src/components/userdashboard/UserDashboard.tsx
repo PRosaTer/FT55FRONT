@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import UserProfile from './UserProfile';
 import MyProperties from './UserProperties';
 import MyReservations from './UserReservations';
-import MyReviews from './UserReviews';
-import OwnerDetailsForm from './OwnerDetailForm';
+import OwnerDetailsForm from './forms/OwnerDetailForm';
 import IUser from '@/interfaces/user';
 import Swal from 'sweetalert2';
 
@@ -19,6 +18,16 @@ const UserDashboard: React.FC = () => {
       user.DOB && user.dni && user.phone && user.civilStatus && user.employmentStatus
     ) {
       setIsOwnerDetailsComplete(true);
+    }
+    const compraId = localStorage.getItem("compraId");
+    if (compraId) {
+      Swal.fire({
+        icon: "success",
+        title: "Reserva realizada",
+        text: "¡Tu reserva se realizó correctamente! Gracias por confiar en nosotros.",
+      }).then(() => {
+        localStorage.removeItem("compraId");
+      });
     }
   }, []);
 
@@ -68,12 +77,6 @@ const UserDashboard: React.FC = () => {
     >
       Mis Reservas
     </button>
-    <button
-      onClick={() => setActiveSection('reviews')}
-      className="w-full p-3 lg:py-5 lg:px-8 text-center md:text-left rounded-md lg:rounded-lg bg-white shadow hover:bg-gray-100 hover:shadow-lg transition duration-200"
-    >
-      Mis Reseñas
-    </button>
   </aside>
   <main className="flex-1 p-4 md:p-8">
     {activeSection === 'profile' && <UserProfile />}
@@ -88,7 +91,6 @@ const UserDashboard: React.FC = () => {
       )
     )}
     {activeSection === 'reservations' && <MyReservations />}
-    {activeSection === 'reviews' && <MyReviews propertyId={''} />}
   </main>
 </div>
   );

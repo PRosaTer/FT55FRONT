@@ -59,7 +59,7 @@ const useEditProperty = () => {
           throw new Error('Error al actualizar la propiedad');
         }
   
-        const updatedProperty = await response.json(); // Suponiendo que el backend devuelve la propiedad actualizada
+        const updatedProperty = await response.json(); 
   
         setProperties((prev) =>
           prev.map((property) =>
@@ -95,20 +95,16 @@ const useEditProperty = () => {
     setProperties: React.Dispatch<React.SetStateAction<IPropiedad[]>>
   ) => {
     try {
-      // Verificamos que los valores estén definidos
       if (!propertyId || !imageId) {
         throw new Error("Faltan parámetros para eliminar la imagen.");
       }
-  
-      console.log("Eliminando imagen con ID:", imageId); // Verifica que el ID sea correcto
-  
-      // Enviar solo el ID de la imagen al backend
+      console.log("Eliminando imagen con ID:", imageId); 
       const response = await fetch(`/image`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(imageId), // Pasamos solo el ID de la imagen
+        body: JSON.stringify(imageId), 
       });
   
       if (!response.ok) {
