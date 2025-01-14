@@ -105,7 +105,7 @@ const RegisterForm = () => {
 
   return (
     <div
-      className="min-h-screen-71 flex items-center justify-center bg-cover bg-center"
+      className="min-h-screen-83 flex items-center justify-center bg-cover bg-center"
       style={{
         backgroundImage:
           "url('https://i.postimg.cc/3RnqJCmr/pexels-chris-schippers-139261-421927.jpg')",

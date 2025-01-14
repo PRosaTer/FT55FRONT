@@ -117,7 +117,7 @@ const Login: React.FC = () => {
 
   return (
     <div
-      className="flex items-center justify-center min-h-screen-71 bg-cover bg-center"
+      className="flex items-center justify-center min-h-screen-83 bg-cover bg-center"
       style={{
         backgroundImage:
           "url('https://i.postimg.cc/j5YLMPFX/pexels-pixabay-417289.jpg')",
