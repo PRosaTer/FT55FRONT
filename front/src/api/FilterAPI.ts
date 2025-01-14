@@ -18,10 +18,28 @@ export const FilterProperties = async (
 ): Promise<IProperty[] | undefined> => {
   try {
     if (filters.country) {
-      filters.country = filters.country
-        .trim()
-        .toLowerCase()
-        .replace(/\b\w/g, (char) => char.toUpperCase());
+      const normalizeCountry = (country: string): string => {
+        const countryMapping: Record<string, string> = {
+          mexico: "México",
+          espana: "España",
+          peru: "Perú",
+          costarica: "Costa Rica",
+          "costa rica": "Costa Rica",
+          "united states": "United States",
+          unitedstates: "United States",
+          panama: "Panamá",
+        };
+        const normalized = country.trim().toLowerCase();
+        return (
+          countryMapping[normalized] ||
+          normalized.charAt(0).toUpperCase() + normalized.slice(1)
+        );
+        // filters.country = filters.country
+        //   .trim()
+        //   .toLowerCase()
+        //   .replace(/\b\w/g, (char) => char.toUpperCase());
+      };
+      filters.country = normalizeCountry(filters.country);
     }
     // Convierte los filtros en parámetros de consulta
     const queryString = new URLSearchParams(
