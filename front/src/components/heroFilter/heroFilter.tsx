@@ -11,12 +11,17 @@ import {
   SelectValue,
 } from "../ui/select";
 import { Button } from "../ui/button";
+import { IFilters } from "@/api/FilterAPI";
 
-export default function HeroFilter() {
+interface PropertyContainerProps {
+  params: IFilters;
+}
+
+const HeroFilterExtend: React.FC<PropertyContainerProps> = ({ params }) => {
   const router = useRouter();
   const [searchParams, setSearchParams] = useState({
-    // checkIn: " ",
-    // checkOut: " ",
+    checkIn: " ",
+    checkOut: " ",
     capacity: "",
     country: "",
     type: "",
@@ -48,8 +53,8 @@ export default function HeroFilter() {
               type="date"
               className="w-full"
               name="checkIn"
-              // value={searchParams.checkIn}
-              // onChange={handleInputChange}
+              value={searchParams.checkIn}
+              onChange={handleInputChange}
             />
           </label>
           <label className="w-full md:w-1/4 px-3 mb-4 md:mb-0">
@@ -58,8 +63,8 @@ export default function HeroFilter() {
               type="date"
               className="w-full"
               name="checkOut"
-              // value={searchParams.checkOut}
-              // onChange={handleInputChange}
+              value={searchParams.checkOut}
+              onChange={handleInputChange}
             />
           </label>
           <label className="w-full md:w-1/4 px-3 mb-4 md:mb-0">
@@ -71,7 +76,9 @@ export default function HeroFilter() {
               }
             >
               <SelectTrigger className="w-full">
-                <SelectValue placeholder="Propiedad?" />
+                <SelectValue
+                  placeholder={params.type ? params.type : "¿Qué buscas?"}
+                />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
@@ -85,10 +92,12 @@ export default function HeroFilter() {
           <label className="w-full md:w-1/4 px-3 mb-4 md:mb-0">
             <span className="text-gray-500 text-sm">Huéspedes</span>
             <Input
-              placeholder="Cuántos?"
+              placeholder={
+                params.capacity ? String(params.capacity) : "¿Cuántos?"
+              }
               type="number"
               className="w-full"
-              min={0}
+              min={1}
               name="capacity"
               value={searchParams.capacity}
               onChange={handleInputChange}
@@ -97,7 +106,7 @@ export default function HeroFilter() {
           <label className="w-full md:w-1/4 px-3 mb-4 md:mb-0">
             <span className="text-gray-500 text-sm">País</span>
             <Input
-              placeholder="Dónde?"
+              placeholder={params.country ? String(params.country) : "¿Dónde?"}
               type="text"
               className="w-full"
               name="country"
@@ -114,4 +123,5 @@ export default function HeroFilter() {
       </form>
     </div>
   );
-}
+};
+export default HeroFilterExtend;

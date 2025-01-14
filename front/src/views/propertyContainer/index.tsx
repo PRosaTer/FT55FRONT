@@ -2,12 +2,10 @@
 
 import CardList from "@/components/cardList";
 import { IProperty } from "@/interfaces/IProperty";
-//import { filterProperties, SearchParams } from "@/api/propertyFilter";
 import React, { useEffect, useState } from "react";
 import Loading from "@/components/loading/loading";
-//import { getPropertyDB } from "@/api/PropertyAPI";
 import { FilterProperties, IFilters } from "@/api/FilterAPI";
-import { getPropertyDB } from "@/api/PropertyAPI";
+import HeroFilterExtend from "@/components/heroFilter/heroFilter";
 
 interface PropertyContainerProps {
   searchParams: IFilters;
@@ -21,6 +19,7 @@ const PropertyContainer: React.FC<PropertyContainerProps> = ({
 
   useEffect(() => {
     //console.log("Recibiendo searchParams en PropertyContainer:", searchParams);
+    //console.log("recibiendo fechas:", searchParams.checkIn);
     const fetchProperties = async () => {
       setIsLoading(true);
       try {
@@ -31,7 +30,7 @@ const PropertyContainer: React.FC<PropertyContainerProps> = ({
           ...property,
           photos: property.image_?.map((img) => img.url) || [],
         }));
-
+        //console.log("estas son las fotos:", products[0].photos);
         setProperties(transformedProperties);
       } catch (error) {
         console.error("Error fetching properties:", error);
@@ -54,6 +53,10 @@ const PropertyContainer: React.FC<PropertyContainerProps> = ({
   return (
     <div className="py-4">
       <div className="container mx-auto px-4">
+        <div className="bg-white p-6 rounded-lg shadow-2xl max-w-5xl mx-auto mb-12 border">
+          <HeroFilterExtend params={searchParams} />
+        </div>
+
         {properties.length === 0 ? (
           <p className="text-center text-gray-600">
             No se encontraron propiedades que coincidan con tu búsqueda.
