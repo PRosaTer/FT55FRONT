@@ -19,12 +19,14 @@ interface PropertyContainerProps {
 
 const HeroFilterExtend: React.FC<PropertyContainerProps> = ({ params }) => {
   const router = useRouter();
+
+  // Initialize searchParams with the values from params or default empty strings
   const [searchParams, setSearchParams] = useState({
-    checkIn: " ",
-    checkOut: " ",
-    capacity: "",
-    country: "",
-    type: "",
+    checkIn: params.checkIn || "",
+    checkOut: params.checkOut || "",
+    capacity: params.capacity ? String(params.capacity) : "",
+    country: params.country || "",
+    type: params.type || "",
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,6 +45,7 @@ const HeroFilterExtend: React.FC<PropertyContainerProps> = ({ params }) => {
     ).toString();
     router.push(`/property/filter?${queryString}`);
   };
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -76,9 +79,7 @@ const HeroFilterExtend: React.FC<PropertyContainerProps> = ({ params }) => {
               }
             >
               <SelectTrigger className="w-full">
-                <SelectValue
-                  placeholder={params.type ? params.type : "¿Qué buscas?"}
-                />
+                <SelectValue placeholder="¿Qué buscas?" />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
@@ -92,9 +93,7 @@ const HeroFilterExtend: React.FC<PropertyContainerProps> = ({ params }) => {
           <label className="w-full md:w-1/4 px-3 mb-4 md:mb-0">
             <span className="text-gray-500 text-sm">Huéspedes</span>
             <Input
-              placeholder={
-                params.capacity ? String(params.capacity) : "¿Cuántos?"
-              }
+              placeholder="¿Cuántos?"
               type="number"
               className="w-full"
               min={1}
@@ -106,7 +105,7 @@ const HeroFilterExtend: React.FC<PropertyContainerProps> = ({ params }) => {
           <label className="w-full md:w-1/4 px-3 mb-4 md:mb-0">
             <span className="text-gray-500 text-sm">País</span>
             <Input
-              placeholder={params.country ? String(params.country) : "¿Dónde?"}
+              placeholder="¿Dónde?"
               type="text"
               className="w-full"
               name="country"
@@ -124,4 +123,5 @@ const HeroFilterExtend: React.FC<PropertyContainerProps> = ({ params }) => {
     </div>
   );
 };
+
 export default HeroFilterExtend;
