@@ -8,7 +8,6 @@ import { useAuthStore } from "@/store/authStore";
 import {
   NavigationMenu,
   NavigationMenuItem,
-  NavigationMenuLink,
   NavigationMenuList,
 } from "../ui/navigation-menu";
 
@@ -83,16 +82,16 @@ export const Navbar: React.FC = () => {
           <NavigationMenuList className="hidden md:flex space-x-4">
             <NavigationMenuItem className="">
               <Link href="/">
-                <NavigationMenuLink className="text-silk hover:border-b-2 hover:border-champagne p-2">
+                <div className="text-silk hover:border-b-2 hover:border-champagne p-2">
                   Inicio
-                </NavigationMenuLink>
+                </div>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
               <Link href="/about">
-                <NavigationMenuLink className="text-silk hover:border-b-2 hover:border-champagne p-2">
+                <div className="text-silk hover:border-b-2 hover:border-champagne p-2">
                   Sobre nosotros
-                </NavigationMenuLink>
+                </div>
               </Link>
             </NavigationMenuItem>
           </NavigationMenuList>
@@ -106,9 +105,9 @@ export const Navbar: React.FC = () => {
           <NavigationMenuList className="hidden md:flex items-center space-x-4">
             <NavigationMenuItem className="hidden lg:block px-4 py-2">
               <Link href="/property/filter">
-                <NavigationMenuLink className="text-silk hover:border-b-2 hover:border-champagne p-2">
+                <div className="text-silk hover:border-b-2 hover:border-champagne p-2">
                   Propiedades
-                </NavigationMenuLink>
+                </div>
               </Link>
             </NavigationMenuItem>
           </NavigationMenuList>
@@ -119,17 +118,10 @@ export const Navbar: React.FC = () => {
             {userData ? (
               <>
                 <NavigationMenuItem>
-                  <Link href="/favs">
-                    <NavigationMenuLink className="text-silk hover:border-b-2 hover:border-champagne p-2">
-                      Favoritos
-                    </NavigationMenuLink>
-                  </Link>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
                   <Link href="/profile">
-                    <NavigationMenuLink className="text-silk hover:border-b-2 hover:border-champagne p-2">
+                    <div className="text-silk hover:border-b-2 hover:border-champagne p-2">
                       Perfil
-                    </NavigationMenuLink>
+                    </div>
                   </Link>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
@@ -200,13 +192,6 @@ export const Navbar: React.FC = () => {
                 <i className="fi fi-rr-user text-silk rounded-lg p-2 hover:bg-champagne hover:text-velvet">
                   {" "}
                   Perfil
-                </i>
-              </Link>
-
-              <Link href="/favs">
-                <i className="fi fi-rr-heart text-silk rounded-lg p-2 hover:bg-champagne hover:text-velvet">
-                  {" "}
-                  Favoritos
                 </i>
               </Link>
               <button

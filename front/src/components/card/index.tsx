@@ -6,11 +6,6 @@ import { CarouselItem } from "../ui/carousel";
 import Link from "next/link";
 
 export const CardProperties: React.FC<IProperty> = (property: IProperty) => {
-  // const [isFavorite, setIsFavorite] = useState(false);
-
-  // const toggleFavorite = () => {
-  //   setIsFavorite(!isFavorite);
-  // };
   return (
     <CarouselItem
       key={property.id}
