@@ -17,6 +17,12 @@ export const FilterProperties = async (
   filters: IFilters
 ): Promise<IProperty[] | undefined> => {
   try {
+    if (filters.country) {
+      filters.country = filters.country
+        .trim()
+        .toLowerCase()
+        .replace(/\b\w/g, (char) => char.toUpperCase());
+    }
     // Convierte los filtros en parámetros de consulta
     const queryString = new URLSearchParams(
       Object.fromEntries(
