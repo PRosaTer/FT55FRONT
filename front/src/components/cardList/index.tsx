@@ -1,6 +1,6 @@
 import React from "react";
 import CardProperties from "../card";
-import { Carousel, CarouselContent } from "../ui/carousel";
+import { Carousel} from "../ui/carousel";
 import { IFeatureDepartmentsProps } from "../home/featureHouse";
 import { IProperty } from "@/interfaces/IProperty";
 
