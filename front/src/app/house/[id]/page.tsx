@@ -2,14 +2,15 @@ import React from "react";
 import ContainerDetail from "@/components/container_detail";
 import { getPropertyById, getPropertyOwner } from "@/api/PropertyAPI";
 
-// Función para obtener los datos antes de renderizar la página
-export async function getServerSideProps({ params }: { params: Record<string, string> }) {
+// El componente de servidor que obtiene los datos
+const HouseDetail = async ({ params }: { params: { id: string } }) => {
   const house = await getPropertyById(params.id);
 
   if (!house) {
-    return { notFound: true }; // Si no se encuentra la propiedad, devuelve 404
+    return <div>Error: Propiedad no encontrada</div>;
   }
 
+  // Construcción del objeto propiedad
   const property = {
     ...house,
     photos: house.image_?.map((img) => img.url) || [],
@@ -23,21 +24,7 @@ export async function getServerSideProps({ params }: { params: Record<string, st
     console.warn("No account ID found in property data.");
   }
 
-  return {
-    props: {
-      property,
-      owner: owner?.user_ || undefined,
-    },
-  };
-}
-
-// El componente para mostrar los detalles
-const HouseDetail: React.FC<{ property: any; owner: any }> = ({ property, owner }) => {
-  if (!property) {
-    return <div>Error: Propiedad no encontrada</div>;
-  }
-
-  return <ContainerDetail property={property} owner={owner} />;
+  return <ContainerDetail property={property} owner={owner?.user_ || undefined} />;
 };
 
 export default HouseDetail;
