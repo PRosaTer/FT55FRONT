@@ -49,7 +49,14 @@ const Login: React.FC = () => {
           text: `Bienvenido, ${data.user.email}!`,
           confirmButtonColor: "#3085d6",
         });
-        router.push("/profile");
+
+        // Redirigir según el rol
+        const role = data.user.role;
+        if (role === "admin" || role === "owner") {
+          router.push("/adminProfile");
+        } else if (role === "user") {
+          router.push("/profile");
+        }
         return;
       }
 
@@ -96,7 +103,14 @@ const Login: React.FC = () => {
           text: `Bienvenido, ${data.user.email}!`,
           confirmButtonColor: "#3085d6",
         });
-        router.push("/profile");
+
+        // Redirigir según el rol
+        const role = data.user.role;
+        if (role === "admin" || role === "owner") {
+          router.push("/adminProfile");
+        } else if (role === "user") {
+          router.push("/profile");
+        }
       } else {
         Swal.fire({
           icon: "error",
