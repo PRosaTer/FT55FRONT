@@ -46,17 +46,21 @@ import React from "react";
 import ContainerDetail from "@/components/container_detail";
 import { getPropertyById, getPropertyOwner } from "@/api/PropertyAPI";
 
-// Esta función se ejecutará en el servidor para obtener los datos antes de renderizar la página
-export async function getServerSideProps({ params }: { params: { id: string } }) {
+const HouseDetail = async ({ params }: { params: { id: string } }) => {
   const house = await getPropertyById(params.id);
 
-  const property = {
-    ...house,
-    photos: house.image_?.map((img) => img.url) || [],
-  };
+    if (!house) {
+      return <div>Error: Propiedad no encontrada</div>;
+    }
+
+    // Construir objeto propiedad
+    const property = {
+      ...house,
+      photos: house.image_?.map((img) => img.url) || [],
+    };
 
   if (!property) {
-    return { notFound: true }; // Si no se encuentra la propiedad, se devuelve un 404
+    return <div>Error: Propiedad no encontrada</div>;
   }
 
   const ownerId = property.account_?.id;
@@ -67,21 +71,9 @@ export async function getServerSideProps({ params }: { params: { id: string } })
     console.warn("No account ID found in property data.");
   }
 
-  return {
-    props: {
-      property,
-      owner: owner?.user_ || null,
-    },
-  };
-}
+  return <ContainerDetail property={property} owner={owner?.user_ || undefined} />;
 
-// El componente que renderiza la propiedad y su propietario
-const HouseDetail: React.FC<{ property: any; owner: any }> = ({ property, owner }) => {
-  if (!property) {
-    return <div>Error: Propiedad no encontrada</div>;
-  }
-
-  return <ContainerDetail property={property} owner={owner} />;
 };
 
 export default HouseDetail;
+
