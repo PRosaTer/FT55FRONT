@@ -50,10 +50,15 @@ import { getPropertyById, getPropertyOwner } from "@/api/PropertyAPI";
 export async function getServerSideProps({ params }: { params: { id: string } }) {
   const house = await getPropertyById(params.id);
 
-  const property = {
-    ...house,
-    photos: house.image_?.map((img) => img.url) || [],
-  };
+    if (!house) {
+      return <div>Error: Propiedad no encontrada</div>;
+    }
+
+    // Construir objeto propiedad
+    const property = {
+      ...house,
+      photos: house.image_?.map((img) => img.url) || [],
+    };
 
   if (!property) {
     return { notFound: true }; // Si no se encuentra la propiedad, se devuelve un 404
