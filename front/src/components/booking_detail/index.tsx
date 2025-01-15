@@ -1,12 +1,22 @@
 "use client";
 
+// react
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import { DateRange as ReactDateRange } from "react-date-range";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
+
+// next
+import { useRouter } from "next/navigation";
+
+// sweet alert
 import Swal from "sweetalert2";
+
+// interface
 import { user } from "@/helpers/data";
+
+// API
+import { getReservationDaysById } from "@/api/ResevationApi";
 
 interface BookingDetailProps {
   id: string;
@@ -23,15 +33,27 @@ const BookingDetail: React.FC<BookingDetailProps> = ({
   hasMinor,
   hasPets,
 }) => {
+  const [ disabledDates, setDisabledDates] = useState<Date[]>([])
   const [userData, setUserData] = useState<user | null>(null);
   useEffect(() => {
+    const fetchDisabledDates = async () => {
+      try {
+        const dates = await getReservationDaysById(id);
+        setDisabledDates(dates);
+      } catch (error) {
+        console.error("Failed to fetch disabled dates:", error);
+      }
+    };
+
+    fetchDisabledDates();
+
     const user = localStorage.getItem("user");
 
     if (user) {
       const data = JSON.parse(user);
       setUserData(data);
     }
-  }, []);
+  }, [id]);
 
   const [showCalendar, setShowCalendar] = useState(false);
 
@@ -218,6 +240,7 @@ const BookingDetail: React.FC<BookingDetailProps> = ({
               minDate={new Date()}
               rangeColors={["#222D52"]}
               showDateDisplay={false}
+              disabledDates={disabledDates}
             />
           </div>
         )}

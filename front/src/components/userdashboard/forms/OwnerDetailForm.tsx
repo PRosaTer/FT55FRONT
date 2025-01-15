@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import IUser from "@/interfaces/user";
 import Swal from "sweetalert2";
 import {CivilStatusOptions,EmploymentStatusOptions,} from "@/helpers/userStatus";
-import { saveUser as saveUserUtil } from "@/helpers/userUtils";
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 interface OwnerDetailsFormProps {
   onComplete: (ownerDetails: IUser) => void;
@@ -92,7 +93,7 @@ const OwnerDetailsForm: React.FC<OwnerDetailsFormProps> = ({
     };
   
     try {
-      const response = await fetch(`http://localhost:3002/users/${id}`, {
+      const response = await fetch(`${API_URL}/users/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -110,7 +111,7 @@ const OwnerDetailsForm: React.FC<OwnerDetailsFormProps> = ({
           title: "¡Actualización exitosa!",
           text: "Los datos se han actualizado correctamente.",
         }).then(() => {
-          onComplete(updatedUser); // Llama a onComplete solo después de que se muestre el swal
+          onComplete(updatedUser); 
         });
         
       } else {
@@ -142,7 +143,7 @@ const OwnerDetailsForm: React.FC<OwnerDetailsFormProps> = ({
     }
   
     try {
-      const response = await fetch(`http://localhost:3002/users/${user.id}`, {
+      const response = await fetch(`${API_URL}/users/${user.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -157,7 +158,7 @@ const OwnerDetailsForm: React.FC<OwnerDetailsFormProps> = ({
           title: "¡Actualización exitosa!",
           text: "Los datos se han actualizado correctamente.",
         }).then(() => {
-          onComplete(userDetails); // Llama a onComplete solo después de que se muestre el swal
+          onComplete(userDetails); 
         });
       } else {
         Swal.fire({
@@ -191,7 +192,7 @@ const OwnerDetailsForm: React.FC<OwnerDetailsFormProps> = ({
     formData.append("file", files[0]);
 
     try {
-      const response = await fetch("http://localhost:3002/image/user-photo", {
+      const response = await fetch(`${API_URL}/image/user-photo`, {
         method: "POST",
         body: formData,
       });

@@ -2,12 +2,13 @@ import { IAmenities } from "./IAmenities";
 import { IAccount } from "./IAccount";
 
 export interface IProperty {
-  id: number;
+  id: string;
   account_: IAccount;
   isActive: boolean;
   name: string;
   description: string;
   type: string;
+  country:string;
   state: string;
   city: string;
   price: number;
@@ -21,6 +22,8 @@ export interface IProperty {
   hasMinor: boolean;
   pets: boolean;
   amenities_: IAmenities;
+  latitude: string;
+  longitude: string
 }
 
 export interface IPropertyList {

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Link from "next/link";
@@ -7,6 +6,7 @@ import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import { GoogleLogin, CredentialResponse } from "@react-oauth/google";
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const Login: React.FC = () => {
   const [loginData, setLoginData] = useState({
@@ -28,7 +28,7 @@ const Login: React.FC = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:3002/auth/signin", {
+      const response = await fetch(`${API_URL}/auth/signin`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -76,7 +76,7 @@ const Login: React.FC = () => {
     }
 
     try {
-      const res = await fetch("http://localhost:3002/auth/google-login", {
+      const res = await fetch(`${API_URL}/auth/google-login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -118,7 +118,7 @@ const Login: React.FC = () => {
 
   return (
     <div
-      className="flex items-center justify-center min-h-screen bg-cover bg-center"
+      className="flex items-center justify-center min-h-screen-83 bg-cover bg-center"
       style={{
         backgroundImage:
           "url('https://i.postimg.cc/j5YLMPFX/pexels-pixabay-417289.jpg')",
@@ -155,19 +155,18 @@ const Login: React.FC = () => {
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-10 text-gray-500 hover:text-gray-700 focus:outline-none"
+              className="absolute right-1 top-8 text-gray-500 hover:text-gray-700 focus:outline-none"
             >
-              {showPassword ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
+              {showPassword ? <FaEyeSlash size={18} /> : <FaEye size={18} />}
             </button>
           </div>
           <button
             type="submit"
-            className="w-full bg-black text-white py-2 rounded-lg hover:bg-gray-800 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            className="w-full bg-velvet text-white py-2 rounded-lg hover:bg-gray-800 focus:ring-2 focus:ring-blue-500 focus:outline-none"
           >
             Ingresar
           </button>
         </form>
-
         <div className="mt-4">
           <GoogleLogin
             onSuccess={handleGoogleLoginSuccess}
@@ -181,28 +180,16 @@ const Login: React.FC = () => {
             }}
           />
         </div>
-
-        <div className="text-center mt-4">
-          <p className="text-sm text-black">
-            ¿No tienes cuenta?{" "}
-            <Link href="/register">
-              <span className="text-blue-600 hover:underline">
-                Regístrate aquí
-              </span>
-            </Link>
-          </p>
-          <p className="text-sm text-black mt-2">
-            ¿Olvidaste tu contraseña?{" "}
-            <Link href="/forgotPassword">
-              <span className="text-blue-600 hover:underline">
-                Recuperala aquí
-              </span>
-            </Link>
-          </p>
-        </div>
-      </div>
+        <div className="text-sm text-center mt-4 text-gray-600">
+          {" "}
+          ¿No tienes una cuenta?{" "}
+          <Link href="/signup" className="text-blue-500 hover:underline">
+            {" "}
+            Regístrate{" "}
+          </Link>{" "}
+        </div>{" "}
+      </div>{" "}
     </div>
   );
 };
-
 export default Login;
