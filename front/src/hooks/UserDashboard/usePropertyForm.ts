@@ -7,6 +7,8 @@ import IUser from "@/interfaces/user";
 import { IPropiedad } from "@/interfaces/properties";
 import { PropertyStatus } from "@/helpers/statusProperty";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 interface UsePropertyFormProps {
   property: IPropiedad;
 }
@@ -55,7 +57,7 @@ const usePropertyForm = ({ property }: UsePropertyFormProps) => {
         setIsLoading(true);
         try {
           const response = await fetch(
-            `http://localhost:3002/property/unique/${propertyId}`
+            `${API_URL}/property/unique/${propertyId}`
           );
           if (!response.ok) throw new Error("Error al obtener la propiedad");
           const fetchedProperty = await response.json();
@@ -81,7 +83,7 @@ const usePropertyForm = ({ property }: UsePropertyFormProps) => {
         const userId = userData.id;
   
         try {
-          const response = await fetch(`http://localhost:3002/users/${userId}`);
+          const response = await fetch(`${API_URL}/users/${userId}`);
           if (!response.ok) throw new Error("Error al obtener el usuario");
           const fetchedUser = await response.json();
           setUser(fetchedUser);
@@ -170,7 +172,7 @@ const usePropertyForm = ({ property }: UsePropertyFormProps) => {
           ),
         };
   
-        const response = await fetch("http://localhost:3002/property/update", {
+        const response = await fetch(`${API_URL}/property/update`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
@@ -237,7 +239,7 @@ const usePropertyForm = ({ property }: UsePropertyFormProps) => {
         formData.append("file", file);
   
         try {
-          const response = await fetch("http://localhost:3002/image", {
+          const response = await fetch(`${API_URL}/image`, {
             method: "POST",
             body: formData,
           });

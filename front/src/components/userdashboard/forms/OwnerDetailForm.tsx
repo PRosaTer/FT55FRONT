@@ -3,6 +3,8 @@ import IUser from "@/interfaces/user";
 import Swal from "sweetalert2";
 import {CivilStatusOptions,EmploymentStatusOptions,} from "@/helpers/userStatus";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 interface OwnerDetailsFormProps {
   onComplete: (ownerDetails: IUser) => void;
 }
@@ -91,7 +93,7 @@ const OwnerDetailsForm: React.FC<OwnerDetailsFormProps> = ({
     };
   
     try {
-      const response = await fetch(`http://localhost:3002/users/${id}`, {
+      const response = await fetch(`${API_URL}/users/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -141,7 +143,7 @@ const OwnerDetailsForm: React.FC<OwnerDetailsFormProps> = ({
     }
   
     try {
-      const response = await fetch(`http://localhost:3002/users/${user.id}`, {
+      const response = await fetch(`${API_URL}/users/${user.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -190,7 +192,7 @@ const OwnerDetailsForm: React.FC<OwnerDetailsFormProps> = ({
     formData.append("file", files[0]);
 
     try {
-      const response = await fetch("http://localhost:3002/image/user-photo", {
+      const response = await fetch(`${API_URL}/image/user-photo`, {
         method: "POST",
         body: formData,
       });
