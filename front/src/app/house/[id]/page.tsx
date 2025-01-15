@@ -34,16 +34,15 @@ import React from "react";
 import ContainerDetail from "@/components/container_detail";
 import { getPropertyById, getPropertyOwner } from "@/api/PropertyAPI";
 
-// Assuming PageProps is defined by Next.js or your project setup
+// Define PageProps according to the error message's hint
 interface PageProps {
-  params: {
-    id: string;
-  };
+  params: Promise<{ id: string }>;
 }
 
 // The server component that fetches the data
 export default async function HouseDetail({ params }: PageProps) {
-  const { id } = params;
+  const resolvedParams = await params;
+  const { id } = resolvedParams;
 
   // Fetching the property by ID
   const house = await getPropertyById(id);
