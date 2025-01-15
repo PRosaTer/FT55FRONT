@@ -3,8 +3,11 @@ import ContainerDetail from "@/components/container_detail";
 import { getPropertyById, getPropertyOwner } from "@/api/PropertyAPI";
 
 // El componente de servidor que obtiene los datos
-const HouseDetail = async ({ params }: { params: { id: string } }) => {
-  const house = await getPropertyById(params.id);
+export default async function HouseDetail({ params }: { params: { id: string } }) {
+  const { id } = params;
+
+  // Obtención de la propiedad por ID
+  const house = await getPropertyById(id);
 
   if (!house) {
     return <div>Error: Propiedad no encontrada</div>;
@@ -25,6 +28,4 @@ const HouseDetail = async ({ params }: { params: { id: string } }) => {
   }
 
   return <ContainerDetail property={property} owner={owner?.user_ || undefined} />;
-};
-
-export default HouseDetail;
+}
