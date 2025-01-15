@@ -49,10 +49,15 @@ import { getPropertyById, getPropertyOwner } from "@/api/PropertyAPI";
 const HouseDetail = async ({ params }: { params: { id: string } }) => {
   const house = await getPropertyById(params.id);
 
-  const property = {
-    ...house,
-    photos: house.image_?.map((img) => img.url) || [],
-  };
+    if (!house) {
+      return <div>Error: Propiedad no encontrada</div>;
+    }
+
+    // Construir objeto propiedad
+    const property = {
+      ...house,
+      photos: house.image_?.map((img) => img.url) || [],
+    };
 
   if (!property) {
     return <div>Error: Propiedad no encontrada</div>;
