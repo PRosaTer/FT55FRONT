@@ -1,1 +1,1 @@
-export { default } from '@/views/house_detail'
+export { default } from '@/views/house_detail/index'
