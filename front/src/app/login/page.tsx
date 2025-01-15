@@ -50,7 +50,6 @@ const Login: React.FC = () => {
           confirmButtonColor: "#3085d6",
         });
 
-        // Redirigir según el rol
         const role = data.user.role;
         if (role === "admin" || role === "owner") {
           router.push("/adminProfile");
@@ -104,7 +103,6 @@ const Login: React.FC = () => {
           confirmButtonColor: "#3085d6",
         });
 
-        // Redirigir según el rol
         const role = data.user.role;
         if (role === "admin" || role === "owner") {
           router.push("/adminProfile");
@@ -194,15 +192,14 @@ const Login: React.FC = () => {
           />
         </div>
         <div className="text-sm text-center mt-4 text-gray-600">
-          {" "}
           ¿No tienes una cuenta?{" "}
           <Link href="/signup" className="text-blue-500 hover:underline">
-            {" "}
-            Regístrate{" "}
-          </Link>{" "}
-        </div>{" "}
-      </div>{" "}
+            Regístrate
+          </Link>
+        </div>
+      </div>
     </div>
   );
 };
+
 export default Login;
