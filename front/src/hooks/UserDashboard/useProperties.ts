@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import { IPropiedad } from "@/interfaces/properties";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 const useProperties = () => {
   const [properties, setProperties] = useState<IPropiedad[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [user, setUser] = useState<any | null>(null); 
-
-
 
   useEffect(() => {
     const fetchProperties = async () => {
@@ -23,7 +23,7 @@ const useProperties = () => {
         const user = JSON.parse(storedUser);  
         const userId = user?.id;  
 
-        const response = await fetch(`http://localhost:3002/users/${userId}`);
+        const response = await fetch(`${API_URL}/users/${userId}`);
         if (!response.ok) {
           throw new Error("Error al obtener el usuario.");
         }
@@ -34,7 +34,7 @@ const useProperties = () => {
         const accountId = userData.account_?.id;
         console.log("Account ID:", accountId);
 
-        const propertiesResponse = await fetch(`http://localhost:3002/property/owner/${accountId}`);
+        const propertiesResponse = await fetch(`${API_URL}/property/owner/${accountId}`);
         if (!propertiesResponse.ok) {
           throw new Error("Error al obtener las propiedades.");
         }
