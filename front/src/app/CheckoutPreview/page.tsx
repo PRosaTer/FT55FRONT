@@ -29,10 +29,8 @@ const CheckoutPreview = () => {
   const [loading, setLoading] = useState(false); // Para manejar el estado de carga
 
   const houseDef = casadef;
-  const houseDef = casadef;
   const [reservData, setReservData] = useState<ILocalReservation | null>(null);
   const [propertyData, setPropertyData] = useState<IProperty | null>(null);
-  const [accountData, setAccountData] = useState<string>("");
   const [accountData, setAccountData] = useState<string>("");
   const [paypalEmail, setPaypalEmail] = useState<string>("");
 
@@ -53,10 +51,6 @@ const CheckoutPreview = () => {
     const userLocal = localStorage.getItem("user");
 
     if (userLocal) {
-      const user = JSON.parse(userLocal);
-      getUserAccount(user.id).then((account) => {
-        setAccountData(account.id);
-      });
       const user = JSON.parse(userLocal);
       getUserAccount(user.id).then((account) => {
         setAccountData(account.id);
@@ -95,7 +89,6 @@ const CheckoutPreview = () => {
       (1000 * 60 * 60 * 24)
   );
 
-  const minor = travelers.children || travelers.babies ? true : false;
   const minor = travelers.children || travelers.babies ? true : false;
 
   const reserva = {
@@ -143,29 +136,6 @@ const CheckoutPreview = () => {
 
   return (
     <div className="flex flex-col md:flex-row justify-between p-6 bg-silk text-black">
-      <CheckoutIzq dates={dates} travelers={travelers} />
-      <div className="w-full md:w-1/3 bg-pearl p-6 rounded-lg shadow-lg flex flex-col justify-between">
-        <div>
-          <CheckoutDer
-            prices={prices}
-            name={name}
-            type={type}
-            rating={rating}
-            photo={photo}
-            nights={nights}
-            state={state}
-            city={city}
-          />
-        </div>
-        <button
-          onClick={handlePayment}
-          className="w-full py-3 bg-champagne text-pearl font-bold rounded-lg hover:bg-velvet hover:text-champagne transition"
-          disabled={loading}
-        >
-          {loading ? "Procesando..." : "Pagar"}
-        </button>
-      </div>
-    </div>
       <CheckoutIzq dates={dates} travelers={travelers} />
       <div className="w-full md:w-1/3 bg-pearl p-6 rounded-lg shadow-lg flex flex-col justify-between">
         <div>
