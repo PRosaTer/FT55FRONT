@@ -29,27 +29,30 @@
 
 //   return <ContainerDetail property={property} owner={owner?.user_ || undefined} />;
 // }
+
 import React from "react";
 import ContainerDetail from "@/components/container_detail";
 import { getPropertyById, getPropertyOwner } from "@/api/PropertyAPI";
 
-// El tipo Params debe coincidir con lo que espera Next.js para los parámetros de la URL
-interface Params {
-  id: string;
+// Assuming PageProps is defined by Next.js or your project setup
+interface PageProps {
+  params: {
+    id: string;
+  };
 }
 
-// El componente de servidor que obtiene los datos
-export default async function HouseDetail({ params }: { params: Params }) {
+// The server component that fetches the data
+export default async function HouseDetail({ params }: PageProps) {
   const { id } = params;
 
-  // Obtención de la propiedad por ID
+  // Fetching the property by ID
   const house = await getPropertyById(id);
 
   if (!house) {
     return <div>Error: Propiedad no encontrada</div>;
   }
 
-  // Construcción del objeto propiedad
+  // Building the property object
   const property = {
     ...house,
     photos: house.image_?.map((img) => img.url) || [],
