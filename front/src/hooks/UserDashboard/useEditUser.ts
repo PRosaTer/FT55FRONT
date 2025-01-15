@@ -11,20 +11,35 @@ const useEditUser = (onComplete: (updatedUser: IUser) => Promise<void>) => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const loadUser = () => {
+    const loadUser = async () => {
       try {
         const userData = localStorage.getItem("user");
         if (userData) {
           const parsedUser = JSON.parse(userData);
-          if (parsedUser.DOB) {
-            parsedUser.DOB = new Date(parsedUser.DOB).toISOString().split("T")[0];
+          const userId = parsedUser.id;
+
+          if (!userId) {
+            throw new Error("El usuario no tiene un ID válido.");
           }
-          setUser(parsedUser);
+
+          const response = await fetch(`${API_URL}/users/${userId}`);
+          if (!response.ok) {
+            throw new Error("Error al obtener la información del usuario desde el servidor.");
+          }
+
+          const fullUserData = await response.json();
+
+          if (fullUserData.DOB) {
+            fullUserData.DOB = new Date(fullUserData.DOB).toISOString().split("T")[0];
+          }
+
+          console.log("Usuario obtenido desde el backend:", fullUserData);
+          setUser(fullUserData);
         } else {
           setError("No se encontró información del usuario en el almacenamiento local.");
         }
       } catch (err) {
-        console.error("Error al cargar el usuario desde localStorage:", err);
+        console.error("Error al cargar el usuario:", err);
         setError("Hubo un error al cargar la información del usuario.");
       } finally {
         setLoading(false);
@@ -43,9 +58,23 @@ const useEditUser = (onComplete: (updatedUser: IUser) => Promise<void>) => {
 
   const saveChanges = async () => {
     if (!user) return;
-
+  
     setLoading(true);
-
+    const phone = parseInt(user.phone as string, 10);
+    const dni = parseInt(user.dni as string, 10);
+  
+    if (isNaN(phone) || isNaN(dni)) {
+      Swal.fire({
+        title: "Error",
+        text: "El teléfono y DNI deben ser números enteros.",
+        icon: "error",
+        confirmButtonText: "Aceptar",
+      });
+      setLoading(false);
+      return;
+    }
+    const updatedUser = { ...user, phone, dni };
+  
     try {
       Swal.fire({
         title: "Aguarde un momento",
@@ -57,30 +86,29 @@ const useEditUser = (onComplete: (updatedUser: IUser) => Promise<void>) => {
           Swal.showLoading();
         },
       });
-
+  
       let uploadedPhotoUrl = user.photo;
       if (selectedImage) {
         uploadedPhotoUrl = await uploadImage(selectedImage);
       }
-
-      const updatedUser = { ...user, photo: uploadedPhotoUrl };
-
-      const response = await fetch(`${API_URL}/users/${updatedUser.id}`, {
+  
+       const response = await fetch(`${API_URL}/users/${updatedUser.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedUser),
+        
       });
-
+  
       if (!response.ok) {
         const errorText = await response.text();
         console.error("Error del servidor:", errorText);
         throw new Error("Error al guardar los cambios del usuario.");
       }
-
+  
       const savedUser = await response.json();
       localStorage.setItem("user", JSON.stringify(savedUser));
       onComplete(savedUser);
-
+  
       Swal.fire({
         title: "¡Éxito!",
         text: "Los cambios se han guardado correctamente.",

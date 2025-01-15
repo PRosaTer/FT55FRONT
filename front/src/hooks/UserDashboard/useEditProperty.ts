@@ -2,6 +2,8 @@ import { useState } from "react";
 import { IPropiedad } from "@/interfaces/properties";
 import Swal from "sweetalert2";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 const useEditProperty = () => {
   const [editingProperty, setEditingProperty] = useState<IPropiedad | null>(null);
 
@@ -47,7 +49,7 @@ const useEditProperty = () => {
   const handleSaveClick = async (setProperties: React.Dispatch<React.SetStateAction<IPropiedad[]>>) => {
     if (editingProperty) {
       try {
-        const response = await fetch('/property/update', {
+        const response = await fetch(`${API_URL}/property/update`, {
           method: 'PUT', 
           headers: {
             'Content-Type': 'application/json',
@@ -148,7 +150,7 @@ const useEditProperty = () => {
       formData.append("file", file);
   
       try {
-        const response = await fetch("http://localhost:3002/image", {
+        const response = await fetch(`${API_URL}/image`, {
           method: "POST",
           body: formData,
         });

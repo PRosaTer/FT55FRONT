@@ -1,14 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import useFetchProperties from "../../hooks/AdminDashboard/useFetchProperties";
 import { IPropiedad } from "../../interfaces/properties";
 import { FiArrowLeftCircle } from "react-icons/fi";
 import Swal from "sweetalert2";
 import { PropertyStatus } from "@/helpers/statusProperty";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 const AllProperties: React.FC = () => {
-  const { properties, error, loading } = useFetchProperties();
+  const { properties: fetchedProperties,  error, loading } = useFetchProperties();
+  const [properties, setProperties] = useState<IPropiedad[]>([]);
   const [selectedProperty, setSelectedProperty] = useState<IPropiedad | null>(null);
   const [filterStatus, setFilterStatus] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (fetchedProperties) {
+      setProperties(fetchedProperties);
+    }
+  }, [fetchedProperties]);
 
   const handlePropertyClick = (property: IPropiedad) => {
     setSelectedProperty(property);
@@ -23,15 +32,15 @@ const AllProperties: React.FC = () => {
   };
 
   type PropertyStatus = keyof typeof PropertyStatus;  
-  
+
   const handleChangePropertyStatus = async (
     propertyId: string,
     currentStatus: typeof PropertyStatus[keyof typeof PropertyStatus],
-    action: string 
+    action: string
   ) => {
     let newStatus: typeof PropertyStatus[keyof typeof PropertyStatus];
-    let statusMessage = '';
-
+    let statusMessage = "";
+  
     if (currentStatus === PropertyStatus.ACTIVATED) {
       newStatus = PropertyStatus.INACTIVE;
       statusMessage = "inactiva";
@@ -42,46 +51,45 @@ const AllProperties: React.FC = () => {
       newStatus = PropertyStatus.ACTIVATED;
       statusMessage = "aprobada";
     } else {
-      throw new Error('Estado de propiedad desconocido');
+      throw new Error("Estado de propiedad desconocido");
     }
   
     try {
-      const response = await fetch('http://localhost:3002/property/status', {
-        method: 'PUT',
+      const response = await fetch(`${API_URL}/property/status`, {
+        method: "PUT",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          id: propertyId,
-          newStatus: newStatus,
-        }),
+        body: JSON.stringify({ id: propertyId }),
       });
   
       const data = await response.json();
   
       if (response.ok) {
-        Swal.fire('Éxito', `La propiedad se pudo ${action} correctamente.`, 'success');
+        Swal.fire("Éxito", `La propiedad se pudo ${action} correctamente.`, "success");
+
+        setSelectedProperty((prev) =>
+          prev?.id === propertyId ? { ...prev, isActive: newStatus } : prev
+        );
+  
+        const updatedProperties = properties.map((prop) =>
+          prop.id === propertyId ? { ...prop, isActive: newStatus } : prop
+        );
+        setProperties(updatedProperties); 
       } else {
-        Swal.fire('Error', data.message || 'Hubo un error al cambiar el estado de la propiedad', 'error');
+        Swal.fire("Error", data.message || "Hubo un error al cambiar el estado de la propiedad", "error");
       }
     } catch (error) {
       console.error("Error al cambiar el estado de la propiedad", error);
-      Swal.fire('Error', 'Hubo un error de comunicación con el servidor', 'error');
+      Swal.fire("Error", "Hubo un error de comunicación con el servidor", "error");
     }
   };
+  
+  
 
   const filteredProperties = filterStatus
   ? properties.filter((property) => property.isActive === filterStatus)
   : properties;
-
-  
-  // const filteredProperties = filterStatus
-  //   ? properties.filter((property) => {
-  //       if (filterStatus === PropertyStatus.ACTIVATED) return property.isActive;
-  //       if (filterStatus === PropertyStatus.INACTIVE) return !property.isActive;
-  //       return property.isActive === null;
-  //     })
-  //   : properties;
 
   const getNoPropertiesMessage = () => {
     switch (filterStatus) {
@@ -105,20 +113,23 @@ const AllProperties: React.FC = () => {
   }
   return (
     <div className="bg-white p-6 rounded-md shadow-md mb-8">
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-2xl font-bold">Propiedades</h2>
-        <select
-          value={filterStatus || ""}
-          onChange={(e) => handleFilterChange(e.target.value || null)}
-          className="border border-gray-300 rounded-md px-4 py-2"
-        >
-          <option value="">Todos</option>
-          <option value={PropertyStatus.ACTIVATED}>Activa</option>
-          <option value={PropertyStatus.INACTIVE}>Inactiva</option>
-          <option value={PropertyStatus.PENDING}>Pendiente</option>
-        </select>
-      </div>
-  
+     <div className="flex justify-between items-center mb-4">
+      <h2 className="text-2xl font-bold">Propiedades</h2>
+      <select
+        value={filterStatus || ""}
+        onChange={(e) => handleFilterChange(e.target.value || null)}
+        disabled={!!selectedProperty}
+        className={`border border-gray-300 rounded-md px-4 py-2 ${
+          selectedProperty ? "cursor-not-allowed bg-gray-200 text-gray-500" : ""
+        }`}
+        title={selectedProperty ? "El filtro está deshabilitado en el detalle de la propiedad" : ""}
+      >
+        <option value="">Todos</option>
+        <option value={PropertyStatus.ACTIVATED}>Activa</option>
+        <option value={PropertyStatus.INACTIVE}>Inactiva</option>
+        <option value={PropertyStatus.PENDING}>Pendiente</option>
+      </select>
+    </div>  
       {selectedProperty ? (
         <div className="property-detail relative">
           <button
