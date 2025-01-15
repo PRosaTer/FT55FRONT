@@ -29,6 +29,23 @@ const HeroFilterExtend: React.FC<PropertyContainerProps> = ({ params }) => {
     type: params.type || "",
   });
 
+  // Fecha mínima para `checkIn` (hoy)
+  const today = new Date().toISOString().split("T")[0]; // Formato YYYY-MM-DD
+
+  // Validar fecha de checkOut
+  const handleCheckOutChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    if (value && searchParams.checkIn) {
+      const checkInDate = new Date(searchParams.checkIn);
+      const checkOutDate = new Date(value);
+      if (checkOutDate <= checkInDate) {
+        // Si checkOut es igual o menor a checkIn, no lo actualizamos
+        return;
+      }
+    }
+    setSearchParams((prev) => ({ ...prev, checkOut: value }));
+  };
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setSearchParams((prev) => ({ ...prev, [name]: value }));
@@ -57,6 +74,7 @@ const HeroFilterExtend: React.FC<PropertyContainerProps> = ({ params }) => {
               className="w-full"
               name="checkIn"
               value={searchParams.checkIn}
+              min={today}
               onChange={handleInputChange}
             />
           </label>
@@ -67,7 +85,9 @@ const HeroFilterExtend: React.FC<PropertyContainerProps> = ({ params }) => {
               className="w-full"
               name="checkOut"
               value={searchParams.checkOut}
-              onChange={handleInputChange}
+              min={searchParams.checkIn ? searchParams.checkIn : today} //la fecha de salida debe ser mayor a la de ingreso
+              // onChange={handleInputChange}
+              onChange={handleCheckOutChange}
             />
           </label>
           <label className="w-full md:w-1/4 px-3 mb-4 md:mb-0">

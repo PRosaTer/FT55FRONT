@@ -34,10 +34,6 @@ export const FilterProperties = async (
           countryMapping[normalized] ||
           normalized.charAt(0) + normalized.slice(1)
         );
-        // filters.country = filters.country
-        //   .trim()
-        //   .toLowerCase()
-        //   .replace(/\b\w/g, (char) => char.toUpperCase());
       };
       filters.country = normalizeCountry(filters.country);
     }

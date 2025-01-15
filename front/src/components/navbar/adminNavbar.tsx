@@ -26,6 +26,7 @@ export const AdminNavbar: React.FC = () => {
   };
 
   const handleLogOutAdmin = () => {
+    //localStorage.removeItem("user");
     useAuthStore.getState().logoutUser();
     setUserData(null);
     router.push("/");
