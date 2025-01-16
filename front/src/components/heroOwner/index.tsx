@@ -24,12 +24,12 @@ export default function HeroOwner() {
             ¿Eres propietario?
           </h2>
           <h1 className="text-4xl text-white font-bold mb-8 text-center">
-            ¡Publica tu propiedad para alquiler con nosotros!
+            ¡Publica tu propiedad para alquilar con nosotros!
           </h1>
           <p className="text-xl text-white mb-8 text-center">
             Alcanza a más personas interesadas en tu propiedad
             <br />
-            Publica ahora y maximiza tus oportunidades!
+            Publica ahora y maximiza tus oportunidades
           </p>
         </div>
       </section>

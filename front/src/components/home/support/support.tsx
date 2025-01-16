@@ -18,7 +18,7 @@ export default function Support() {
           <Accordion type="single" collapsible className="mb-4">
             <AccordionItem value="item-1">
               <AccordionTrigger className="text-xl text-sky-600">
-                Se puede reservar directamente desde la web?
+                ¿Se puede reservar directamente desde la web?
               </AccordionTrigger>
               <AccordionContent className="text-gray-500 text-lg">
                 Si, puedes hacer tu reserva directamente desde la web, consulta
@@ -27,41 +27,34 @@ export default function Support() {
             </AccordionItem>
             <AccordionItem value="item-2">
               <AccordionTrigger className="text-xl text-sky-600">
-                Las fechas de disponibilidad y precios estan actualizados?
+                ¿Las fechas de disponibilidad y precios estan actualizados?
               </AccordionTrigger>
               <AccordionContent className="text-gray-500 text-lg">
-                Trabajamos arduamente para que así sea, pero, como los precios
-                están en dólares, pueden variar. Así como también las reservas
-                de último minuto. Siempre es mejor consultar para que podamos
-                asesorarte.
+              Sí, las fechas de disponibilidad y precios están actualizados. Nuestro sistema se sincroniza en tiempo real para mostrar la información más reciente sobre las propiedades, asegurando que puedas reservar con total confianza.
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-3">
               <AccordionTrigger className="text-xl text-sky-600">
-                Los niños cuentan como adultos?
+                ¿A partir de qué edad los menores ocupan un lugar como huésped?
               </AccordionTrigger>
               <AccordionContent className="text-gray-500 text-lg">
-                Sí, pero los menores de tres años no, porque podrían dormir con
-                sus padres, también hay que mencionarlos en la consulta.
+                A partir de los tres años los menores ocupan un lugar como huésped.
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-4">
               <AccordionTrigger className="text-xl text-sky-600">
-                Cuales son las políticas de cancelación?
+                ¿Cuáles son las políticas de cancelación?
               </AccordionTrigger>
               <AccordionContent className="text-gray-500 text-lg">
-                Las políticas de cancelación varían según la propiedad. Consulte
-                antes de reservar.
+                Las políticas de cancelación varían según la propiedad. 
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-5">
               <AccordionTrigger className="text-xl text-sky-600">
-                Dónde puedo ver las ubicaciones de las propiedades?
+                ¿Dónde puedo ver las ubicaciones de las propiedades?
               </AccordionTrigger>
               <AccordionContent className="text-gray-500 text-lg">
-                En cada propiedad figura un google maps de la ubicación . La
-                dirección exacta, por cuestiones de seguridad, sólo se enviará
-                en el voucher de reserva, una vez concretada.
+                En el detalle de cada propiedad figura un google maps de la ubicación exacta.
               </AccordionContent>
             </AccordionItem>
           </Accordion>
