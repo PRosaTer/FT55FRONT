@@ -64,7 +64,7 @@ export const useAuthStore = create<IAuthState>((set) => {
         set({ token, error: "", successMessage: "Inicio de sesión exitoso" });
 
         localStorage.setItem("token", token);
-        // localStorage.setItem("user", userData);
+        localStorage.setItem("user", userData);
       } catch (error: any) {
         set({ error: error.message || "Error en el inicio de sesión", successMessage: "" });
       }
