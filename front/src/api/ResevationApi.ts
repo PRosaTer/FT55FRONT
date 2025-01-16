@@ -111,24 +111,14 @@ export const getReservationDaysById = async (propertyId: string): Promise<Date[]
   
       if (!res.ok) {
         const errorDetails = await res.text();
-        console.error("Error en respuesta de PaidReservation:", errorDetails);
-        Swal.fire({
-          icon: "error",
-          title: "Ups...",
-          text: "No pudimos realizar el pago de tu reserva.",
-        });
-        throw new Error(errorDetails);
+        // console.error("Error en respuesta de PaidReservation:", errorDetails);
+        // throw new Error(errorDetails);
       }
   
       return await res.json();
     } catch (error: any) {
-      console.error("Error en PaidReservation:", error.message || error);
-      Swal.fire({
-        icon: "error",
-        title: "Ups...",
-        text: "No pudimos realizar el pago de tu reserva.",
-      });
-      throw new Error(error);
+    //   console.error("Error en PaidReservation:", error.message || error);
+    //   throw new Error(error);
     }
   };
   

@@ -152,13 +152,8 @@ export const Reservations: React.FC = () => {
                 localStorage.removeItem("compraId");
               });
             } catch (error) {
-              console.error("Error al procesar la reserva:", error);
+              // console.error("Error al procesar la reserva:", error);
               localStorage.removeItem("compraId");
-              Swal.fire({
-                icon: "error",
-                title: "Error",
-                text: "Hubo un problema al realizar la reserva. Por favor, inténtalo nuevamente.",
-              });
             }
           }
 
@@ -175,12 +170,7 @@ export const Reservations: React.FC = () => {
           });
         }
       } catch (error) {
-        console.error("Error al cargar las reservas:", error);
-        Swal.fire({
-          icon: "error",
-          title: "Error",
-          text: "Hubo un problema al cargar las reservas. Por favor, inténtalo nuevamente.",
-        });
+        // console.error("Error al cargar las reservas:", error);
       } finally {
         setLoading(false);
       }
