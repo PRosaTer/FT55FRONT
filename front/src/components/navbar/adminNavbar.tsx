@@ -6,15 +6,12 @@ import { usePathname, useRouter } from "next/navigation";
 import { useAuthStore } from "@/store/authStore";
 
 export const AdminNavbar: React.FC = () => {
-  const { user, resetForm } = useAuthStore();
+  const user = useAuthStore((state) => state.user); // Suscribirse directamente al estado del usuario
   const [userData, setUserData] = useState(user);
+  const logoutUser = useAuthStore((state) => state.logoutUser);
   const [isClick, setIsClick] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
-
-  useEffect(() => {
-    setUserData(user);
-  }, [user]);
 
   useEffect(() => {
     const dataUser = localStorage.getItem("user");
@@ -26,10 +23,8 @@ export const AdminNavbar: React.FC = () => {
   };
 
   const handleLogOutAdmin = () => {
-    //localStorage.removeItem("user");
-    useAuthStore.getState().logoutUser();
-    setUserData(null);
-    router.push("/");
+    logoutUser(); // Llamar a la función de logout
+    router.push("/"); // Redirigir al usuario a la página de inicio
   };
 
   return (
@@ -80,14 +75,18 @@ export const AdminNavbar: React.FC = () => {
           </Link>
         </div>
         <div className="flex items-center space-x-4">
-          <div className="hidden lg:flex items-center space-x-6">
-            <button
-              onClick={handleLogOutAdmin}
-              className="bg-silk text-velvet w-full py-2 px-4 rounded mb-4 hover:bg-champagne hover:text-white mt-4"
-            >
-              Cerrar Sesion
-            </button>
-          </div>
+          {userData ? ( // Verificar si hay un usuario autenticado
+            <div className="hidden lg:flex items-center space-x-6">
+              <button
+                onClick={handleLogOutAdmin}
+                className="bg-silk text-velvet w-full py-2 px-4 rounded mb-4 hover:bg-champagne hover:text-white mt-4"
+              >
+                Cerrar Sesion
+              </button>
+            </div>
+          ) : (
+            <p className="text-white">No hay usuario autenticado</p>
+          )}
         </div>
       </div>
 

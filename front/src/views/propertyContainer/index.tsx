@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import Loading from "@/components/loading/loading";
 import { FilterProperties, IFilters } from "@/api/FilterAPI";
 import HeroFilterExtend from "@/components/heroFilter/heroFilter";
+import { PropertyNotFound } from "./propertyNotFound";
 
 interface PropertyContainerProps {
   searchParams: IFilters;
@@ -58,10 +59,13 @@ const PropertyContainer: React.FC<PropertyContainerProps> = ({
         </div>
 
         {properties.length === 0 ? (
-          <p className="text-center text-gray-600">
-            No se encontraron propiedades que coincidan con tu búsqueda.
-          </p>
+          <div className="my-auto">
+            <PropertyNotFound />
+          </div>
         ) : (
+          // <p className="text-center text-gray-600">
+          //   No se encontraron propiedades que coincidan con tu búsqueda.
+          // </p>
           <CardList properties={properties} />
         )}
       </div>
