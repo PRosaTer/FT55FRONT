@@ -19,8 +19,11 @@ export const FeatureHouse: React.FC<IFeatureDepartmentsProps> = ({
   return (
     <section className="py-16 ">
       <div className="container mx-auto px-4">
+        <p className="text-[#29b6f6] text-center font-semibold mb-4 ">
+          Para disfrutar en familia
+        </p>
         <h2 className="mb-12 text-2xl text-center font-semibold md:text-3xl">
-          Las mejores casas y departamentos
+          Casas, departamentos y habitaciones
         </h2>
         <Carousel className="w-full" plugins={[plugin.current]}>
           <CarouselContent className="-ml-2 md:-ml-4">
