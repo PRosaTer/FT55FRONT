@@ -98,7 +98,12 @@ export const Navbar: React.FC = () => {
         </NavigationMenu>
         <div className="flex justify-center flex-1 lg:mr-32">
           <Link href="/">
-            <Image src="/logofinal.png" alt="logo" width={200} height={70} />
+            <Image
+              src="/logorentafacil.jpeg"
+              alt="logo"
+              width={200}
+              height={70}
+            />
           </Link>
         </div>
         <NavigationMenu className="flex items-center space-x-4">
