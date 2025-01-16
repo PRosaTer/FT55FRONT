@@ -210,7 +210,7 @@ const EditUserForm: React.FC<OwnerDetailsFormProps> = ({
       <div>
         <label
           htmlFor="name"
-          className="block text-sm font-medium text-gray-700"
+          className="block font-semibold text-gray-700"
         >
           Nombre
         </label>
@@ -226,7 +226,7 @@ const EditUserForm: React.FC<OwnerDetailsFormProps> = ({
       <div>
         <label
           htmlFor="lastName"
-          className="block text-sm font-medium text-gray-700"
+          className="block font-semibold text-gray-700"
         >
           Apellido
         </label>
@@ -242,7 +242,7 @@ const EditUserForm: React.FC<OwnerDetailsFormProps> = ({
       <div>
         <label
           htmlFor="email"
-          className="block text-sm font-medium text-gray-700"
+          className="block font-semibold text-gray-700"
         >
           Correo Electrónico
         </label>
@@ -258,7 +258,7 @@ const EditUserForm: React.FC<OwnerDetailsFormProps> = ({
       <div>
         <label
           htmlFor="DOB"
-          className="block text-sm font-medium text-gray-700"
+          className="block font-semibold text-gray-700"
         >
           Fecha de Nacimiento
         </label>
@@ -273,8 +273,24 @@ const EditUserForm: React.FC<OwnerDetailsFormProps> = ({
       </div>
       <div>
         <label
+          htmlFor="name"
+          className="block font-semibold text-gray-700"
+        >
+          Nacionalidad
+        </label>
+        <input
+          type="text"
+          id="nationality"
+          value={nationality}
+          onChange={(e) => setName(e.target.value)}
+          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+          required
+        />
+      </div>
+      <div>
+        <label
           htmlFor="phone"
-          className="block text-sm font-medium text-gray-700"
+          className="block font-semibold text-gray-700"
         >
           Teléfono
         </label>
@@ -290,7 +306,7 @@ const EditUserForm: React.FC<OwnerDetailsFormProps> = ({
       <div>
         <label
           htmlFor="dni"
-          className="block text-sm font-medium text-gray-700"
+          className="block text-sm font-semibold text-gray-700"
         >
           DNI
         </label>
@@ -336,7 +352,7 @@ const EditUserForm: React.FC<OwnerDetailsFormProps> = ({
       <div>
         <label
           htmlFor="photo"
-          className="block text-sm font-medium text-gray-700"
+          className="block font-semibold text-gray-700"
         >
           Foto de Perfil
         </label>

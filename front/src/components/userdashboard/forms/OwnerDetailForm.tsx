@@ -234,9 +234,9 @@ const OwnerDetailsForm: React.FC<OwnerDetailsFormProps> = ({
     }
   };
 
-  const isReadOnly = (field: string) => {
-    return field !== "";
-  };
+  // const isReadOnly = (field: string) => {
+  //   return field !== "";
+  // };
 
   return (
     <form
@@ -250,10 +250,7 @@ const OwnerDetailsForm: React.FC<OwnerDetailsFormProps> = ({
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          readOnly={isReadOnly(name)}
-          className={`border border-gray-300 rounded-md p-2 w-full ${
-            isReadOnly(name) ? "bg-gray-100 text-gray-500" : ""
-          }`}
+          className={`border border-gray-300 rounded-md p-2 w-full`}
           required
         />
       </div>
@@ -263,10 +260,7 @@ const OwnerDetailsForm: React.FC<OwnerDetailsFormProps> = ({
           type="text"
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
-          readOnly={isReadOnly(lastName)}
-          className={`border border-gray-300 rounded-md p-2 w-full ${
-            isReadOnly(lastName) ? "bg-gray-100 text-gray-500" : ""
-          }`}
+          className={`border border-gray-300 rounded-md p-2 w-full`}
           required
         />
       </div>
@@ -285,10 +279,7 @@ const OwnerDetailsForm: React.FC<OwnerDetailsFormProps> = ({
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          readOnly={isReadOnly(email)}
-          className={`border border-gray-300 rounded-md p-2 w-full ${
-            isReadOnly(email) ? "bg-gray-100 text-gray-500" : ""
-          }`}
+          className={`border border-gray-300 rounded-md p-2 w-full`}
           required
         />
       </div>
@@ -298,10 +289,7 @@ const OwnerDetailsForm: React.FC<OwnerDetailsFormProps> = ({
           type="text"
           value={nationality}
           onChange={(e) => setNationality(e.target.value)}
-          readOnly={isReadOnly(nationality)}
-          className={`border border-gray-300 rounded-md p-2 w-full ${
-            isReadOnly(nationality) ? "bg-gray-100 text-gray-500" : ""
-          }`}
+          className={`border border-gray-300 rounded-md p-2 w-full`}
           required
         />
       </div>
@@ -320,10 +308,7 @@ const OwnerDetailsForm: React.FC<OwnerDetailsFormProps> = ({
           type="date"
           value={DOB}
           onChange={(e) => setDOB(e.target.value)}
-          readOnly={isReadOnly(DOB)}
-          className={`border border-gray-300 rounded-md p-2 w-full ${
-            isReadOnly(DOB) ? "bg-gray-100 text-gray-500" : ""
-          }`}
+          className={`border border-gray-300 rounded-md p-2 w-full`}
           required
         />
       </div>
