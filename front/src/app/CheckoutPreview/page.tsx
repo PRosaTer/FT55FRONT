@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 // react
 import { useState, useEffect } from "react";
@@ -16,7 +15,7 @@ import { ILocalReservation } from "@/interfaces/IReservation";
 
 // API peticiones
 import { getPropertyById } from "@/api/PropertyAPI";
-import { createReservation, getEmailOwner } from "@/api/ResevationApi";
+import { createReservation, getEmailOwner, PaidReservation } from "@/api/ResevationApi";
 import { getUserAccount } from "@/api/UsersAPI";
 
 // Sweet
@@ -36,45 +35,74 @@ const CheckoutPreview = () => {
   const [paypalEmail, setPaypalEmail] = useState<string>("");
 
   useEffect(() => {
+    const fetchData = async () => {
+    // Verificar si existe "compraId" en el localStorage
+    const compraId = localStorage.getItem("compraId");
+    if (compraId) {
+      const currentUrl = window.location.href;
+      const paid = {
+        url: currentUrl,
+        contractId: compraId,
+        };
+    
+      try {
+       const prueba = await PaidReservation(paid);
+       console.log(prueba);
+    
+              Swal.fire({
+                icon: "error",
+                title: "Algo salio mal",
+                text: "Tu reserva no pudo ser realizada",
+              }).then(() => {
+                localStorage.removeItem("compraId");
+              });
+            } catch (error) {
+              console.error("Error al procesar la reserva:", error);
+              Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "Hubo un problema al realizar la reserva. Por favor, inténtalo nuevamente.",
+              });
+            }
+          }
+
     const reservLocal = localStorage.getItem("reserv");
-    // Recuperar datos del Local
     const userLocal = localStorage.getItem("user");
+
     if (userLocal) {
       const user = JSON.parse(userLocal);
       getUserAccount(user.id).then((account) => {
         setAccountData(account.id);
       });
     }
+
     if (reservLocal) {
       const reserv: ILocalReservation = JSON.parse(reservLocal);
       setReservData(reserv);
 
-      // peticion para traerme el email del propietario
+      // Petición para traer el email del propietario
       getEmailOwner(reserv.propertyId)
-        .then((email: string) => {
-          setPaypalEmail(email);
-        })
+        .then((email: string) => setPaypalEmail(email))
         .catch((error) => console.error("Error fetching owner email:", error));
 
       // Obtener información de la propiedad desde el backend
       getPropertyById(reserv.propertyId)
-        .then((property) => {
-          setPropertyData(property);
-        })
+        .then((property) => setPropertyData(property))
         .catch((error) => console.error("Error fetching property:", error));
     }
+  }
+  fetchData(); // Llama a la función asíncrona
   }, []);
 
   if (!reservData || !propertyData) {
     return <p>Cargando información del viaje...</p>;
   }
-
-  console.log(reservData);
+  if (!reservData || !propertyData) {
+    return <p>Cargando información del viaje...</p>;
+  }
 
   const { dates, prices, travelers, propertyId } = reservData;
   const { name, type, rating, image_, state, city } = propertyData;
-  console.log(image_);
-
   const photo = image_ ? image_[0].url : houseDef;
 
   const nights = Math.ceil(
@@ -95,18 +123,15 @@ const CheckoutPreview = () => {
     paypalEmail,
   };
 
-  console.log(`esta es la reserva:`, reserva);
-
   const handlePayment = async () => {
-    setLoading(true); // Activa el estado de carga
+    setLoading(true);
     try {
       const response = await createReservation(reserva);
 
+
       if (response && response.link) {
-      // guardar el id en local
-      localStorage.setItem("compraId", JSON.stringify(response.id));
-      // Redirigir al usuario al enlace proporcionado por el backend
-     router.push(response.link)
+        localStorage.setItem("compraId", JSON.stringify(response.id));
+        router.push(response.link);
       } else {
         console.error(
           "No se recibió un enlace válido en la respuesta:",
@@ -126,7 +151,7 @@ const CheckoutPreview = () => {
         text: "Ocurrió un error inesperado. Intenta nuevamente.",
       });
     } finally {
-      setLoading(false); // Desactiva el estado de carga
+      setLoading(false);
     }
   };
 

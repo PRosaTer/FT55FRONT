@@ -5,6 +5,8 @@ import MyReservations from './UserReservations';
 import OwnerDetailsForm from './forms/OwnerDetailForm';
 import IUser from '@/interfaces/user';
 import Swal from 'sweetalert2';
+import { PaidReservation } from '@/api/ResevationApi';
+
 
 const UserDashboard: React.FC = () => {
   const [activeSection, setActiveSection] = useState<'profile' | 'properties' | 'reservations' | 'reviews'>('profile');
@@ -31,6 +33,7 @@ const UserDashboard: React.FC = () => {
     }
   }, []);
 
+  
   const handleOwnerDetailsComplete = (ownerDetails: IUser) => {
     setIsOwnerDetailsComplete(true);
   };

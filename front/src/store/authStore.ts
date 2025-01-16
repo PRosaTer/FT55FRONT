@@ -1,13 +1,15 @@
 import { create } from "zustand";
 import IAuthState from "../interfaces/Auth";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 export const useAuthStore = create<IAuthState>((set) => {
   const savedToken = typeof window !== "undefined" ? localStorage.getItem("token") : null;
 
   if (savedToken) {
     set({ token: savedToken});
 
-    fetch("http://localhost:3002/users/{id}", {
+    fetch(`${API_URL}/users/{id}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${savedToken}`,
@@ -38,7 +40,7 @@ export const useAuthStore = create<IAuthState>((set) => {
     loginUser: async (email: string, password: string) => {
       try {
 
-        const response = await fetch("http://localhost:3002/auth/login", {
+        const response = await fetch(`${API_URL}/auth/login`, {
 
           method: "POST",
           headers: {

@@ -4,6 +4,8 @@ import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Swal from "sweetalert2";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -76,7 +78,7 @@ const RegisterForm = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:3002/users", {
+      const response = await fetch(`${API_URL}/users`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

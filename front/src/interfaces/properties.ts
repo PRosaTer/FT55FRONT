@@ -10,7 +10,7 @@ export interface IPropiedad {
   state?: string;
   city: string;
   capacity: number;
-  rating: number;
+  rating?: number;
   hasMinor: boolean;
   pets: boolean;
   latitude: number;

@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import { GoogleLogin, CredentialResponse } from "@react-oauth/google";
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const Login: React.FC = () => {
   const [loginData, setLoginData] = useState({
@@ -27,7 +28,7 @@ const Login: React.FC = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:3002/auth/signin", {
+      const response = await fetch(`${API_URL}/auth/signin`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -49,14 +50,7 @@ const Login: React.FC = () => {
           text: `Bienvenido, ${data.user.email}!`,
           confirmButtonColor: "#3085d6",
         });
-
-        // Redirigir según el rol
-        const role = data.user.role;
-        if (role === "admin" || role === "owner") {
-          router.push("/adminProfile");
-        } else if (role === "user") {
-          router.push("/profile");
-        }
+        router.push("/profile");
         return;
       }
 
@@ -82,7 +76,7 @@ const Login: React.FC = () => {
     }
 
     try {
-      const res = await fetch("http://localhost:3002/auth/google-login", {
+      const res = await fetch(`${API_URL}/auth/google-login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -103,14 +97,7 @@ const Login: React.FC = () => {
           text: `Bienvenido, ${data.user.email}!`,
           confirmButtonColor: "#3085d6",
         });
-
-        // Redirigir según el rol
-        const role = data.user.role;
-        if (role === "admin" || role === "owner") {
-          router.push("/adminProfile");
-        } else if (role === "user") {
-          router.push("/profile");
-        }
+        router.push("/profile");
       } else {
         Swal.fire({
           icon: "error",
