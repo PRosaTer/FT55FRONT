@@ -81,11 +81,6 @@ export const AdminNavbar: React.FC = () => {
         </div>
         <div className="flex items-center space-x-4">
           <div className="hidden lg:flex items-center space-x-6">
-            <Link href="/adminProfile">
-              <div className="text-silk hover:border-b-2 hover:border-champagne p-2">
-                Panel
-              </div>
-            </Link>
             <button
               onClick={handleLogOutAdmin}
               className="bg-silk text-velvet w-full py-2 px-4 rounded mb-4 hover:bg-champagne hover:text-white mt-4"
@@ -98,11 +93,6 @@ export const AdminNavbar: React.FC = () => {
 
       {isClick && (
         <div className="md:hidden px-2 pt-2 pb-3 space-y-1 sm:px-3">
-          <Link href="/adminProfile">
-            <div className="text-silk hover:bg-champagne hover:text-velvet rounded-lg p-2">
-              Panel
-            </div>
-          </Link>
           <button
             onClick={handleLogOutAdmin}
             className="bg-silk text-velvet w-full py-2 px-4 rounded mb-4 hover:bg-champagne hover:text-white mt-4"
