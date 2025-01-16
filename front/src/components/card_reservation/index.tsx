@@ -29,7 +29,7 @@ const ReservationCard: React.FC<ReservationCardProps> = ({ reservation }) => {
       <p className="text-gray-600">Huéspedes: {guests}</p>
       <p
         className={`font-semibold ${
-          status === "confirmada"
+          status === "aceptado"
             ? "text-green-500"
             : status === "negociacion"
             ? "text-yellow-500"
