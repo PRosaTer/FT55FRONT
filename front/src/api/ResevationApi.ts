@@ -47,7 +47,6 @@ export const getEmailOwner = async(propertyId:string): Promise<string> => {
             throw new Error(`Fallo al realizar el fetch a Email: ${res.status} ${res.statusText}`);
         }
         const paypalEmail: string = await res.text();
-        console.log(paypalEmail);
         
         return paypalEmail;
     } catch (error: any) {
@@ -57,9 +56,9 @@ export const getEmailOwner = async(propertyId:string): Promise<string> => {
 
 }
 
-export const getReservationDaysById = async ( propertyId: string ): Promise<Date[]> => {
+export const getReservationDaysById = async (propertyId: string): Promise<Date[]> => {
     try {
-      const res = await fetch(`${API_URL}/contract/propety/${propertyId}`, {
+      const res = await fetch(`${API_URL}/contract/proprety/${propertyId}`, {
         next: { revalidate: 1200 },
       });
   
@@ -71,7 +70,7 @@ export const getReservationDaysById = async ( propertyId: string ): Promise<Date
   
       const blockedDates: Date[] = [];
       reservations.forEach((reservation) => {
-        if (reservation.status !== "cancelled") {
+        if (reservation.status === "aceptado") { // Solo procesar reservas aceptadas
           const start = new Date(reservation.startDate);
           const end = new Date(reservation.endDate);
   
@@ -80,7 +79,7 @@ export const getReservationDaysById = async ( propertyId: string ): Promise<Date
             date <= end;
             date.setDate(date.getDate() + 1)
           ) {
-            blockedDates.push(new Date(date)); 
+            blockedDates.push(new Date(date)); // Asegurar nueva instancia para evitar referencias mutables
           }
         }
       });
@@ -91,40 +90,45 @@ export const getReservationDaysById = async ( propertyId: string ): Promise<Date
       return [];
     }
   };
+  
 
   interface IBackPaid {
     url: string,
     contractId: string 
   }
 
-  export const PaidReservation = async (reservation: IBackPaid | void) => {
+  export const PaidReservation = async (reservation: IBackPaid) => {
     try {
+      console.log("Datos enviados a PaidReservation:", reservation);
+  
       const res = await fetch(`${API_URL}/payments/paid`, {
-          method: "POST",
-          headers: {
-              "Content-type": "application/json",
-          },
-          body: JSON.stringify(reservation)
-      })
-
-      if(res.ok) {
-          return res.json()
-      } else {
-          const errorDetails = await res.text(); 
-          console.error("Error details:", errorDetails);
-          Swal.fire({
-              icon: "error",
-              title: "Ups...",
-              text: "No pudimos realizar el pago de tu reserva",
-          });
-      }
-
-  } catch (error: any) {
-      Swal.fire({
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(reservation),
+      });
+  
+      if (!res.ok) {
+        const errorDetails = await res.text();
+        console.error("Error en respuesta de PaidReservation:", errorDetails);
+        Swal.fire({
           icon: "error",
           title: "Ups...",
-          text: "No pudimos realizar el pago de tu reserva",
+          text: "No pudimos realizar el pago de tu reserva.",
+        });
+        throw new Error(errorDetails);
+      }
+  
+      return await res.json();
+    } catch (error: any) {
+      console.error("Error en PaidReservation:", error.message || error);
+      Swal.fire({
+        icon: "error",
+        title: "Ups...",
+        text: "No pudimos realizar el pago de tu reserva.",
       });
-      throw new Error(error)
-  }
-  }
+      throw new Error(error);
+    }
+  };
+  

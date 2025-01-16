@@ -99,19 +99,25 @@
 // };
 
 // export default Reservations;
+
+
+
+// ------------------------------------
 "use client";
 
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import BackProfile from "@/components/back_button/backProfile";
-import { getUserReservation } from "@/api/ContractsAPI";
-import { PaidReservation } from "@/api/ResevationApi";
 import ReservationCard from "@/components/card_reservation";
 import EmptyReservations from "@/components/empty_reservations";
+import { getUserReservation } from "@/api/ContractsAPI";
+import { PaidReservation } from "@/api/ResevationApi";
+import { getUserAccount } from "@/api/UsersAPI";
 
 export const Reservations: React.FC = () => {
   const [userData, setUserData] = useState<any | null>(null);
-  const [reservations, setReservations] = useState<any[]>([]);
+  const [accountId, setAccountId] = useState<string | null>(null);
+  const [reservations, setReservations] = useState<any[] | null>(null); // Cambiar el estado inicial a null
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -122,17 +128,20 @@ export const Reservations: React.FC = () => {
           const parsedUser = JSON.parse(user);
           setUserData(parsedUser);
 
-          // Verificar y procesar compra pendiente
+          const accountData = await getUserAccount(parsedUser.id);
+          setAccountId(accountData.id);
+
           const compraId = localStorage.getItem("compraId");
           if (compraId) {
             const currentUrl = window.location.href;
-            const paid = {
+            const parsedCompraId = JSON.parse(compraId);
+            const paymentData = {
               url: currentUrl,
-              contractId: compraId,
+              contractId: parsedCompraId,
             };
 
             try {
-              const paidResponse = await PaidReservation(paid);
+              const paidResponse = await PaidReservation(paymentData);
               console.log("Reserva pagada con éxito:", paidResponse);
 
               Swal.fire({
@@ -144,6 +153,7 @@ export const Reservations: React.FC = () => {
               });
             } catch (error) {
               console.error("Error al procesar la reserva:", error);
+              localStorage.removeItem("compraId");
               Swal.fire({
                 icon: "error",
                 title: "Error",
@@ -152,12 +162,11 @@ export const Reservations: React.FC = () => {
             }
           }
 
-          // Obtener reservas del usuario
-          const response = await getUserReservation(parsedUser.id);
-          // Assuming the response is JSON and contains an array of reservations
-          const reservationData = await response.json(); // Parse the response if it's JSON
-          setReservations(reservationData);
-          console.log(reservationData);
+          if (accountData.id) {
+            const reservationData = await getUserReservation(accountData.id);
+            setReservations(reservationData);
+            console.log("Reservas del usuario:", reservationData);
+          }
         } else {
           Swal.fire({
             icon: "error",
@@ -178,7 +187,7 @@ export const Reservations: React.FC = () => {
     };
 
     fetchData();
-  }, []);
+  }, [accountId]);
 
   if (loading) {
     return <div className="text-center mt-8">Cargando reservas...</div>;
@@ -188,7 +197,7 @@ export const Reservations: React.FC = () => {
     <div className="container mx-auto p-4">
       <BackProfile />
       <h1 className="text-2xl font-bold mb-4">Mis Reservas</h1>
-      {reservations.length > 0 ? (
+      {reservations && reservations.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {reservations.map((reservation) => (
             <ReservationCard key={reservation.id} reservation={reservation} />
@@ -202,3 +211,5 @@ export const Reservations: React.FC = () => {
 };
 
 export default Reservations;
+
+

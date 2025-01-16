@@ -37,34 +37,36 @@ const CheckoutPreview = () => {
   useEffect(() => {
     const fetchData = async () => {
     // Verificar si existe "compraId" en el localStorage
-    const compraId = localStorage.getItem("compraId");
-    if (compraId) {
-      const currentUrl = window.location.href;
-      const paid = {
-        url: currentUrl,
-        contractId: compraId,
-        };
+     const compraId = localStorage.getItem("compraId");
+              if (compraId) {
+                const currentUrl = window.location.href;
+                const parsedCompraId = JSON.parse(compraId);
+                const paid = {
+                  url: currentUrl,
+                  contractId: parsedCompraId,
+                };
     
-      try {
-       const prueba = await PaidReservation(paid);
-       console.log(prueba);
+                try {
+                  const paidResponse = await PaidReservation(paid);
+                  console.log("Reserva pagada con éxito:", paidResponse);
     
-              Swal.fire({
-                icon: "error",
-                title: "Algo salio mal",
-                text: "Tu reserva no pudo ser realizada",
-              }).then(() => {
-                localStorage.removeItem("compraId");
-              });
-            } catch (error) {
-              console.error("Error al procesar la reserva:", error);
-              Swal.fire({
-                icon: "error",
-                title: "Error",
-                text: "Hubo un problema al realizar la reserva. Por favor, inténtalo nuevamente.",
-              });
-            }
-          }
+                  Swal.fire({
+                    icon: "error",
+                    title: "Algo salio mal",
+                    text: "Tu reserva no pudo ser realizada",
+                  }).then(() => {
+                    localStorage.removeItem("compraId");
+                  });
+                } catch (error) {
+                  console.error("Error al procesar la reserva:", error);
+                  localStorage.removeItem("compraId");
+                  Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: "Hubo un problema al realizar la reserva. Por favor, inténtalo nuevamente.",
+                  });
+                }
+              }
 
     const reservLocal = localStorage.getItem("reserv");
     const userLocal = localStorage.getItem("user");
