@@ -3,7 +3,7 @@ import useUsers from "../../hooks/AdminDashboard/useUsers";
 import IUser from "../../interfaces/user";
 
 const AllUsers: React.FC = () => {
-  const { users, loading, error, handleActivate, handleDesactivateUser } = useUsers();
+  const { users, setUsers, loading, error, handleActivate, handleDesactivateUser } = useUsers();
   const [selectedUser, setSelectedUser] = useState<IUser | null>(null);
   const [brokenImages, setBrokenImages] = useState<Record<string, boolean>>({});
   const [filter, setFilter] = useState<"all" | "active" | "inactive">("all");
@@ -113,9 +113,19 @@ const AllUsers: React.FC = () => {
                   if (selectedUser.isActive) {
                     await handleDesactivateUser(selectedUser.id);
                     setSelectedUser({ ...selectedUser, isActive: false });
+                    setUsers((prevUsers) =>
+                      prevUsers.map((user) =>
+                        user.id === selectedUser.id ? { ...user, isActive: false } : user
+                      )
+                    );
                   } else {
                     await handleActivate(selectedUser.id);
                     setSelectedUser({ ...selectedUser, isActive: true });
+                    setUsers((prevUsers) =>
+                      prevUsers.map((user) =>
+                        user.id === selectedUser.id ? { ...user, isActive: true } : user
+                      )
+                    );
                   }
                 }}
               >

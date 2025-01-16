@@ -85,7 +85,7 @@ const useUsers = () => {
     }
   };
   
-  return { users, loading, error, handleActivate, handleDesactivateUser };
+  return { users, setUsers, loading, error, handleActivate, handleDesactivateUser };
 };
 
 export default useUsers;
